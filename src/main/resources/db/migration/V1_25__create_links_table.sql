@@ -1,0 +1,10 @@
+CREATE TABLE tbl_links
+(
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    branch_id VARCHAR(36) NOT NULL,
+    link_type_id VARCHAR(36) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (branch_id) REFERENCES tbl_company_branches(id),
+    FOREIGN KEY (link_type_id) REFERENCES tbl_link_types(id)
+);
