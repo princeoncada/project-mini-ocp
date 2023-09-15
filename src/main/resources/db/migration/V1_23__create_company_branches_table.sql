@@ -1,0 +1,25 @@
+CREATE TABLE tbl_company_branches
+(
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    company_id VARCHAR(36) NOT NULL,
+    country_id VARCHAR(36) NOt NULL,
+    address VARCHAR(255),
+    zip_code VARCHAR(255),
+    is_main_branch BOOL,
+    phone VARCHAR(255),
+    email VARCHAR(255),
+    description TEXT,
+    region_id VARCHAR(36),
+    province_id VARCHAR(36),
+    city_mun_id VARCHAR(36),
+    barangay_id VARCHAR(36),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (country_id) REFERENCES tbl_countries(id),
+    FOREIGN KEY (company_id) REFERENCES tbl_companies(id),
+    FOREIGN KEY (region_id) REFERENCES tbl_phil_regions(id),
+    FOREIGN KEY (province_id) REFERENCES tbl_phil_provinces(id),
+    FOREIGN KEY (city_mun_id) REFERENCES tbl_phil_city_municipalities(id),
+    FOREIGN KEY (barangay_id) REFERENCES tbl_phil_barangays(id)
+);
