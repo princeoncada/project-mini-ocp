@@ -1,6 +1,6 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-import com.mmcm.projectocp.backend.spring.domain.dto.UserDTO
+//import com.mmcm.projectocp.backend.spring.domain.dto.UserCreateRequest
 import com.mmcm.projectocp.backend.spring.domain.model.User
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserService
@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/user")
 class UserController(
-    private val userRepository: UserRepository,
-    private val userService: UserService
+
+    private val userService: UserService,
+    private val userRepository: UserRepository
 ) {
 
     @GetMapping("/get-users")
@@ -55,17 +56,26 @@ class UserController(
     }
 
     @GetMapping("/get-users", params = ["search"])
-    fun searchUsers(
+    fun getUsersBySearch(
         @RequestParam("search") search: String,
         pageable: Pageable
     ): Page<User> {
         return userRepository.findByEmailOrFirstNameOrLastName(search, search, search, pageable)
     }
 
-    @PostMapping("/register")
+
+    data class UserCreateRequest(
+        val email: String,
+        val firstName: String,
+        val lastName: String,
+        val studentId: String,
+        val designation: String,
+    )
+
+    @PostMapping("/create-user")
     fun createUser(
-        @RequestBody req: UserDTO
-    ): UserDTO {
+        @RequestBody req: UserCreateRequest
+    ): UserCreateRequest {
         return userService.register(req)
     }
 }

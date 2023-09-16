@@ -1,30 +1,16 @@
 package com.mmcm.projectocp.backend.spring.domain.mapper
 
+import com.mmcm.projectocp.backend.spring.application.rest.UserController
 import com.mmcm.projectocp.backend.spring.domain.model.User
-import com.mmcm.projectocp.backend.spring.domain.dto.UserDTO
-import org.springframework.stereotype.Component
+import org.mapstruct.*
 
-@Component
-class UserMapper {
-    fun toUserDTO(user: User): UserDTO {
-        return UserDTO(
-            id = user.id,
-            email = user.email,
-            firstName = user.firstName,
-            lastName = user.lastName,
-            studentId = user.studentId,
-            designation = user.designation,
-        )
-    }
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
+abstract class UserMapper {
 
-    fun toUserEntity(userDTO: UserDTO): User {
-        val user = User()
-        user.id = userDTO.id
-        user.email = userDTO.email
-        user.firstName = userDTO.firstName
-        user.lastName = userDTO.lastName
-        user.studentId = userDTO.studentId
-        user.designation = userDTO.designation
-        return user
-    }
+    abstract fun toEntity(userCreateRequest: UserController.UserCreateRequest): User
+
+    abstract fun toDto(user: User): UserController.UserCreateRequest
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    abstract fun partialUpdate(userCreateRequest: UserController.UserCreateRequest, @MappingTarget user: User): User
 }
