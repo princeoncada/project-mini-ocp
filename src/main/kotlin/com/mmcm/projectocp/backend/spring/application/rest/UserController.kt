@@ -1,6 +1,5 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-//import com.mmcm.projectocp.backend.spring.domain.dto.UserCreateRequest
 import com.mmcm.projectocp.backend.spring.domain.model.User
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserService
@@ -62,7 +61,6 @@ class UserController(
     ): Page<User> {
         return userRepository.findByEmailOrFirstNameOrLastName(search, search, search, pageable)
     }
-
 
     data class UserCreateRequest(
         val email: String,
