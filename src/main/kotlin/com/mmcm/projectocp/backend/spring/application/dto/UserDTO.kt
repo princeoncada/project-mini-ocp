@@ -1,6 +1,4 @@
-package com.mmcm.projectocp.backend.spring.domain.dto
-
-import java.time.Instant
+package com.mmcm.projectocp.backend.spring.application.dto
 
 data class UserDTO(
     val id: String,
