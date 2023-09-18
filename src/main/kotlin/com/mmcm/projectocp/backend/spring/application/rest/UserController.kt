@@ -6,7 +6,6 @@ import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -19,7 +18,6 @@ class UserController(
     private val userService: UserService
 ) {
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get-users")
     fun getUsers(pageable: Pageable): Page<User> {
         return userRepository.findAll(pageable)
@@ -63,7 +61,6 @@ class UserController(
         return userRepository.findByEmailOrFirstNameOrLastName(search, search, search, pageable)
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/register")
     fun createUser(@RequestBody req: UserDTO): UserDTO {
         return userService.register(UserDTO(
