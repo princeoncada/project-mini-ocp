@@ -1,26 +1,27 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-import com.mmcm.projectocp.backend.spring.domain.dto.UserDTO
+import com.mmcm.projectocp.backend.spring.application.dto.UserDTO
 import com.mmcm.projectocp.backend.spring.domain.model.User
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 // Todo : Implement UserController API With Auths
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 class UserController(
     private val userRepository: UserRepository,
     private val userService: UserService
 ) {
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get-users")
-    fun getUsers(
-        pageable: Pageable
-    ): Page<User> {
+    fun getUsers(pageable: Pageable): Page<User> {
         return userRepository.findAll(pageable)
     }
 
@@ -62,12 +63,19 @@ class UserController(
         return userRepository.findByEmailOrFirstNameOrLastName(search, search, search, pageable)
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/register")
-    fun createUser(
-        @RequestBody req: UserDTO
-    ): UserDTO {
-        return userService.register(req)
+    fun createUser(@RequestBody req: UserDTO): UserDTO {
+        return userService.register(UserDTO(
+            id = UUID.randomUUID().toString(),
+            email = req.email,
+            firstName = req.firstName,
+            lastName = req.lastName,
+            studentId = req.studentId,
+            designation = req.designation
+        ))
     }
+
 }
 
 
