@@ -8,6 +8,7 @@ import com.mmcm.projectocp.backend.spring.domain.model.UserRole
 import com.mmcm.projectocp.backend.spring.domain.repository.RoleRepository
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRoleRepository
+import com.mmcm.projectocp.backend.spring.domain.service.UserRoleService
 import org.springframework.web.bind.annotation.*
 import java.time.Instant
 import java.util.UUID
@@ -18,15 +19,14 @@ class UserRoleController(
     private val userRoleRepository: UserRoleRepository,
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
-    private val userRoleMapper: UserRoleMapper
+    private val userRoleMapper: UserRoleMapper,
+    private val userRoleService: UserRoleService
 ) {
 
     data class RequestPostBody(
         var email: String,
         var role: String
     )
-
-
 
     @GetMapping
     fun findAll(): List<UserRoleDTO> {
@@ -36,8 +36,7 @@ class UserRoleController(
 
     @GetMapping("/{email}")
     fun findByEmail(@PathVariable email: String): UserRoleDTO {
-        val userId = userRepository.findByEmail(email).id
-        val userRoleEntity = userRoleRepository.findByUserId(userId)
+        val userRoleEntity = userRoleService.findByEmail(email)
         return userRoleMapper.toUserRoleDTO(userRoleEntity)
     }
 
