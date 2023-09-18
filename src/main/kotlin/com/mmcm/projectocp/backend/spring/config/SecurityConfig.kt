@@ -52,10 +52,6 @@ class SecurityConfig(
         return BCryptPasswordEncoder()
     }
 
-    fun auth(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder())
-    }
-
     @Bean
     fun configure(http: HttpSecurity): SecurityFilterChain {
         http.invoke {
