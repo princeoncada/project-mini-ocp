@@ -9,7 +9,8 @@ import org.springframework.stereotype.Repository
 @Repository
 interface UserRepository : JpaRepository<User, String> {
     fun findByStudentId(studentId: String, pageable: Pageable): Page<User>
-    fun findByEmail(email: String, pageable: Pageable): Page<User>
+    fun findByEmail(email: String): User
+    fun existsByEmail(email: String): Boolean
     fun findByEmailOrFirstNameOrLastName(
         firstName: String,
         lastName: String,
