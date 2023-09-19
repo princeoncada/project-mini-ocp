@@ -8,24 +8,23 @@ import java.time.Instant
 @Entity
 @Table(name = "tbl_user_roles")
 data class UserRole(
-
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     val user: User,
 
-    @OneToOne
-    @JoinColumn(name = "role_id")
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
     val role: Role,
 
-    @Column
     @CreationTimestamp
+    @Column(name = "created_at", nullable = false)
     val createdAt: Instant,
 
-    @Column
     @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
     val updatedAt: Instant
 )
