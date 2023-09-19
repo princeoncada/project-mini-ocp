@@ -1,6 +1,5 @@
 package com.mmcm.projectocp.backend.spring.domain.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -10,30 +9,29 @@ import java.time.Instant
 @Table(name = "tbl_users")
 data class User(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
-    @Column
+    @Column(name = "email", length = 255, nullable = false, unique = true)
     val email: String,
 
-    @Column
+    @Column(name = "first_name", length = 255, nullable = false)
     val firstName: String,
 
-    @Column
+    @Column(name = "last_name", length = 255, nullable = false)
     val lastName: String,
 
-    @Column
+    @Column(name = "student_id", length = 255, unique = true)
     val studentId: String,
 
-    @Column
+    @Column(name = "designation", length = 255)
     val designation: String,
 
-    @Column
     @CreationTimestamp
+    @Column(name = "created_at", nullable = false)
     val createdAt: Instant,
 
-    @Column
     @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
     val updatedAt: Instant
 )
