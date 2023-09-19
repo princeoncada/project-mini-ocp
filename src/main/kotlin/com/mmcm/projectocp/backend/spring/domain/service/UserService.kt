@@ -1,7 +1,6 @@
 package com.mmcm.projectocp.backend.spring.domain.service
 
 import com.mmcm.projectocp.backend.spring.application.dto.UserDTO
-import com.mmcm.projectocp.backend.spring.application.dto.UserRoleDTO
 import com.mmcm.projectocp.backend.spring.domain.model.UserRole
 import org.springframework.stereotype.Service
 

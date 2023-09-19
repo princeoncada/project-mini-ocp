@@ -3,14 +3,12 @@ package com.mmcm.projectocp.backend.spring.impl.domain.service
 import com.mmcm.projectocp.backend.spring.application.dto.UserDTO
 import com.mmcm.projectocp.backend.spring.application.dto.UserRoleDTO
 import com.mmcm.projectocp.backend.spring.application.mapper.UserMapper
-import com.mmcm.projectocp.backend.spring.application.rest.UserRoleController
 import com.mmcm.projectocp.backend.spring.domain.model.UserRole
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRoleRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.PathVariable
 
 @Service
 class UserServiceImpl(
