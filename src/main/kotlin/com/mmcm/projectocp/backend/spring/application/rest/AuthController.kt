@@ -22,7 +22,7 @@ import java.time.Instant
 import java.util.UUID
 
 @RestController
-class DefaultController (
+class AuthController (
     private val authorityModificationService: AuthorityModificationService,
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
