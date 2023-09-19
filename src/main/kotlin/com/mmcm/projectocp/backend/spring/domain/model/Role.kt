@@ -1,6 +1,5 @@
 package com.mmcm.projectocp.backend.spring.domain.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -10,18 +9,17 @@ import java.time.Instant
 @Table(name = "tbl_roles")
 data class Role(
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
+    @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
-    @Column
+    @Column(name = "name", length = 255, nullable = false, unique = true)
     val name: String,
 
-    @Column
     @CreationTimestamp
+    @Column(name = "created_at", nullable = false)
     val createdAt: Instant,
 
-    @Column
     @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
     val updatedAt: Instant
 )
