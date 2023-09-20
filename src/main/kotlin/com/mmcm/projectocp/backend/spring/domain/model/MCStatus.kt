@@ -6,7 +6,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "tbl_mc_statuses")
-data class McStatus(
+data class MCStatus(
     @Id
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
