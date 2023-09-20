@@ -69,78 +69,77 @@
 - [x]  Phil Province: `PhilProvinceRepository`
 - [x]  Phil Municipality: `PhilMunicipalityRepository`
 - [x]  Phil Barangay: `PhilBarangayRepository`
-- [ ]  Company: `CompanyRepository`
-- [ ]  Company Contact Person: `CompanyContactPersonRepository`
-- [ ]  Country: `CountryRepository`
-- [ ]  Company Branch: `CompanyBranchRepository`
-- [ ]  Link Type: `LinkTypeRepository`
-- [ ]  Links: `LinksRepository`
-- [ ]  MOA: `MOARepository`
-- [ ]  MC Status Update: `MCStatusUpdateRepository`
-- [ ]  MOA OJT Delivery Mode: `MOAOJTDeliveryModeRepository`
-- [ ]  MOA Position: `MOAPositionRepository`
-- [ ]  Meeting: `MeetingRepository`
-- [ ]  File: `FileRepository`
-- [ ]  Academic Year: `AcademicYearRepository`
-- [ ]  Term: `TermRepository`
-- [ ]  Course: `CourseRepository`
-- [ ]  Requirement: `RequirementRepository`
-- [ ]  Student Course: `StudentCourseRepository`
-- [ ]  Requirement Submission: `RequirementSubmissionRepository`
-- [ ]  Content Type: `ContentTypeRepository`
-- [ ]  Content: `ContentRepository`
-- [ ]  MOA Partnership Type: `MOAPartnershipTypeRepository`
-- [ ]  Student Company Attended: `StudentCompanyAttendedRepository`
-- [ ]  Student Testimony: `StudentTestimonyRepository`
-- [ ]  MOA Position Program: `MOAPositionProgramRepository`
-- [ ]  User Email: `UserEmailRepository`
+- [x]  Company: `CompanyRepository`
+- [x]  Company Contact Person: `CompanyContactPersonRepository`
+- [x]  Country: `CountryRepository`
+- [x]  Company Branch: `CompanyBranchRepository`
+- [x]  Link Type: `LinkTypeRepository`
+- [x]  Link: `LinkRepository`
+- [x]  MOA: `MOARepository`
+- [x]  MC Status Update: `MCStatusUpdateRepository`
+- [x]  MOA OJT Delivery Mode: `MOAOJTDeliveryModeRepository`
+- [x]  MOA Position: `MOAPositionRepository`
+- [x]  Meeting: `MeetingRepository`
+- [x]  File: `FileRepository`
+- [x]  Academic Year: `AcademicYearRepository`
+- [x]  Term: `TermRepository`
+- [x]  Course: `CourseRepository`
+- [x]  Requirement: `RequirementRepository`
+- [x]  Student Course: `StudentCourseRepository`
+- [x]  Requirement Submission: `RequirementSubmissionRepository`
+- [x]  Content Type: `ContentTypeRepository`
+- [x]  Content: `ContentRepository`
+- [x]  MOA Partnership Type: `MOAPartnershipTypeRepository`
+- [x]  Student Company Attended: `StudentCompanyAttendedRepository`
+- [x]  Student Testimony: `StudentTestimonyRepository`
+- [x]  MOA Position Program: `MOAPositionProgramRepository`
+- [x]  User Email: `UserEmailRepository`
 
 # Service Checklist
 
-- [ ]  Role
-- [ ]  Permission
-- [ ]  User
-- [ ]  User Role
-- [ ]  Session
-- [ ]  User Permission
-- [ ]  Department
-- [ ]  Program
-- [ ]  File Type
-- [ ]  Industry Type
-- [ ]  Partnership Type
-- [ ]  Company Category
-- [ ]  OJT Delivery Mode
-- [ ]  Meeting Status
-- [ ]  Meeting Type
-- [ ]  MC Status
-- [ ]  Phil Region
-- [ ]  Phil Province
-- [ ]  Phil Municipality
-- [ ]  Phil Barangay
-- [ ]  Company
-- [ ]  Company Contact Person
-- [ ]  Country
-- [ ]  Company Branch
-- [ ]  Link Type
-- [ ]  Links
-- [ ]  MOA
-- [ ]  MC Status Update
-- [ ]  MOA OJT Delivery Mode
-- [ ]  MOA Position
-- [ ]  Meeting
-- [ ]  File
-- [ ]  Academic Year
-- [ ]  Term
-- [ ]  Course
-- [ ]  Requirement
-- [ ]  Student Course
-- [ ]  Requirement Submission
-- [ ]  Content Type
-- [ ]  Content
-- [ ]  MOA Partnership Type
-- [ ]  Student Company Attended
-- [ ]  Student Testimony
-- [ ]  MOA Position Program
-- [ ]  User Email
-
+- [ ]  Role: `RoleService`
+- [ ]  Permission: `PermissionService`
+- [ ]  User: `UserService`
+- [ ]  User Role: `UserRoleService`
+- [ ]  Session: `SessionService`
+- [ ]  User Permission: `UserPermissionService`
+- [ ]  Department: `DepartmentService`
+- [ ]  Program: `ProgramService`
+- [ ]  File Type: `FileTypeService`
+- [ ]  Industry Type: `IndustryTypeService`
+- [ ]  Partnership Type: `PartnershipTypeService`
+- [ ]  Company Category: `CompanyCategoryService`
+- [ ]  OJT Delivery Mode: `OJTDeliveryModeService`
+- [ ]  Meeting Status: `MeetingStatusService`
+- [ ]  Meeting Type: `MeetingTypeService`
+- [ ]  MC Status: `MCStatusService`
+- [ ]  Phil Region: `PhilippineRegionService`
+- [ ]  Phil Province: `PhilippineProvinceService`
+- [ ]  Phil Municipality: `PhilippineMunicipalityService`
+- [ ]  Phil Barangay: `PhilippineBarangayService`
+- [ ]  Company: `CompanyService`
+- [ ]  Company Contact Person: `CompanyContactPersonService`
+- [ ]  Country: `CountryService`
+- [ ]  Company Branch: `CompanyBranchService`
+- [ ]  Link Type: `LinkTypeService`
+- [ ]  Links: `LinksService`
+- [ ]  MOA: `MOAService`
+- [ ]  MC Status Update: `MCStatusUpdateService`
+- [ ]  MOA OJT Delivery Mode: `MOAOJTDeliveryModeService`
+- [ ]  MOA Position: `MOAPositionService`
+- [ ]  Meeting: `MeetingService`
+- [ ]  File: `FileService`
+- [ ]  Academic Year: `AcademicYearService`
+- [ ]  Term: `TermService`
+- [ ]  Course: `CourseService`
+- [ ]  Requirement: `RequirementService`
+- [ ]  Student Course: `StudentCourseService`
+- [ ]  Requirement Submission: `RequirementSubmissionService`
+- [ ]  Content Type: `ContentTypeService`
+- [ ]  Content: `ContentService`
+- [ ]  MOA Partnership Type: `MOAPartnershipTypeService`
+- [ ]  Student Company Attended: `StudentCompanyAttendedService`
+- [ ]  Student Testimony: `StudentTestimonyService`
+- [ ]  MOA Position Program: `MOAPositionProgramService`
+- [ ]  User Email: `UserEmailService`
 
