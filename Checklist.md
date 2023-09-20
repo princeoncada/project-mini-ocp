@@ -1,0 +1,146 @@
+
+# Add to Obsidian
+
+# Models Checklist
+- [x] Role
+- [x] Permission
+- [x] User
+- [x] User Role
+- [x] Session
+- [x] User Permission
+- [x] Department
+- [x] Program
+- [x] File Type
+- [x] Industry Type
+- [x] Partnership Type
+- [x] Company Category
+- [x] OJT Delivery Mode
+- [x] Meeting Status
+- [x] Meeting Type
+- [x] MC Status
+- [x] Phil Region
+- [x] Phil Province
+- [x] Phil Municipality
+- [x] Phil Barangay
+- [x] Company
+- [x] Company Contact Person
+- [x] Country
+- [x] Company Branch
+- [x] Link Type
+- [x] Links
+- [x] MOA
+- [x] MC Status Update
+- [x] MOA OJT Delivery Mode
+- [x] MOA Position
+- [x] Meeting
+- [x] File
+- [x] Academic Year
+- [x] Term
+- [x] Course
+- [x] Requirement
+- [x] Student Course
+- [x] Requirement Submission
+- [x] Content Type
+- [x] Content
+- [x] MOA Partnership Type
+- [x] Student Company Attended
+- [x] Student Testimony
+- [x] MOA Position Program
+- [x] User Email
+# Repository Checklist
+
+- [x]  Role: `RoleRepository`
+- [x]  Permission: `PermissionRepository`
+- [x]  User: `UserRepository`
+- [x]  User Role: `UserRoleRepository`
+- [x]  Session: `SessionRepository`
+- [x]  User Permission: `UserPermissionRepository`
+- [x]  Department: `DepartmentRepository`
+- [x]  Program: `ProgramRepository`
+- [x]  File Type: `FileTypeRepository`
+- [x]  Industry Type: `IndustryTypeRepository`
+- [x]  Partnership Type: `PartnershipTypeRepository`
+- [x]  Company Category: `CompanyCategoryRepository`
+- [x]  OJT Delivery Mode: `OJTDeliveryModeRepository`
+- [x]  Meeting Status: `MeetingStatusRepository`
+- [x]  Meeting Type: `MeetingTypeRepository`
+- [x]  MC Status: `MCStatusRepository`
+- [x]  Phil Region: `PhilRegionRepository`
+- [x]  Phil Province: `PhilProvinceRepository`
+- [x]  Phil Municipality: `PhilMunicipalityRepository`
+- [x]  Phil Barangay: `PhilBarangayRepository`
+- [ ]  Company: `CompanyRepository`
+- [ ]  Company Contact Person: `CompanyContactPersonRepository`
+- [ ]  Country: `CountryRepository`
+- [ ]  Company Branch: `CompanyBranchRepository`
+- [ ]  Link Type: `LinkTypeRepository`
+- [ ]  Links: `LinksRepository`
+- [ ]  MOA: `MOARepository`
+- [ ]  MC Status Update: `MCStatusUpdateRepository`
+- [ ]  MOA OJT Delivery Mode: `MOAOJTDeliveryModeRepository`
+- [ ]  MOA Position: `MOAPositionRepository`
+- [ ]  Meeting: `MeetingRepository`
+- [ ]  File: `FileRepository`
+- [ ]  Academic Year: `AcademicYearRepository`
+- [ ]  Term: `TermRepository`
+- [ ]  Course: `CourseRepository`
+- [ ]  Requirement: `RequirementRepository`
+- [ ]  Student Course: `StudentCourseRepository`
+- [ ]  Requirement Submission: `RequirementSubmissionRepository`
+- [ ]  Content Type: `ContentTypeRepository`
+- [ ]  Content: `ContentRepository`
+- [ ]  MOA Partnership Type: `MOAPartnershipTypeRepository`
+- [ ]  Student Company Attended: `StudentCompanyAttendedRepository`
+- [ ]  Student Testimony: `StudentTestimonyRepository`
+- [ ]  MOA Position Program: `MOAPositionProgramRepository`
+- [ ]  User Email: `UserEmailRepository`
+
+# Service Checklist
+
+- [ ]  Role
+- [ ]  Permission
+- [ ]  User
+- [ ]  User Role
+- [ ]  Session
+- [ ]  User Permission
+- [ ]  Department
+- [ ]  Program
+- [ ]  File Type
+- [ ]  Industry Type
+- [ ]  Partnership Type
+- [ ]  Company Category
+- [ ]  OJT Delivery Mode
+- [ ]  Meeting Status
+- [ ]  Meeting Type
+- [ ]  MC Status
+- [ ]  Phil Region
+- [ ]  Phil Province
+- [ ]  Phil Municipality
+- [ ]  Phil Barangay
+- [ ]  Company
+- [ ]  Company Contact Person
+- [ ]  Country
+- [ ]  Company Branch
+- [ ]  Link Type
+- [ ]  Links
+- [ ]  MOA
+- [ ]  MC Status Update
+- [ ]  MOA OJT Delivery Mode
+- [ ]  MOA Position
+- [ ]  Meeting
+- [ ]  File
+- [ ]  Academic Year
+- [ ]  Term
+- [ ]  Course
+- [ ]  Requirement
+- [ ]  Student Course
+- [ ]  Requirement Submission
+- [ ]  Content Type
+- [ ]  Content
+- [ ]  MOA Partnership Type
+- [ ]  Student Company Attended
+- [ ]  Student Testimony
+- [ ]  MOA Position Program
+- [ ]  User Email
+
+
