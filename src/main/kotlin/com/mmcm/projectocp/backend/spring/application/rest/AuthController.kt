@@ -41,26 +41,28 @@ class AuthController (
             val email: String = oauth2User.getAttribute<String>("email").toString()
             if(!(userRepository.existsByEmail(email))){
                 userService.register(
-                        UserDTO(
-                                id = UUID.randomUUID().toString(),
-                                email = oauth2User.getAttribute<String>("email").toString(),
-                                firstName = oauth2User.getAttribute<String>("given_name").toString(),
-                                lastName = oauth2User.getAttribute<String>("family_name").toString(),
-                                studentId = UUID.randomUUID().toString(),
-                                designation = "CS"
-                        )
+                    UserDTO(
+                        id = UUID.randomUUID().toString(),
+                        email = oauth2User.getAttribute<String>("email").toString(),
+                        firstName = oauth2User.getAttribute<String>("given_name").toString(),
+                        lastName = oauth2User.getAttribute<String>("family_name").toString(),
+                        studentId = UUID.randomUUID().toString(),
+                        designation = "CS"
+                    )
                 )
                 println("Successfully Registered!")
 
                 val user: User = userRepository.findByEmail(email)
                 val role: Role = roleRepository.findByName("student")
-                userRoleRepository.save(UserRole(
+                userRoleRepository.save(
+                    UserRole(
                         id = UUID.randomUUID().toString(),
                         user = user,
                         role = role,
                         createdAt = Instant.now(),
                         updatedAt = Instant.now()
-                ))
+                    )
+                )
                 println("Successfully assigned Student Role!")
             }
         }
