@@ -1,3 +1,4 @@
+package com.mmcm.projectocp.backend.spring.domain.model
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.Instant
