@@ -1,5 +1,4 @@
 package com.mmcm.projectocp.backend.spring.domain.model
-
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
@@ -12,11 +11,11 @@ data class UserRole(
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     val user: User,
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     val role: Role,
 
