@@ -1,0 +1,8 @@
+package com.mmcm.projectocp.backend.spring.domain.repository
+
+import com.mmcm.projectocp.backend.spring.domain.model.StudentCourse
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface StudentCourseRepository : JpaRepository<StudentCourse, String> {
+    // You can add custom query methods here if needed
+}
