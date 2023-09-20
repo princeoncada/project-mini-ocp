@@ -1,18 +1,23 @@
 package com.mmcm.projectocp.backend.spring.domain.model
-import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.Instant
+import jakarta.persistence.*
 
 @Entity
-@Table(name = "tbl_industry_types")
-data class IndustryType(
+@Table(name = "tbl_links")
+data class Link(
     @Id
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
-    @Column(name = "type", length = 255, nullable = false, unique = true)
-    val type: String,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "branch_id", referencedColumnName = "id", nullable = false)
+    val branch: CompanyBranch,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "link_type_id", referencedColumnName = "id", nullable = false)
+    val linkType: LinkType,
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
