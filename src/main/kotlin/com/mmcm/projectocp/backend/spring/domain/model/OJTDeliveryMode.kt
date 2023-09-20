@@ -6,7 +6,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "tbl_ojt_delivery_modes")
-data class OjtDeliveryMode(
+data class OJTDeliveryMode(
     @Id
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
