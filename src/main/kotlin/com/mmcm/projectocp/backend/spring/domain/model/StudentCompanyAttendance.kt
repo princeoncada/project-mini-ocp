@@ -9,6 +9,7 @@ import java.time.LocalDate
 @Table(name = "tbl_student_companies_attended")
 data class StudentCompanyAttendance(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 

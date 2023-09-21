@@ -8,6 +8,7 @@ import java.time.Instant
 @Table(name = "tbl_file_types")
 data class FileType(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 

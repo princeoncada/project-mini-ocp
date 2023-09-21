@@ -6,23 +6,23 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "tbl_academic_years")
-open class AcademicYear {
+data class AcademicYear (
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, length = 36)
-    open lateinit var id: String
+    @GeneratedValue(strategy = GenerationType.UUID)
+    val id: String,
 
     @Column(name = "year_from", nullable = false)
-    open var yearFrom: Int? = null
+    var yearFrom: Int? = null,
 
     @Column(name = "year_to", nullable = false)
-    open var yearTo: Int? = null
+    var yearTo: Int? = null,
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
-    open lateinit var createdAt: Instant
+    var createdAt: Instant,
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
-    open lateinit var updatedAt: Instant
-}
+    var updatedAt: Instant,
+)

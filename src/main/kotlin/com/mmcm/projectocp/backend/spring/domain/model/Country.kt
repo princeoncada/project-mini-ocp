@@ -8,8 +8,8 @@ import jakarta.persistence.*
 @Table(name = "tbl_countries")
 data class Country(
     @Id
+    @Column(name = "id", length = 36,)
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
     @Column(name = "iso_code", length = 255, nullable = false, unique = true)
@@ -19,10 +19,10 @@ data class Country(
     val name: String,
 
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at")
     val createdAt: Instant,
 
     @UpdateTimestamp
-    @Column(name = "updated_at", nullable = false)
+    @Column(name = "updated_at")
     val updatedAt: Instant
 )

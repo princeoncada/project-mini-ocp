@@ -8,6 +8,7 @@ import java.time.Instant
 @Table(name = "tbl_moa_position_programs")
 data class MOAPositionProgram(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 

@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
-// TODO: add POST, PUT and DELETE methods according to the implementations of the old back-end
+// TODO: add POST, PUT and DELETE methods
 // its in the works, but for now, this is just a proof of concept
+// Goods ba or separate na lang?
 @RestController
 @RequestMapping("/api/philippines")
 class PhilippinesController(
@@ -37,8 +38,6 @@ class PhilippinesController(
     fun getPhilRegionsByRegCode(@PathVariable regcode: String): PhilippineRegion {
         return philippineRegionRepository.findByRegionCode(regcode).orElseThrow() { Exception("Region Code not found")}
     }
-
-
 
     // Provinces
     @GetMapping("/get-philippines-provinces")
@@ -68,7 +67,6 @@ class PhilippinesController(
     }
 
     // Barangays
-
     @GetMapping("/get-philippines-barangays")
     fun getPhilBarangays(): List<String> {
         return philippineBarangayRepository.findAll().map { it.name }

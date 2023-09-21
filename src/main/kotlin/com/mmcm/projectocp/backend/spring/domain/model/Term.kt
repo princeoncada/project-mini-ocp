@@ -8,6 +8,7 @@ import jakarta.persistence.*
 @Table(name = "tbl_terms")
 data class Term(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 

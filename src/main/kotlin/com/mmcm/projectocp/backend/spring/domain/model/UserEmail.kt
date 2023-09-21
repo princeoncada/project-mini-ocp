@@ -8,6 +8,7 @@ import java.time.Instant
 @Table(name = "tbl_user_emails")
 data class UserEmail(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
