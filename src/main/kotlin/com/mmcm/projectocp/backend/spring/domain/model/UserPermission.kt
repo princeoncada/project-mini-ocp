@@ -7,15 +7,8 @@ import jakarta.persistence.*
 @Entity
 @Table(name = "tbl_user_permissions")
 data class UserPermission(
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    val user: User,
-
-    @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "permission_id", referencedColumnName = "id", nullable = false)
-    val permission: Permission,
+    @EmbeddedId
+    val id: UserPermissionKey,
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
