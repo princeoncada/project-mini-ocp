@@ -14,4 +14,6 @@ interface CountryRepository : JpaRepository<Country, String> {
     fun findByIsoCode(isoCode: String): List<Country>
 
     fun findByNameAndIsoCode(name: String, isoCode: String): List<Country>
+
+    fun findAllByOrderByNameAsc(): List<Country>
 }
