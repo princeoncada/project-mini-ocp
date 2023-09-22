@@ -129,7 +129,7 @@
 - [ ]  MOA Position: `MOAPositionService`
 - [ ]  Meeting: `MeetingService`
 - [ ]  File: `FileService`
-- [ ]  Academic Year: `AcademicYearService`
+- [x]  Academic Year: `AcademicYearService`
 - [ ]  Term: `TermService`
 - [ ]  Course: `CourseService`
 - [ ]  Requirement: `RequirementService`

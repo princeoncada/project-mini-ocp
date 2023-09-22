@@ -8,6 +8,7 @@ import java.time.Instant
 @Table(name = "tbl_req_submissions")
 data class RequirementSubmission(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 

@@ -8,6 +8,7 @@ import jakarta.persistence.*
 @Table(name = "tbl_links")
 data class Link(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 

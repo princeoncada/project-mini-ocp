@@ -9,6 +9,7 @@ import java.time.Instant
 @Table(name = "tbl_roles")
 data class Role(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 

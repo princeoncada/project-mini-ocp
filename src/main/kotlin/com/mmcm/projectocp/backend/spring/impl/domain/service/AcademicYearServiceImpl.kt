@@ -1,6 +1,6 @@
 package com.mmcm.projectocp.backend.spring.impl.domain.service
 
-import com.mmcm.projectocp.backend.spring.application.dto.AcademicYeartDto
+import com.mmcm.projectocp.backend.spring.application.dto.AcademicYearDTO
 import com.mmcm.projectocp.backend.spring.application.mapper.AcademicYearMapper
 import com.mmcm.projectocp.backend.spring.domain.repository.AcademicYearRepository
 import com.mmcm.projectocp.backend.spring.domain.service.AcademicYearService
@@ -12,13 +12,13 @@ class AcademicYearServiceImpl(
     private val academicYearMapper: AcademicYearMapper
 ): AcademicYearService {
 
-    override fun createAcademicYear(req: AcademicYeartDto): AcademicYeartDto {
+    override fun createAcademicYear(req: AcademicYearDTO): AcademicYearDTO {
         val academicYearEntity = academicYearMapper.toEntity(req)
         val academicYearEntityCreated = academicYearRepository.save(academicYearEntity)
         return academicYearMapper.toDto(academicYearEntityCreated)
     }
 
-    override fun updateAcademicYearById(id: String, req: AcademicYeartDto): AcademicYeartDto {
+    override fun updateAcademicYearById(id: String, req: AcademicYearDTO): AcademicYearDTO {
         val academicYearEntity = academicYearMapper.toEntity(req)
         val academicYearEntityUpdated = academicYearRepository.save(academicYearEntity)
         return academicYearMapper.toDto(academicYearEntityUpdated)

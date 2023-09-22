@@ -9,6 +9,7 @@ import jakarta.persistence.*
 @Table(name = "tbl_mc_status_updates")
 data class MCStatusUpdate(
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
