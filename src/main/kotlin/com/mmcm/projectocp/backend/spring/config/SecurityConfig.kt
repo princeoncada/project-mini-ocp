@@ -53,10 +53,10 @@ class SecurityConfig{
         http.invoke {
             oauth2Login { }
             csrf { disable() }
-            authorizeRequests {
+//            authorizeRequests {
 //                authorize("/", authenticated)
-                authorize("/api/user/**" , hasRole("admin"))
-            }
+//                authorize("/api/user/**" , hasRole("admin"))
+//            }
             httpBasic {  }
             logout {  }
         }
