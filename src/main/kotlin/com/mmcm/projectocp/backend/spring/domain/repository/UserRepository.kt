@@ -20,4 +20,6 @@ interface UserRepository : JpaRepository<User, String> {
 
     fun findByFirstName(firstName: String, pageable: Pageable): Page<User>
     fun findByLastName(lastName: String, pageable: Pageable): Page<User>
+
+    fun findById(id: String, pageable: Pageable): Page<User>
 }
