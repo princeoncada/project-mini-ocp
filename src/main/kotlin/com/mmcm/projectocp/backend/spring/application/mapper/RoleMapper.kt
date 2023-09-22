@@ -13,6 +13,7 @@ class RoleMapper: EntityMapper<Role, RoleDTOs.GetResult, RoleDTOs.PostRequest, R
             name = entity.name
         )
     }
+
     override fun createEntity(id: String, entityRequest: RoleDTOs.PostRequest): Role {
         return Role(
             id = id,

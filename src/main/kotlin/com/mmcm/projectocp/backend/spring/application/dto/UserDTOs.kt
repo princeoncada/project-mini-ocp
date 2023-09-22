@@ -25,7 +25,6 @@ class UserDTOs{
         val studentId: String?,
         val designation: String?
     )
-
 }
 
 

@@ -37,6 +37,7 @@ class PermissionController(
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         }
     }
+
     @DeleteMapping("/{id}")
     override fun deleteEntityById(
         @PathVariable id: String,
@@ -49,6 +50,7 @@ class PermissionController(
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         }
     }
+
     @PutMapping("/{id}")
     override fun updateEntityById(
         @PathVariable id: String,
@@ -62,6 +64,7 @@ class PermissionController(
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         }
     }
+
     @PostMapping
     override fun createEntity(
         @RequestBody entityRequest: PermissionDTOs.PostRequest,
