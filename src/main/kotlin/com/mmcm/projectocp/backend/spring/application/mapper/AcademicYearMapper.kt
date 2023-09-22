@@ -7,7 +7,7 @@ import org.mapstruct.*
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 abstract class AcademicYearMapper {
 
-    abstract fun toEntity(academicYeartDto: AcademicYeartDto): AcademicYear
+    abstract fun toEntity(academicYearDto: AcademicYeartDto): AcademicYear
 
     abstract fun toDto(academicYear: AcademicYear): AcademicYeartDto
 

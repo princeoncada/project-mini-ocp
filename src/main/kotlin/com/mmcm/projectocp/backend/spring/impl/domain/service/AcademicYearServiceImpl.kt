@@ -16,7 +16,6 @@ class AcademicYearServiceImpl(
         val academicYearEntity = academicYearMapper.toEntity(req)
         val academicYearEntityCreated = academicYearRepository.save(academicYearEntity)
         return academicYearMapper.toDto(academicYearEntityCreated)
-
     }
 
     override fun updateAcademicYearById(id: String, req: AcademicYeartDto): AcademicYeartDto {
@@ -28,6 +27,4 @@ class AcademicYearServiceImpl(
     override fun deleteAcademicYearById(id: String) {
         academicYearRepository.deleteById(id)
     }
-
-
 }

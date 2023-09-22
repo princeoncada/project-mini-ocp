@@ -42,15 +42,15 @@ class AcademicYearController (
         return academicYearRepository.findByYearFromLessThanEqualAndYearToGreaterThanEqual(year, year, pageable).orElseThrow { Exception("AcademicYear not found") }
     }
 
-
     @PostMapping("/create-academic-year")
-    fun createUser(@RequestBody req: AcademicYeartDto): AcademicYeartDto {
+    fun createAcademicYear(
+        @RequestBody req: AcademicYeartDto
+    ): AcademicYeartDto {
         return academicYearService.createAcademicYear(req)
-
     }
 
     @PutMapping("/update-academic-year/id={id}")
-    fun updateUser(
+    fun updateAcademicYear(
         @PathVariable("id") academicYearId: String,
         @RequestBody req: AcademicYeartDto
     ): AcademicYeartDto {
@@ -58,10 +58,9 @@ class AcademicYearController (
     }
 
     @DeleteMapping("/delete-academic-year/id={id}")
-    fun deleteUser(@PathVariable("id") academicYearId: String) {
+    fun deleteAcademicYear(
+        @PathVariable("id") academicYearId: String
+    ) {
         academicYearService.deleteAcademicYearById(academicYearId)
     }
-
-
-
 }
