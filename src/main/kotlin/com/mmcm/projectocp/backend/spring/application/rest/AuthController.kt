@@ -1,6 +1,6 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-import com.mmcm.projectocp.backend.spring.application.dto.UserDTO
+import com.mmcm.projectocp.backend.spring.application.dto.UserDTOs
 import com.mmcm.projectocp.backend.spring.domain.model.Role
 import com.mmcm.projectocp.backend.spring.domain.model.User
 import com.mmcm.projectocp.backend.spring.domain.model.UserRole
@@ -9,6 +9,7 @@ import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRoleRepository
 import com.mmcm.projectocp.backend.spring.domain.service.AuthorityModificationService
 import com.mmcm.projectocp.backend.spring.domain.service.UserService
+import org.springframework.data.domain.Pageable
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
@@ -33,22 +34,22 @@ class AuthController (
     lateinit var authentication: Authentication
 
     @GetMapping("/")
-    fun start(): ModelAndView {
+    fun start(pageable: Pageable): ModelAndView {
 
         authentication = SecurityContextHolder.getContext().authentication
         if (authentication is OAuth2AuthenticationToken) {
             val oauth2User: OAuth2User = authentication.principal as OAuth2User
             val email: String = oauth2User.getAttribute<String>("email").toString()
             if(!(userRepository.existsByEmail(email))){
-                userService.register(
-                    UserDTO(
-                        id = UUID.randomUUID().toString(),
-                        email = oauth2User.getAttribute<String>("email").toString(),
+                userService.createEntity(
+                    UserDTOs.PostRequest(
+                        email = email,
                         firstName = oauth2User.getAttribute<String>("given_name").toString(),
                         lastName = oauth2User.getAttribute<String>("family_name").toString(),
                         studentId = UUID.randomUUID().toString(),
                         designation = "CS"
-                    )
+                    ),
+                    pageable
                 )
                 println("Successfully Registered!")
 
