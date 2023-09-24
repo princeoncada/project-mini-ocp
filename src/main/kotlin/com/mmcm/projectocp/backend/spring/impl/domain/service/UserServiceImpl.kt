@@ -1,68 +1,61 @@
 package com.mmcm.projectocp.backend.spring.impl.domain.service
 
-import com.mmcm.projectocp.backend.spring.application.dto.UserDTO
-import com.mmcm.projectocp.backend.spring.application.dto.UserRoleDTO
+import com.mmcm.projectocp.backend.spring.application.dto.UserDTOs.*
 import com.mmcm.projectocp.backend.spring.application.mapper.UserMapper
-import com.mmcm.projectocp.backend.spring.application.rest.UserRoleController
 import com.mmcm.projectocp.backend.spring.domain.model.UserRole
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRoleRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserService
-import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.PathVariable
+import java.util.UUID
 
 @Service
 class UserServiceImpl(
-    private val userRepository: UserRepository,
     private val userRoleRepository: UserRoleRepository,
+    private val userRepository: UserRepository,
     private val userMapper: UserMapper
-) : UserService {
-    override fun register(req: UserDTO): UserDTO {
-        val userEntity = userMapper.toUserEntity(req)
-        val userEntityCreated = userRepository.save(userEntity)
-        return userMapper.toUserDTO(userEntityCreated)
+): UserService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<GetResult> {
+        return userRepository.findAll(pageable).map { userMapper.toGetResult(it) }
     }
 
-    override fun getAuth(req: UserDTO): UserDTO {
-        TODO("Not yet implemented")
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable,
+    ): Page<GetResult> {
+        return userRepository.findById(id, pageable).map { userMapper.toGetResult(it) }
     }
 
-    override fun getPermissions(req: UserDTO): UserDTO {
-        TODO("Not yet implemented")
+    override fun createEntity(
+        entityRequest: PostRequest,
+        pageable: Pageable,
+    ): Page<GetResult> {
+        val userId = UUID.randomUUID().toString()
+        val savedUser = userRepository.save(userMapper.createEntity(userId, entityRequest))
+        return userRepository.findById(savedUser.id, pageable).map { userMapper.toGetResult(it) }
     }
 
-    override fun getAllPermissions(req: UserDTO): UserDTO {
-        TODO("Not yet implemented")
+    override fun updateEntityById(
+        id: String,
+        entityRequest: PutRequest,
+        pageable: Pageable,
+    ): Page<GetResult> {
+        val currentUser = userRepository.findById(id).get()
+        val savedUser = userRepository.save(userMapper.updateEntity(currentUser, entityRequest))
+        return userRepository.findById(savedUser.id, pageable).map { userMapper.toGetResult(it) }
     }
 
-    override fun getRole(req: UserDTO): UserDTO {
-        TODO("Not yet implemented")
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable,
+    ): Page<GetResult> {
+        val user = userRepository.findById(id).get()
+        userRepository.delete(user)
+        return userRepository.findAll(pageable).map { userMapper.toGetResult(it) }
     }
-
-
-    override fun signIn(req: UserDTO): UserDTO {
-        TODO("Not yet implemented")
-    }
-
-    override fun signOut(req: UserDTO): UserDTO {
-        TODO("Not yet implemented")
-    }
-
-
-
-
-    fun userRoleMapping(userRole: UserRole): UserRoleDTO {
-        return UserRoleDTO(
-            id = userRole.id,
-            user = userRole.user.email,
-            role = userRole.role.name
-        )
-    }
-    override fun findByUsername(email: String): UserRole {
-        val userId = userRepository.findByEmail(email).id ?: throw UsernameNotFoundException("User not found with username: $email")
-        return userRoleRepository.findByUserId(userId)
-    }
-
-
 }
