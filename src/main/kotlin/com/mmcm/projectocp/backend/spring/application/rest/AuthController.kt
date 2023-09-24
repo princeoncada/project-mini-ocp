@@ -53,8 +53,8 @@ class AuthController (
                 )
                 println("Successfully Registered!")
 
-                val user: User = userRepository.findByEmail(email)
-                val role: Role = roleRepository.findByName("student")
+                val user: User = userRepository.findByEmail(email).get()
+                val role: Role = roleRepository.findByName("student").get()
                 userRoleRepository.save(
                     UserRole(
                         id = UUID.randomUUID().toString(),
@@ -145,7 +145,7 @@ class AuthController (
         val authentication: Authentication = SecurityContextHolder.getContext().authentication
         val oauth2User: OAuth2User = authentication.principal as OAuth2User
         val email: String = oauth2User.getAttribute<String>("email").toString()
-        val userId: String = userRepository.findByEmail(email).id
+        val userId: String = userRepository.findByEmail(email).get().id
         val userHasRole: Boolean = userRoleRepository.existsByUserId(userId)
         if(userHasRole) {
             val userRole: UserRole = userRoleRepository.findByUserId(userId)

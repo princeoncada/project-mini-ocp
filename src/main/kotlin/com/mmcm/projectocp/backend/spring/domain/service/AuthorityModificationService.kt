@@ -1,5 +1,6 @@
 package com.mmcm.projectocp.backend.spring.domain.service
 
+import com.mmcm.projectocp.backend.spring.domain.repository.UserRoleRepository
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
@@ -20,7 +21,7 @@ class AuthorityModificationService(
 
         val oauth2User: OAuth2User = authentication.principal as OAuth2User
         val email: String = oauth2User.getAttribute<String>("email").toString()
-        val userRole = userRoleService.findByEmail(email)
+        val userRole = userRoleService.findByEmail(email).get()
 
         if ((!newAuthorities.any { it.authority == "ROLE_${userRole.role.name}" })) {
             newAuthorities.add(GrantedAuthority { "ROLE_${userRole.role.name}" } )
