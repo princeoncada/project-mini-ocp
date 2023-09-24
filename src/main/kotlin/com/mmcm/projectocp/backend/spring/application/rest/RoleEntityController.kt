@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/roles")
-class RoleController(
+class RoleEntityController(
     private val roleService: RoleService
-): Controller<RoleDTOs.GetResult, RoleDTOs.PostRequest, RoleDTOs.PutRequest> {
+): EntityController<RoleDTOs.GetResult, RoleDTOs.PostRequest, RoleDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
