@@ -31,5 +31,4 @@ class CompanyCategoryMapper() : EntityMapper<CompanyCategory, CompanyCategoryDTO
             updatedAt = Instant.now()
         )
     }
-
 }
