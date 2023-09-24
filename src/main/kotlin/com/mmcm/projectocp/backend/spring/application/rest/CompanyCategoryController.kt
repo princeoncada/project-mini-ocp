@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*
 class CompanyCategoryController(
     private val companyCategoryService: CompanyCategoryService
 ) : EntityController<CompanyCategoryDTOs.GetResult, CompanyCategoryDTOs.PostRequest, CompanyCategoryDTOs.PutRequest> {
-
     @GetMapping
     override fun getEntities(pageable: Pageable): ResponseEntity<Page<CompanyCategoryDTOs.GetResult>> {
         return try {
@@ -49,7 +48,6 @@ class CompanyCategoryController(
         }
     }
 
-
     @PutMapping("/{id}")
     override fun updateEntityById(
         @PathVariable id: String,
@@ -64,7 +62,6 @@ class CompanyCategoryController(
         }
     }
 
-
     @DeleteMapping("/{id}")
     override fun deleteEntityById(
         @PathVariable id: String,
@@ -77,5 +74,4 @@ class CompanyCategoryController(
             ResponseEntity.notFound().build()
         }
     }
-
 }
