@@ -28,7 +28,7 @@ class RoleController(
             val role = roleService.getEntities(pageable)
             ResponseEntity.ok(role)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -41,7 +41,7 @@ class RoleController(
             val role = roleService.getEntityById(id, pageable)
             ResponseEntity.ok(role)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -54,7 +54,7 @@ class RoleController(
             val role = roleService.deleteEntityById(id, pageable)
             ResponseEntity.ok(role)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -68,7 +68,7 @@ class RoleController(
             val role = roleService.updateEntityById(id, entityRequest, pageable)
             ResponseEntity.ok(role)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -81,7 +81,7 @@ class RoleController(
             val role = roleService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(role)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 }
