@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class OJTDeliveryModeMapper(
-
-) : EntityMapper<OJTDeliveryMode, OJTDeliveryModeDTOs.GetResult, OJTDeliveryModeDTOs.PostRequest, OJTDeliveryModeDTOs.PutRequest> {
+class OJTDeliveryModeMapper: EntityMapper<OJTDeliveryMode, OJTDeliveryModeDTOs.GetResult, OJTDeliveryModeDTOs.PostRequest, OJTDeliveryModeDTOs.PutRequest> {
     override fun toGetResult(entity: OJTDeliveryMode): OJTDeliveryModeDTOs.GetResult {
         return OJTDeliveryModeDTOs.GetResult(
             id = entity.id,
