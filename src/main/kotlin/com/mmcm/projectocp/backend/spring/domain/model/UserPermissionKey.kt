@@ -6,8 +6,6 @@ import java.io.Serializable
 
 @Embeddable
 data class UserPermissionKey(
-    val user: String,
-    val permission: String
-) : Serializable{
-
-}
+    val userId: String,
+    val permissionId: String
+) : Serializable
