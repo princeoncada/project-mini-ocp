@@ -4,7 +4,6 @@ class PartnershipTypeDTOs {
     data class GetResult(
         val id: String,
         val type: String
-
     )
 
     data class PostRequest(
