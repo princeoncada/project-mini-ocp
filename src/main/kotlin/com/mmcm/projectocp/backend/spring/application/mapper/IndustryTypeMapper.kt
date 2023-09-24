@@ -33,6 +33,4 @@ class IndustryTypeMapper(
             updatedAt = Instant.now()
         )
     }
-
-
 }
