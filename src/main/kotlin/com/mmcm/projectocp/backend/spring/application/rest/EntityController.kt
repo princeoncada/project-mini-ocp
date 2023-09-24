@@ -3,11 +3,14 @@ package com.mmcm.projectocp.backend.spring.application.rest
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 
-interface Controller<GetResult, PostResult, PutResult> {
+interface EntityController<GetResult, PostResult, PutResult> {
+
     fun getEntities(
         pageable: Pageable
     ): ResponseEntity<Page<GetResult>>
+
 
     fun getEntityById(
         id: String,
