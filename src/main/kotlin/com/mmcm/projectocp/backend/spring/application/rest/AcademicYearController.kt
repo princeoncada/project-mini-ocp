@@ -1,6 +1,6 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-import com.mmcm.projectocp.backend.spring.application.dto.AcademicYeartDto
+import com.mmcm.projectocp.backend.spring.application.dto.AcademicYearDTO
 import com.mmcm.projectocp.backend.spring.domain.model.AcademicYear
 import com.mmcm.projectocp.backend.spring.domain.repository.AcademicYearRepository
 import com.mmcm.projectocp.backend.spring.domain.service.AcademicYearService
@@ -44,16 +44,16 @@ class AcademicYearController (
 
     @PostMapping("/create-academic-year")
     fun createAcademicYear(
-        @RequestBody req: AcademicYeartDto
-    ): AcademicYeartDto {
+        @RequestBody req: AcademicYearDTO
+    ): AcademicYearDTO {
         return academicYearService.createAcademicYear(req)
     }
 
     @PutMapping("/update-academic-year/id={id}")
     fun updateAcademicYear(
         @PathVariable("id") academicYearId: String,
-        @RequestBody req: AcademicYeartDto
-    ): AcademicYeartDto {
+        @RequestBody req: AcademicYearDTO
+    ): AcademicYearDTO {
         return academicYearService.updateAcademicYearById(academicYearId, req)
     }
 
