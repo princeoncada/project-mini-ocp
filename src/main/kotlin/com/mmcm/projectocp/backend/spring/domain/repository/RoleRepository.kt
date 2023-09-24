@@ -9,6 +9,6 @@ import java.util.*
 
 @Repository
 interface RoleRepository: JpaRepository<Role, String> {
-    fun findByName(name: String): Role
+    fun findByName(name: String?): Optional<Role>
     fun findById(id: String, pageable: Pageable): Page<Role>
 }
