@@ -28,8 +28,8 @@ class JwtAuthenticationFilter(
 
         val token: String = header.substring(7)
         val payload: Claims = jwtService.getPayload(token)
-        val roles = payload["authorities"] as List<String>
-        val authorities = roles.map { SimpleGrantedAuthority(it) }
+        val roles = payload["authorities"] as List<*>
+        val authorities = roles.map { SimpleGrantedAuthority(it as String) }
 
         val authentication = UsernamePasswordAuthenticationToken(
             payload.subject,
