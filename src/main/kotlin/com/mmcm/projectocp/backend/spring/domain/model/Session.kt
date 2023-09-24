@@ -14,7 +14,7 @@ data class Session(
     val id: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     val user: User,
 
     @Column(name = "expires_on", nullable = false)
