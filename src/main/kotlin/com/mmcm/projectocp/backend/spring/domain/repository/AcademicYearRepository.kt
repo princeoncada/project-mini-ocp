@@ -10,9 +10,7 @@ import java.util.*
 @Repository
 interface AcademicYearRepository : JpaRepository<AcademicYear, String> {
     // You can add custom query methods here if needed
-
-    fun findByYearFromLessThanEqualAndYearToGreaterThanEqual(yearFrom: Int, yearTo: Int, pageable: Pageable): Optional<Page<AcademicYear>>
-
+    fun findById(id: String, pageable: Pageable): Page<AcademicYear>
 
 
 }
