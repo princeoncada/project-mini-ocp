@@ -32,7 +32,6 @@ class UserRoleServiceImpl(
         return userRoleRepository.findById(id, pageable).map { userRoleMapper.toGetResult(it) }
     }
 
-    @Transactional
     override fun createEntity(
         entityRequest: UserRoleDTOs.PostRequest,
         pageable: Pageable
