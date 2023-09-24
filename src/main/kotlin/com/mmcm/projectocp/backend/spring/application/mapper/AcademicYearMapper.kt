@@ -32,7 +32,6 @@ class AcademicYearMapper : EntityMapper<AcademicYear, AcademicYearDTOs.GetResult
             yearTo = entityRequest.yearTo?: entity.yearTo,
             createdAt = entity.createdAt,
             updatedAt = Instant.now()
-
         )
     }
 }
