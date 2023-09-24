@@ -34,8 +34,8 @@ class PermissionServiceImpl(
         pageable: Pageable
     ): Page<GetResult> {
         val permissionId = UUID.randomUUID().toString()
-        permissionRepository.save(permissionMapper.createEntity(permissionId, entityRequest)) ?: throw NotFoundException()
-        return permissionRepository.findById(permissionId, pageable).map { permissionMapper.toGetResult(it) }
+        val savedPermission = permissionRepository.save(permissionMapper.createEntity(permissionId, entityRequest))
+        return permissionRepository.findById(savedPermission.id, pageable).map { permissionMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -43,7 +43,7 @@ class PermissionServiceImpl(
         entityRequest: PutRequest,
         pageable: Pageable
     ): Page<GetResult> {
-        val currentPermission = permissionRepository.findById(id).get() ?: throw NotFoundException()
+        val currentPermission = permissionRepository.findById(id).get()
         permissionRepository.save(permissionMapper.updateEntity(currentPermission, entityRequest))
         return permissionRepository.findById(id, pageable).map { permissionMapper.toGetResult(it) }
     }
@@ -52,7 +52,7 @@ class PermissionServiceImpl(
         id: String,
         pageable: Pageable
     ): Page<GetResult> {
-        val permission = permissionRepository.findById(id).get() ?: throw NotFoundException()
+        val permission = permissionRepository.findById(id).get()
         permissionRepository.delete(permission)
         return permissionRepository.findAll(pageable).map { permissionMapper.toGetResult(it) }
     }
