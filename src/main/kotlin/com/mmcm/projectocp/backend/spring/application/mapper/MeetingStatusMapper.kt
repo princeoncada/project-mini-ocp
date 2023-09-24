@@ -29,7 +29,6 @@ class MeetingStatusMapper : EntityMapper<MeetingStatus, MeetingStatusDTOs.GetRes
             name = entityRequest.name?: entity.name,
             createdAt = entity.createdAt,
             updatedAt = Instant.now()
-
         )
     }
 }
