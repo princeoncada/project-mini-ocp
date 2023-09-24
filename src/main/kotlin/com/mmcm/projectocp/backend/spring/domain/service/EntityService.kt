@@ -9,10 +9,12 @@ interface EntityService<GetResult, PostRequest, PutRequest> {
     fun getEntities(
         pageable: Pageable
     ): Page<GetResult>
+
     fun getEntityById(
         id: String,
         pageable: Pageable
     ): Page<GetResult>
+
     fun createEntity(
         entityRequest: PostRequest,
         pageable: Pageable
