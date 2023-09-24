@@ -6,8 +6,6 @@ import com.mmcm.projectocp.backend.spring.domain.model.UserRole
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRoleRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserRoleService
-import jakarta.transaction.Transactional
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service

@@ -1,22 +1,11 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
 import com.mmcm.projectocp.backend.spring.application.dto.UserRoleDTOs
-import com.mmcm.projectocp.backend.spring.application.mapper.UserRoleMapper
-import com.mmcm.projectocp.backend.spring.domain.model.Role
-import com.mmcm.projectocp.backend.spring.domain.model.User
-import com.mmcm.projectocp.backend.spring.domain.model.UserRole
-import com.mmcm.projectocp.backend.spring.domain.repository.RoleRepository
-import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
-import com.mmcm.projectocp.backend.spring.domain.repository.UserRoleRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserRoleService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.sql.Time
-import java.time.Instant
-import java.util.Timer
-import java.util.UUID
 
 @RestController
 @RequestMapping("/api/user-roles")
