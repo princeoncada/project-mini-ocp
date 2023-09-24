@@ -1,6 +1,5 @@
 package com.mmcm.projectocp.backend.spring.application.mapper
 
-
 import com.mmcm.projectocp.backend.spring.application.dto.FileTypeDTOs
 import com.mmcm.projectocp.backend.spring.domain.model.FileType
 import com.mmcm.projectocp.backend.spring.domain.repository.FileTypeRepository
