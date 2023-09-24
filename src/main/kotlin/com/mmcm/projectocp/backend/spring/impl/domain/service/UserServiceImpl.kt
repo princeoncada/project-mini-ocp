@@ -36,8 +36,8 @@ class UserServiceImpl(
         pageable: Pageable,
     ): Page<GetResult> {
         val userId = UUID.randomUUID().toString()
-        userRepository.save(userMapper.createEntity(userId, entityRequest))
-        return userRepository.findById(userId, pageable).map { userMapper.toGetResult(it) }
+        val savedUser = userRepository.save(userMapper.createEntity(userId, entityRequest))
+        return userRepository.findById(savedUser.id, pageable).map { userMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -45,16 +45,16 @@ class UserServiceImpl(
         entityRequest: PutRequest,
         pageable: Pageable,
     ): Page<GetResult> {
-        val currentUser = userRepository.findById(id).get() ?: throw NotFoundException()
-        userRepository.save(userMapper.updateEntity(currentUser, entityRequest))
-        return userRepository.findById(id, pageable).map { userMapper.toGetResult(it) }
+        val currentUser = userRepository.findById(id).get()
+        val savedUser = userRepository.save(userMapper.updateEntity(currentUser, entityRequest))
+        return userRepository.findById(savedUser.id, pageable).map { userMapper.toGetResult(it) }
     }
 
     override fun deleteEntityById(
         id: String,
         pageable: Pageable,
     ): Page<GetResult> {
-        val user = userRepository.findById(id).get() ?: throw NotFoundException()
+        val user = userRepository.findById(id).get()
         userRepository.delete(user)
         return userRepository.findAll(pageable).map { userMapper.toGetResult(it) }
     }
