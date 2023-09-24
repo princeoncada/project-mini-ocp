@@ -1,19 +1,14 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
 import com.mmcm.projectocp.backend.spring.application.dto.UserDTOs
-import com.mmcm.projectocp.backend.spring.domain.model.User
-import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import com.mmcm.projectocp.backend.spring.domain.service.UserService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.util.*
-
-// Todo : Implement UserController API With Auths
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 class UserController(
     private val userService: UserService
 ): Controller<UserDTOs.GetResult, UserDTOs.PostRequest, UserDTOs.PutRequest> {
