@@ -6,9 +6,7 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class PartnershipTypeMapper(
-
-): EntityMapper<PartnershipType, PartnershipTypeDTOs.GetResult, PartnershipTypeDTOs.PostRequest, PartnershipTypeDTOs.PutRequest>{
+class PartnershipTypeMapper: EntityMapper<PartnershipType, PartnershipTypeDTOs.GetResult, PartnershipTypeDTOs.PostRequest, PartnershipTypeDTOs.PutRequest>{
     override fun toGetResult(entity: PartnershipType): PartnershipTypeDTOs.GetResult {
         return PartnershipTypeDTOs.GetResult(
             id = entity.id,
@@ -33,5 +31,4 @@ class PartnershipTypeMapper(
             updatedAt = Instant.now()
         )
     }
-
 }
