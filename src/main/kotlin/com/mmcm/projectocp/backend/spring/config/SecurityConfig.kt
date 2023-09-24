@@ -1,65 +1,44 @@
 package com.mmcm.projectocp.backend.spring.config
 
+import com.mmcm.projectocp.backend.spring.config.service.CustomOidcUserService
+import com.mmcm.projectocp.backend.spring.config.service.JwtAuthenticationFilter
+import com.mmcm.projectocp.backend.spring.config.service.JwtService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
-import org.springframework.security.core.userdetails.User
-import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.core.userdetails.UserDetailsService
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
-import org.springframework.security.crypto.factory.PasswordEncoderFactories
-import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.security.provisioning.InMemoryUserDetailsManager
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
-class SecurityConfig{
-
-    private final val encoder: PasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
-
-    val user: UserDetails = User
-        .withUsername("user")
-        .username("user")
-        .password(encoder.encode("pass"))
-        .roles("USER")
-        .build()
-
-    val admin: UserDetails = User
-        .withUsername("admin")
-        .username("admin")
-        .password(encoder.encode("pass"))
-        .roles("ADMIN")
-        .authorities("GET")
-        .build()
-
+class SecurityConfig(
+    private val jwtService: JwtService
+) {
     @Bean
-    fun users(): UserDetailsService {
-        val users = InMemoryUserDetailsManager()
-        users.createUser(user)
-        users.createUser(admin)
-        return users
-    }
-
-    @Bean
-    fun passwordEncoder(): BCryptPasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
-
-    @Bean
-    fun configure(http: HttpSecurity): SecurityFilterChain {
+    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http.invoke {
-            oauth2Login { }
             csrf { disable() }
-//            authorizeRequests {
-//                authorize("/", authenticated)
-//                authorize("/api/user/**" , hasRole("admin"))
-//            }
-            httpBasic {  }
-            logout {  }
+            authorizeRequests {
+//                authorize("/api/users/**", hasRole("admin"))
+                authorize(anyRequest, authenticated)
+            }
+            oauth2Login {
+                userInfoEndpoint {
+                    oidcUserService = oidcUserService()
+                }
+                defaultSuccessUrl("/authenticate", true)
+            }
+            addFilterBefore<UsernamePasswordAuthenticationFilter>(JwtAuthenticationFilter(jwtService))
         }
         return http.build()
+    }
+
+    @Bean
+    fun oidcUserService(): OidcUserService {
+        val delegate = OidcUserService()
+        return CustomOidcUserService(delegate)
     }
 }
