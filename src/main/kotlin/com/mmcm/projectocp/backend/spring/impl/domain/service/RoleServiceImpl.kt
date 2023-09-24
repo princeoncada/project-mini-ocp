@@ -27,7 +27,7 @@ class RoleServiceImpl(
         id: String,
         pageable: Pageable
     ): Page<GetResult> {
-        val role = roleRepository.findById(id, pageable) ?: throw NotFoundException()
+        val role = roleRepository.findById(id, pageable)
         return role.map { roleMapper.toGetResult(it) }
     }
 
@@ -36,8 +36,8 @@ class RoleServiceImpl(
         pageable: Pageable
     ): Page<GetResult> {
         val roleId = UUID.randomUUID().toString()
-        roleRepository.save(roleMapper.createEntity(roleId, entityRequest))
-        return roleRepository.findById(roleId, pageable).map { roleMapper.toGetResult(it) }
+        val savedRole = roleRepository.save(roleMapper.createEntity(roleId, entityRequest))
+        return roleRepository.findById(savedRole.id, pageable).map { roleMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -45,16 +45,16 @@ class RoleServiceImpl(
         entityRequest: PutRequest,
         pageable: Pageable
     ): Page<GetResult> {
-        val currentRole = roleRepository.findById(id).get() ?: throw NotFoundException()
-        roleRepository.save(roleMapper.updateEntity(currentRole, entityRequest))
-        return roleRepository.findById(id, pageable).map { roleMapper.toGetResult(it) }
+        val currentRole = roleRepository.findById(id).get()
+        val savedRole = roleRepository.save(roleMapper.updateEntity(currentRole, entityRequest))
+        return roleRepository.findById(savedRole.id, pageable).map { roleMapper.toGetResult(it) }
     }
 
     override fun deleteEntityById(
         id: String,
         pageable: Pageable
     ): Page<GetResult> {
-        val role = roleRepository.findById(id).get() ?: throw NotFoundException()
+        val role = roleRepository.findById(id).get()
         roleRepository.delete(role)
         return roleRepository.findAll(pageable).map { roleMapper.toGetResult(it) }
     }
