@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController
 class AcademicYearController(
     private val academicYearService: AcademicYearService
 ) : EntityController<AcademicYearDTOs.GetResult, AcademicYearDTOs.PostRequest, AcademicYearDTOs.PutRequest> {
-
     @GetMapping
     override fun getEntities(pageable: Pageable): ResponseEntity<Page<AcademicYearDTOs.GetResult>> {
         return try {
@@ -83,6 +82,4 @@ class AcademicYearController(
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         }
     }
-
-
 }
