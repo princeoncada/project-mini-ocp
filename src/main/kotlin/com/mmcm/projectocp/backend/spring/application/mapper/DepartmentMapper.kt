@@ -1,20 +1,39 @@
 package com.mmcm.projectocp.backend.spring.application.mapper
 
-
-import com.mmcm.projectocp.backend.spring.application.dto.DepartmentDTO
+import com.mmcm.projectocp.backend.spring.application.dto.DepartmentDTOs
 import com.mmcm.projectocp.backend.spring.domain.model.Department
-import org.mapstruct.*
+import org.springframework.stereotype.Component
+import java.time.Instant
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
-abstract class DepartmentMapper {
+@Component
+class DepartmentMapper : EntityMapper<Department, DepartmentDTOs.GetResult, DepartmentDTOs.PostRequest, DepartmentDTOs.PutRequest>{
+    override fun toGetResult(entity: Department): DepartmentDTOs.GetResult {
+        return DepartmentDTOs.GetResult(
+            id = entity.id,
+            name = entity.name,
+            abbr = entity.abbr
 
-    abstract fun toEntity(departmentDTO: DepartmentDTO): Department
+        )
+    }
 
-    abstract fun toDto(department: Department): DepartmentDTO
+    override fun createEntity(id: String, entityRequest: DepartmentDTOs.PostRequest): Department {
+        return Department(
+            id = id,
+            name = entityRequest.name,
+            abbr = entityRequest.abbr,
+            createdAt = Instant.now(),
+            updatedAt = Instant.now()
+        )
+    }
 
+    override fun updateEntity(entity: Department, entityRequest: DepartmentDTOs.PutRequest): Department {
+        return Department(
+            id = entity.id,
+            name = entityRequest.name?: entity.name,
+            abbr = entityRequest.abbr?: entity.abbr,
+            createdAt = entity.createdAt,
+            updatedAt = Instant.now()
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    abstract fun partialUpdate(
-        departmentDTO: DepartmentDTO,
-        @MappingTarget department: Department): Department
+        )
+    }
 }
