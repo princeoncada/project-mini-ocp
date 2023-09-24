@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/user-roles")
 class UserRoleController(
     private val userRoleService: UserRoleService
-): Controller<UserRoleDTOs.GetResult, UserRoleDTOs.PostRequest, UserRoleDTOs.PutRequest> {
+) : EntityController<UserRoleDTOs.GetResult, UserRoleDTOs.PostRequest, UserRoleDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
@@ -49,17 +49,6 @@ class UserRoleController(
         }
     }
 
-    @DeleteMapping("/{id}")
-    override fun deleteEntityById(
-        @PathVariable id: String, pageable: Pageable
-    ): ResponseEntity<Page<UserRoleDTOs.GetResult>> {
-        return try {
-            val userRole = userRoleService.deleteEntityById(id, pageable)
-            ResponseEntity.ok(userRole)
-        } catch (e: Exception) {
-            ResponseEntity.notFound().build()
-        }
-    }
 
     @PutMapping("/{id}")
     override fun updateEntityById(
@@ -74,4 +63,18 @@ class UserRoleController(
             ResponseEntity.notFound().build()
         }
     }
+
+    @DeleteMapping("/{id}")
+    override fun deleteEntityById(
+        @PathVariable id: String, pageable: Pageable
+    ): ResponseEntity<Page<UserRoleDTOs.GetResult>> {
+        return try {
+            val userRole = userRoleService.deleteEntityById(id, pageable)
+            ResponseEntity.ok(userRole)
+        } catch (e: Exception) {
+            ResponseEntity.notFound().build()
+        }
+    }
+
+
 }

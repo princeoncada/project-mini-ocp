@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/sessions")
 class SessionController(
     private val sessionService: SessionService
-): Controller<SessionDTOs.GetResult, SessionDTOs.PostRequest, SessionDTOs.PutRequest> {
+) : EntityController<SessionDTOs.GetResult, SessionDTOs.PostRequest, SessionDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
@@ -37,18 +37,19 @@ class SessionController(
         }
     }
 
-    @DeleteMapping("/{id}")
-    override fun deleteEntityById(
-        @PathVariable id: String,
+    @PostMapping
+    override fun createEntity(
+        @RequestBody entityRequest: SessionDTOs.PostRequest,
         pageable: Pageable
     ): ResponseEntity<Page<SessionDTOs.GetResult>> {
         return try {
-            val session = sessionService.deleteEntityById(id, pageable)
+            val session = sessionService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(session)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }
     }
+
 
     @PutMapping("/{id}")
     override fun updateEntityById(
@@ -64,16 +65,18 @@ class SessionController(
         }
     }
 
-    @PostMapping
-    override fun createEntity(
-        @RequestBody entityRequest: SessionDTOs.PostRequest,
+    @DeleteMapping("/{id}")
+    override fun deleteEntityById(
+        @PathVariable id: String,
         pageable: Pageable
     ): ResponseEntity<Page<SessionDTOs.GetResult>> {
         return try {
-            val session = sessionService.createEntity(entityRequest, pageable)
+            val session = sessionService.deleteEntityById(id, pageable)
             ResponseEntity.ok(session)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }
     }
+
+
 }
