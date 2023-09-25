@@ -23,12 +23,29 @@ class JwtService(
             .compact()
     }
 
-    fun getPayload(token: String): Claims {
+    fun getClaims(token: String): Claims {
         return Jwts.parserBuilder()
             .setSigningKey(secretKey)
             .build()
             .parseClaimsJws(token)
             .body
+    }
+
+    fun getUsername(token: String): String {
+        return getClaims(token).subject
+    }
+
+    fun getExpirationDate(token: String): Date {
+        return getClaims(token).expiration
+    }
+
+    private fun isTokenExpired(token: String): Boolean {
+        return getExpirationDate(token).before(Date())
+    }
+
+    fun validateToken(token: String, userDetails: UserPrincipal): Boolean {
+        val username = getUsername(token)
+        return username == userDetails.username && !isTokenExpired(token)
     }
 
     companion object {
