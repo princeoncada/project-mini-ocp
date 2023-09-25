@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/permissions")
 class PermissionController(
     private val permissionService: PermissionService
-): Controller<PermissionDTOs.GetResult, PermissionDTOs.PostRequest, PermissionDTOs.PutRequest> {
+): EntityController<PermissionDTOs.GetResult, PermissionDTOs.PostRequest, PermissionDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
@@ -38,13 +38,13 @@ class PermissionController(
         }
     }
 
-    @DeleteMapping("/{id}")
-    override fun deleteEntityById(
-        @PathVariable id: String,
+    @PostMapping
+    override fun createEntity(
+        @RequestBody entityRequest: PermissionDTOs.PostRequest,
         pageable: Pageable,
     ): ResponseEntity<Page<PermissionDTOs.GetResult>> {
         return try {
-            val permission = permissionService.deleteEntityById(id, pageable)
+            val permission = permissionService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(permission)
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()
@@ -65,13 +65,13 @@ class PermissionController(
         }
     }
 
-    @PostMapping
-    override fun createEntity(
-        @RequestBody entityRequest: PermissionDTOs.PostRequest,
+    @DeleteMapping("/{id}")
+    override fun deleteEntityById(
+        @PathVariable id: String,
         pageable: Pageable,
     ): ResponseEntity<Page<PermissionDTOs.GetResult>> {
         return try {
-            val permission = permissionService.createEntity(entityRequest, pageable)
+            val permission = permissionService.deleteEntityById(id, pageable)
             ResponseEntity.ok(permission)
         } catch (e: Exception) {
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()

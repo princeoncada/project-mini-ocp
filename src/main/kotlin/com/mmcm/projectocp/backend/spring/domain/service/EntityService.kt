@@ -30,5 +30,4 @@ interface EntityService<GetResult, PostRequest, PutRequest> {
         id: String,
         pageable: Pageable
     ): Page<GetResult>
-
 }

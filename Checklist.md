@@ -97,29 +97,29 @@
 
 # Service Checklist
 
-- [ ]  Role: `RoleService`
-- [ ]  Permission: `PermissionService`
-- [ ]  User: `UserService`
-- [ ]  User Role: `UserRoleService`
-- [ ]  Session: `SessionService`
-- [ ]  User Permission: `UserPermissionService`
-- [ ]  Department: `DepartmentService`
-- [ ]  Program: `ProgramService`
-- [ ]  File Type: `FileTypeService`
-- [ ]  Industry Type: `IndustryTypeService`
-- [ ]  Partnership Type: `PartnershipTypeService`
-- [ ]  Company Category: `CompanyCategoryService`
-- [ ]  OJT Delivery Mode: `OJTDeliveryModeService`
-- [ ]  Meeting Status: `MeetingStatusService`
-- [ ]  Meeting Type: `MeetingTypeService`
-- [ ]  MC Status: `MCStatusService`
-- [ ]  Phil Region: `PhilippineRegionService`
+- [x]  Role: `RoleService`
+- [x]  Permission: `PermissionService`
+- [x]  User: `UserService`
+- [x]  User Role: `UserRoleService`
+- [x]  Session: `SessionService`
+- [x]  User Permission: `UserPermissionService`
+- [x]  Department: `DepartmentService`
+- [x]  Program: `ProgramService`
+- [x]  File Type: `FileTypeService`
+- [x]  Industry Type: `IndustryTypeService`
+- [x]  Partnership Type: `PartnershipTypeService`
+- [x]  Company Category: `CompanyCategoryService`
+- [x]  OJT Delivery Mode: `OJTDeliveryModeService`
+- [x]  Meeting Status: `MeetingStatusService`
+- [x]  Meeting Type: `MeetingTypeService`
+- [x]  MC Status: `MCStatusService`
+- [x]  Phil Region: `PhilippineRegionService`
 - [ ]  Phil Province: `PhilippineProvinceService`
 - [ ]  Phil Municipality: `PhilippineMunicipalityService`
 - [ ]  Phil Barangay: `PhilippineBarangayService`
 - [ ]  Company: `CompanyService`
 - [ ]  Company Contact Person: `CompanyContactPersonService`
-- [ ]  Country: `CountryService`
+- [x]  Country: `CountryService`
 - [ ]  Company Branch: `CompanyBranchService`
 - [ ]  Link Type: `LinkTypeService`
 - [ ]  Links: `LinksService`

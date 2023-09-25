@@ -13,7 +13,9 @@ class UserRoleMapper(
     private val userRepository: UserRepository,
     private val roleRepository: RoleRepository
 ): EntityMapper<UserRole, UserRoleDTOs.GetResult, UserRoleDTOs.PostRequest, UserRoleDTOs.PutRequest> {
-    override fun toGetResult(entity: UserRole): UserRoleDTOs.GetResult {
+    override fun toGetResult(
+        entity: UserRole
+    ): UserRoleDTOs.GetResult {
         return UserRoleDTOs.GetResult(
             id = entity.id,
             user = entity.user.email,
@@ -21,7 +23,10 @@ class UserRoleMapper(
         )
     }
 
-    override fun createEntity(id: String, entityRequest: UserRoleDTOs.PostRequest): UserRole {
+    override fun createEntity(
+        id: String,
+        entityRequest: UserRoleDTOs.PostRequest
+    ): UserRole {
         return UserRole(
             id = id,
             user = userRepository.findByEmail(entityRequest.user).getOrNull()
@@ -33,7 +38,10 @@ class UserRoleMapper(
         )
     }
 
-    override fun updateEntity(entity: UserRole, entityRequest: UserRoleDTOs.PutRequest): UserRole {
+    override fun updateEntity(
+        entity: UserRole,
+        entityRequest: UserRoleDTOs.PutRequest
+    ): UserRole {
         return UserRole(
             id = entity.id,
             user = userRepository.findByEmail(entityRequest.user).getOrNull()

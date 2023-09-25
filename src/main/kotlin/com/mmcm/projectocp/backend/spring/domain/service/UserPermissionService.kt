@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
-interface UserPermissionService{
+interface UserPermissionService {
     fun getEntities(
         pageable: Pageable
     ): Page<UserPermissionDTOs.GetResult>

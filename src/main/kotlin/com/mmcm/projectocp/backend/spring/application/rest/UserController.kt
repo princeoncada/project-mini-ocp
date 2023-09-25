@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/users")
 class UserController(
     private val userService: UserService
-): Controller<UserDTOs.GetResult, UserDTOs.PostRequest, UserDTOs.PutRequest> {
+): EntityController<UserDTOs.GetResult, UserDTOs.PostRequest, UserDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable

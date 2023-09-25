@@ -6,23 +6,23 @@ import java.time.Instant
 
 @Entity
 @Table(name = "tbl_departments")
-open class Department(
+data class Department(
     @Id
     @Column(name = "id", length = 36)
     @GeneratedValue(strategy = GenerationType.UUID)
-    open val id: String,
+    val id: String,
 
     @Column(name = "name", length = 255, nullable = false, unique = true)
-    open val name: String,
+    val name: String,
 
     @Column(name = "abbr", length = 255, nullable = false, unique = true)
-    open val abbr: String,
+    val abbr: String,
 
-    @Column(name = "created_at", nullable = false)
     @CreationTimestamp
-    open val createdAt: Instant,
+    @Column(name = "created_at", nullable = false)
+    val createdAt: Instant,
 
-    @Column(name = "updated_at", nullable = false)
     @UpdateTimestamp
-    open val updatedAt: Instant
+    @Column(name = "updated_at", nullable = false)
+    val updatedAt: Instant
 )

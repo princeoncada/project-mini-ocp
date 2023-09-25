@@ -4,7 +4,6 @@ import com.mmcm.projectocp.backend.spring.application.dto.RoleDTOs
 import com.mmcm.projectocp.backend.spring.domain.service.RoleService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/roles")
 class RoleController(
     private val roleService: RoleService
-): Controller<RoleDTOs.GetResult, RoleDTOs.PostRequest, RoleDTOs.PutRequest> {
+): EntityController<RoleDTOs.GetResult, RoleDTOs.PostRequest, RoleDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable

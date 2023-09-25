@@ -5,13 +5,10 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
+import java.util.*
 
 @Repository
-interface DepartmentRepository : JpaRepository<Department, String> {
-    // You can add custom query methods here if needed
-
-    fun findByNameAndAbbr(
-        name: String,
-        abbr: String,
-    ): List<Department>
+interface DepartmentRepository: JpaRepository<Department, String> {
+    fun findById(id: String, pageable: Pageable): Page<Department>
+    fun findByName(name: String?): Optional<Department>
 }

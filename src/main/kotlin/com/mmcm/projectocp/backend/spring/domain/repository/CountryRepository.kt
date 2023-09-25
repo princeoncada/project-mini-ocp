@@ -1,19 +1,13 @@
 package com.mmcm.projectocp.backend.spring.domain.repository
 
 import com.mmcm.projectocp.backend.spring.domain.model.Country
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface CountryRepository : JpaRepository<Country, String> {
-    // You can add custom query methods here if needed
-
-    fun findByName(name: String): List<Country>
-
-    fun findByIsoCode(isoCode: String): List<Country>
-
-    fun findByNameAndIsoCode(name: String, isoCode: String): List<Country>
-
-    fun findAllByOrderByNameAsc(): List<Country>
+interface CountryRepository: JpaRepository<Country, String> {
+    fun findById(id: String, pageable: Pageable): Page<Country>
 }

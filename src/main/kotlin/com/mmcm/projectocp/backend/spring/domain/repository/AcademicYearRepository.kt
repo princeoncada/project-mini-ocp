@@ -8,11 +8,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface AcademicYearRepository : JpaRepository<AcademicYear, String> {
-    // You can add custom query methods here if needed
-
-    fun findByYearFromLessThanEqualAndYearToGreaterThanEqual(yearFrom: Int, yearTo: Int, pageable: Pageable): Optional<Page<AcademicYear>>
-
-
-
+interface AcademicYearRepository: JpaRepository<AcademicYear, String> {
+    fun findById(id: String, pageable: Pageable): Page<AcademicYear>
 }

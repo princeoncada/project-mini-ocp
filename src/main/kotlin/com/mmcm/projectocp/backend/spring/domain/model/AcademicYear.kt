@@ -13,10 +13,10 @@ data class AcademicYear (
     val id: String,
 
     @Column(name = "year_from", nullable = false)
-    var yearFrom: Int? = null,
+    var yearFrom: Int,
 
     @Column(name = "year_to", nullable = false)
-    var yearTo: Int? = null,
+    var yearTo: Int,
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

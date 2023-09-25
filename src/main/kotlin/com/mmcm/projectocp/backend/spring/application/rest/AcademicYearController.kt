@@ -1,11 +1,11 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-import com.mmcm.projectocp.backend.spring.application.dto.AcademicYearDTO
-import com.mmcm.projectocp.backend.spring.domain.model.AcademicYear
-import com.mmcm.projectocp.backend.spring.domain.repository.AcademicYearRepository
+import com.mmcm.projectocp.backend.spring.application.dto.AcademicYearDTOs
 import com.mmcm.projectocp.backend.spring.domain.service.AcademicYearService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -15,52 +15,73 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-
 @RestController
 @RequestMapping("/api/academic-years")
-class AcademicYearController (
-    private val academicYearRepository: AcademicYearRepository,
+class AcademicYearController(
     private val academicYearService: AcademicYearService
-){
+): EntityController<AcademicYearDTOs.GetResult, AcademicYearDTOs.PostRequest, AcademicYearDTOs.PutRequest> {
     @GetMapping
-    fun getAcademicYears(pageable: Pageable): Page<AcademicYear> {
-        return academicYearRepository.findAll(pageable)
-    }
-    @GetMapping("/id={id}")
-    fun getAcademicYearById(
-        @PathVariable("id") academicYearId: String,
+    override fun getEntities(
         pageable: Pageable
-    ): AcademicYear {
-        return academicYearRepository.findById(academicYearId).orElseThrow { Exception("AcademicYear not found") }
+    ): ResponseEntity<Page<AcademicYearDTOs.GetResult>> {
+        return try {
+            val academicYears = academicYearService.getEntities(pageable)
+            ResponseEntity.ok(academicYears)
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+        }
     }
 
-    @GetMapping("/year={year}")
-    fun getAcademicYearByYear(
-        @PathVariable("year") year: Int,
+    @GetMapping("/{id}")
+    override fun getEntityById(
+        @PathVariable id: String,
         pageable: Pageable
-    ): Page<AcademicYear> {
-        return academicYearRepository.findByYearFromLessThanEqualAndYearToGreaterThanEqual(year, year, pageable).orElseThrow { Exception("AcademicYear not found") }
+    ): ResponseEntity<Page<AcademicYearDTOs.GetResult>> {
+        return try {
+            val academicYear = academicYearService.getEntityById(id, pageable)
+            ResponseEntity.ok(academicYear)
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+        }
     }
 
-    @PostMapping("/create-academic-year")
-    fun createAcademicYear(
-        @RequestBody req: AcademicYearDTO
-    ): AcademicYearDTO {
-        return academicYearService.createAcademicYear(req)
+    @PostMapping
+    override fun createEntity(
+        @RequestBody entityRequest: AcademicYearDTOs.PostRequest,
+        pageable: Pageable
+    ): ResponseEntity<Page<AcademicYearDTOs.GetResult>> {
+        return try {
+            val academicYear = academicYearService.createEntity(entityRequest, pageable)
+            ResponseEntity.ok(academicYear)
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+        }
     }
 
-    @PutMapping("/update-academic-year/id={id}")
-    fun updateAcademicYear(
-        @PathVariable("id") academicYearId: String,
-        @RequestBody req: AcademicYearDTO
-    ): AcademicYearDTO {
-        return academicYearService.updateAcademicYearById(academicYearId, req)
+    @PutMapping("/{id}")
+    override fun updateEntityById(
+        @PathVariable id: String,
+        @RequestBody entityRequest: AcademicYearDTOs.PutRequest,
+        pageable: Pageable
+    ): ResponseEntity<Page<AcademicYearDTOs.GetResult>> {
+        return try {
+            val academicYear = academicYearService.updateEntityById(id, entityRequest, pageable)
+            ResponseEntity.ok(academicYear)
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+        }
     }
 
-    @DeleteMapping("/delete-academic-year/id={id}")
-    fun deleteAcademicYear(
-        @PathVariable("id") academicYearId: String
-    ) {
-        academicYearService.deleteAcademicYearById(academicYearId)
+    @DeleteMapping("/{id}")
+    override fun deleteEntityById(
+        @PathVariable id: String,
+        pageable: Pageable
+    ): ResponseEntity<Page<AcademicYearDTOs.GetResult>> {
+        return try {
+            val academicYear = academicYearService.deleteEntityById(id, pageable)
+            ResponseEntity.ok(academicYear)
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+        }
     }
 }

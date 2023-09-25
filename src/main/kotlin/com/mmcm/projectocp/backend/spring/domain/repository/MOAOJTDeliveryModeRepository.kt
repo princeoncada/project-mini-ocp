@@ -5,6 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface MOAOJTDeliveryModeRepository : JpaRepository<MOAOJTDeliveryMode, String> {
-    // You can add custom query methods here if needed
+interface MOAOJTDeliveryModeRepository: JpaRepository<MOAOJTDeliveryMode, String> {
 }
