@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface FileTypeRepository : JpaRepository<FileType, String> {
-    // You can add custom query methods here if needed
-
-
+interface FileTypeRepository: JpaRepository<FileType, String> {
     fun findById(id: String, pageable: Pageable): Page<FileType>
 }

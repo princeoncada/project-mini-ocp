@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/sessions")
 class SessionController(
     private val sessionService: SessionService
-) : EntityController<SessionDTOs.GetResult, SessionDTOs.PostRequest, SessionDTOs.PutRequest> {
+): EntityController<SessionDTOs.GetResult, SessionDTOs.PostRequest, SessionDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
@@ -77,6 +77,4 @@ class SessionController(
             ResponseEntity.badRequest().build()
         }
     }
-
-
 }

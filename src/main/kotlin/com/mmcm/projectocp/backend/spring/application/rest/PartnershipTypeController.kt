@@ -18,10 +18,11 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/partnership-types")
 class PartnershipTypeController(
     private val partnershipTypeService: PartnershipTypeService
-) : EntityController<PartnershipTypeDTOs.GetResult, PartnershipTypeDTOs.PostRequest, PartnershipTypeDTOs.PutRequest> {
-
+): EntityController<PartnershipTypeDTOs.GetResult, PartnershipTypeDTOs.PostRequest, PartnershipTypeDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<PartnershipTypeDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<PartnershipTypeDTOs.GetResult>> {
         return try {
             val partnershipType = partnershipTypeService.getEntities(pageable)
             ResponseEntity.ok(partnershipType)
@@ -73,7 +74,8 @@ class PartnershipTypeController(
     @DeleteMapping("/{id}")
     override fun deleteEntityById(
         @PathVariable id: String,
-        pageable: Pageable): ResponseEntity<Page<PartnershipTypeDTOs.GetResult>> {
+        pageable: Pageable
+    ): ResponseEntity<Page<PartnershipTypeDTOs.GetResult>> {
         return try {
             val partnershipType = partnershipTypeService.deleteEntityById(id, pageable)
             ResponseEntity.ok(partnershipType)
@@ -81,8 +83,4 @@ class PartnershipTypeController(
             ResponseEntity.notFound().build()
         }
     }
-
-
-
-
 }

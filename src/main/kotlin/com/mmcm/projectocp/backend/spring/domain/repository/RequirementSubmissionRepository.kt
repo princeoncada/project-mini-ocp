@@ -5,6 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface RequirementSubmissionRepository : JpaRepository<RequirementSubmission, String> {
-    // You can add custom query methods here if needed
+interface RequirementSubmissionRepository: JpaRepository<RequirementSubmission, String> {
 }

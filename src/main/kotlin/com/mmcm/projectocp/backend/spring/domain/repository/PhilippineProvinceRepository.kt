@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface PhilippineProvinceRepository : JpaRepository<PhilippineProvince, String> {
-    // You can add custom query methods here if needed
-    fun findByProvinceCode(provcode: String): Optional<PhilippineProvince>
+interface PhilippineProvinceRepository: JpaRepository<PhilippineProvince, String> {
+    fun findByProvinceCode(provCode: String): Optional<PhilippineProvince>
 }

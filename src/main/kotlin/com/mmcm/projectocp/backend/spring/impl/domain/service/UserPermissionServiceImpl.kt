@@ -30,14 +30,13 @@ class UserPermissionServiceImpl(
         permission: String,
         pageable: Pageable
     ): Page<UserPermissionDTOs.GetResult> {
-        return userPermissionRepository.findById(
+        val userPermission = userPermissionRepository.findById(
             UserPermissionKey(
-                userId = userRepository.findByEmail(user).getOrNull()?.id
-                    ?: userRepository.findById(user).get().id,
-                permissionId = permissionRepository.findByName(permission).getOrNull()?.id
-                    ?: permissionRepository.findById(permission).get().id
+                userId = userRepository.findByEmail(user).getOrNull()?.id ?: userRepository.findById(user).get().id,
+                permissionId = permissionRepository.findByName(permission).getOrNull()?.id ?: permissionRepository.findById(permission).get().id
             ), pageable
-        ).get().map { userPermissionMapper.toGetResult(it) }
+        ).get()
+        return userPermission.map { userPermissionMapper.toGetResult(it) }
     }
 
     override fun createEntity(
@@ -56,22 +55,13 @@ class UserPermissionServiceImpl(
     ): Page<UserPermissionDTOs.GetResult> {
         val currentUserPermission = userPermissionRepository.findById(
             UserPermissionKey(
-                userId = userRepository.findByEmail(user).getOrNull()?.id
-                    ?: userRepository.findById(user).get().id,
-                permissionId = permissionRepository.findByName(permission).getOrNull()?.id
-                    ?: permissionRepository.findById(permission).get().id
+                userId = userRepository.findByEmail(user).getOrNull()?.id ?: userRepository.findById(user).get().id,
+                permissionId = permissionRepository.findByName(permission).getOrNull()?.id ?: permissionRepository.findById(permission).get().id
             )
         ).get()
-
         val savedUserPermission = userPermissionRepository.save(userPermissionMapper.updateEntity(currentUserPermission, entityRequest))
         userPermissionRepository.delete(currentUserPermission)
-
-        return userPermissionRepository.findById(
-            UserPermissionKey(
-                userId = savedUserPermission.id.userId,
-                permissionId = savedUserPermission.id.permissionId
-            ), pageable
-        ).get().map { userPermissionMapper.toGetResult(it) }
+        return userPermissionRepository.findById(savedUserPermission.id, pageable).get().map { userPermissionMapper.toGetResult(it) }
     }
 
     override fun deleteEntityByKey(
@@ -81,10 +71,8 @@ class UserPermissionServiceImpl(
     ): Page<UserPermissionDTOs.GetResult> {
         val userPermission = userPermissionRepository.findById(
             UserPermissionKey(
-                userId = userRepository.findByEmail(user).getOrNull()?.id
-                    ?: userRepository.findById(user).get().id,
-                permissionId = permissionRepository.findByName(permission).getOrNull()?.id
-                    ?: permissionRepository.findById(permission).get().id
+                userId = userRepository.findByEmail(user).getOrNull()?.id ?: userRepository.findById(user).get().id,
+                permissionId = permissionRepository.findByName(permission).getOrNull()?.id ?: permissionRepository.findById(permission).get().id
             )
         ).get()
         userPermissionRepository.delete(userPermission)

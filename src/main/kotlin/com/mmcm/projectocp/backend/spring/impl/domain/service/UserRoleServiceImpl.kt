@@ -13,9 +13,9 @@ import java.util.*
 
 @Service
 class UserRoleServiceImpl(
-        private val userRoleRepository: UserRoleRepository,
-        private val userRepository: UserRepository,
-        private val userRoleMapper: UserRoleMapper
+    private val userRoleRepository: UserRoleRepository,
+    private val userRepository: UserRepository,
+    private val userRoleMapper: UserRoleMapper
 ): UserRoleService {
     override fun getEntities(
         pageable: Pageable
@@ -27,7 +27,8 @@ class UserRoleServiceImpl(
         id: String,
         pageable: Pageable
     ): Page<UserRoleDTOs.GetResult> {
-        return userRoleRepository.findById(id, pageable).map { userRoleMapper.toGetResult(it) }
+        val userRole = userRoleRepository.findById(id, pageable)
+        return userRole.map { userRoleMapper.toGetResult(it) }
     }
 
     override fun createEntity(
@@ -64,7 +65,9 @@ class UserRoleServiceImpl(
         return userRoleRepository.findByUserId(userId).role.name == "admin"
     }
 
-    override fun findByEmail(email: String): Optional<UserRole> {
+    override fun findByEmail(
+        email: String
+    ): Optional<UserRole> {
         val userId = userRepository.findByEmail(email).get().id
         return userRoleRepository.findById(userId)
     }

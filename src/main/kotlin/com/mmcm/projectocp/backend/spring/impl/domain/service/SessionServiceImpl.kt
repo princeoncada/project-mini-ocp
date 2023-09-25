@@ -24,7 +24,8 @@ class SessionServiceImpl(
         id: String,
         pageable: Pageable
     ): Page<SessionDTOs.GetResult> {
-        return sessionRepository.findById(id, pageable).map { sessionMapper.toGetResult(it) }
+        val session = sessionRepository.findById(id, pageable)
+        return session.map { sessionMapper.toGetResult(it) }
     }
 
     override fun createEntity(
@@ -42,8 +43,8 @@ class SessionServiceImpl(
         pageable: Pageable
     ): Page<SessionDTOs.GetResult> {
         val session = sessionRepository.findById(id).get()
-        sessionRepository.save(sessionMapper.updateEntity(session, entityRequest))
-        return sessionRepository.findById(id, pageable).map { sessionMapper.toGetResult(it) }
+        val savedSession = sessionRepository.save(sessionMapper.updateEntity(session, entityRequest))
+        return sessionRepository.findById(savedSession.id, pageable).map { sessionMapper.toGetResult(it) }
     }
 
     override fun deleteEntityById(

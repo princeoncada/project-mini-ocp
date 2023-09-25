@@ -7,7 +7,9 @@ import java.time.Instant
 
 @Component
 class MeetingTypeMapper : EntityMapper<MeetingType, MeetingTypeDTOs.GetResult, MeetingTypeDTOs.PostRequest, MeetingTypeDTOs.PutRequest> {
-    override fun toGetResult(entity: MeetingType): MeetingTypeDTOs.GetResult {
+    override fun toGetResult(
+        entity: MeetingType
+    ): MeetingTypeDTOs.GetResult {
         return MeetingTypeDTOs.GetResult(
             id = entity.id,
             name = entity.name,
@@ -15,7 +17,10 @@ class MeetingTypeMapper : EntityMapper<MeetingType, MeetingTypeDTOs.GetResult, M
         )
     }
 
-    override fun createEntity(id: String, entityRequest: MeetingTypeDTOs.PostRequest): MeetingType {
+    override fun createEntity(
+        id: String,
+        entityRequest: MeetingTypeDTOs.PostRequest
+    ): MeetingType {
         return MeetingType(
             id = id,
             name = entityRequest.name,
@@ -25,7 +30,10 @@ class MeetingTypeMapper : EntityMapper<MeetingType, MeetingTypeDTOs.GetResult, M
         )
     }
 
-    override fun updateEntity(entity: MeetingType, entityRequest: MeetingTypeDTOs.PutRequest): MeetingType {
+    override fun updateEntity(
+        entity: MeetingType,
+        entityRequest: MeetingTypeDTOs.PutRequest
+    ): MeetingType {
         return MeetingType(
             id = entity.id,
             name = entityRequest.name ?: entity.name,

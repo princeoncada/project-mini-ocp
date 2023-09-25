@@ -13,12 +13,17 @@ import java.util.*
 class IndustryTypeServiceImpl(
     private val industryTypeRepository: IndustryTypeRepository,
     private val industryTypeMapper: IndustryTypeMapper
-) : IndustryTypeService {
-    override fun getEntities(pageable: Pageable): Page<IndustryTypeDTOs.GetResult> {
+): IndustryTypeService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<IndustryTypeDTOs.GetResult> {
         return industryTypeRepository.findAll(pageable).map { industryTypeMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<IndustryTypeDTOs.GetResult> {
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<IndustryTypeDTOs.GetResult> {
         val industryType = industryTypeRepository.findById(id, pageable)
         return industryType.map { industryTypeMapper.toGetResult(it) }
     }
@@ -38,11 +43,14 @@ class IndustryTypeServiceImpl(
         pageable: Pageable
     ): Page<IndustryTypeDTOs.GetResult> {
         val currentIndustryType = industryTypeRepository.findById(id).get()
-        industryTypeRepository.save(industryTypeMapper.updateEntity(currentIndustryType, entityRequest))
-        return industryTypeRepository.findById(id, pageable).map { industryTypeMapper.toGetResult(it) }
+        val savedIndustryType = industryTypeRepository.save(industryTypeMapper.updateEntity(currentIndustryType, entityRequest))
+        return industryTypeRepository.findById(savedIndustryType.id, pageable).map { industryTypeMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<IndustryTypeDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<IndustryTypeDTOs.GetResult> {
         val industryType = industryTypeRepository.findById(id).get()
         industryTypeRepository.delete(industryType)
         return industryTypeRepository.findAll(pageable).map { industryTypeMapper.toGetResult(it) }

@@ -12,7 +12,9 @@ import kotlin.jvm.optionals.getOrNull
 class SessionMapper(
     private val userRepository: UserRepository
 ): EntityMapper<Session, SessionDTOs.GetResult, SessionDTOs.PostRequest, SessionDTOs.PutRequest> {
-    override fun toGetResult(entity: Session): SessionDTOs.GetResult {
+    override fun toGetResult(
+        entity: Session
+    ): SessionDTOs.GetResult {
         return SessionDTOs.GetResult(
             id = entity.id,
             user = entity.user.email,
@@ -20,7 +22,10 @@ class SessionMapper(
         )
     }
 
-    override fun createEntity(id: String, entityRequest: SessionDTOs.PostRequest): Session {
+    override fun createEntity(
+        id: String,
+        entityRequest: SessionDTOs.PostRequest
+    ): Session {
         return Session(
             id = id,
             user = userRepository.findByEmail(entityRequest.user).getOrNull()
@@ -31,7 +36,10 @@ class SessionMapper(
         )
     }
 
-    override fun updateEntity(entity: Session, entityRequest: SessionDTOs.PutRequest): Session {
+    override fun updateEntity(
+        entity: Session,
+        entityRequest: SessionDTOs.PutRequest
+    ): Session {
         return Session(
             id = entity.id,
             user = userRepository.findByEmail(entityRequest.user).getOrNull()

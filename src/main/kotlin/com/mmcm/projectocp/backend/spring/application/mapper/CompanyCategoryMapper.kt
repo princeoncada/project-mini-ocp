@@ -6,15 +6,20 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class CompanyCategoryMapper() : EntityMapper<CompanyCategory, CompanyCategoryDTOs.GetResult, CompanyCategoryDTOs.PostRequest, CompanyCategoryDTOs.PutRequest> {
-    override fun toGetResult(entity: CompanyCategory): CompanyCategoryDTOs.GetResult {
+class CompanyCategoryMapper: EntityMapper<CompanyCategory, CompanyCategoryDTOs.GetResult, CompanyCategoryDTOs.PostRequest, CompanyCategoryDTOs.PutRequest> {
+    override fun toGetResult(
+        entity: CompanyCategory
+    ): CompanyCategoryDTOs.GetResult {
         return CompanyCategoryDTOs.GetResult(
             id = entity.id,
             name = entity.name,
         )
     }
 
-    override fun createEntity(id: String, entityRequest: CompanyCategoryDTOs.PostRequest): CompanyCategory {
+    override fun createEntity(
+        id: String,
+        entityRequest: CompanyCategoryDTOs.PostRequest
+    ): CompanyCategory {
         return CompanyCategory(
             id = id,
             name = entityRequest.name,
@@ -23,7 +28,10 @@ class CompanyCategoryMapper() : EntityMapper<CompanyCategory, CompanyCategoryDTO
         )
     }
 
-    override fun updateEntity(entity: CompanyCategory, entityRequest: CompanyCategoryDTOs.PutRequest): CompanyCategory {
+    override fun updateEntity(
+        entity: CompanyCategory,
+        entityRequest: CompanyCategoryDTOs.PutRequest
+    ): CompanyCategory {
         return CompanyCategory(
             id = entity.id,
             name = entityRequest.name ?: entity.name,

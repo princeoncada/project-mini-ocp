@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface CountryRepository : JpaRepository<Country, String> {
-    // You can add custom query methods here if needed
-
-
+interface CountryRepository: JpaRepository<Country, String> {
     fun findById(id: String, pageable: Pageable): Page<Country>
 }

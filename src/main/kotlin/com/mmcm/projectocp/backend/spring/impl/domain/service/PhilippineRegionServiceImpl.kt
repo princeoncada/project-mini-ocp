@@ -13,13 +13,19 @@ import java.util.UUID
 class PhilippineRegionServiceImpl(
     private val philippineRegionRepository: PhilippineRegionRepository,
     private val philippineRegionMapper: PhilippineRegionMapper,
-) : PhilippineRegionService {
-    override fun getEntities(pageable: Pageable): Page<PhilippineRegionDTOs.GetResult> {
+): PhilippineRegionService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<PhilippineRegionDTOs.GetResult> {
         return philippineRegionRepository.findAll(pageable).map { philippineRegionMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<PhilippineRegionDTOs.GetResult> {
-        return philippineRegionRepository.findById(id, pageable).map { philippineRegionMapper.toGetResult(it) }
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<PhilippineRegionDTOs.GetResult> {
+        val philippineRegion = philippineRegionRepository.findById(id, pageable)
+        return philippineRegion.map { philippineRegionMapper.toGetResult(it) }
     }
 
     override fun createEntity(
@@ -27,10 +33,8 @@ class PhilippineRegionServiceImpl(
         pageable: Pageable
     ): Page<PhilippineRegionDTOs.GetResult> {
         val philippineRegionId = UUID.randomUUID().toString()
-        val savedPhilippineRegion = philippineRegionRepository.save(
-            philippineRegionMapper.createEntity(philippineRegionId, entityRequest))
-        return philippineRegionRepository.findById(savedPhilippineRegion.id, pageable)
-            .map { philippineRegionMapper.toGetResult(it) }
+        val savedPhilippineRegion = philippineRegionRepository.save(philippineRegionMapper.createEntity(philippineRegionId, entityRequest))
+        return philippineRegionRepository.findById(savedPhilippineRegion.id, pageable).map { philippineRegionMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -39,14 +43,16 @@ class PhilippineRegionServiceImpl(
         pageable: Pageable
     ): Page<PhilippineRegionDTOs.GetResult> {
         val currentPhilippineRegion = philippineRegionRepository.findById(id).get()
-        philippineRegionRepository.save(philippineRegionMapper.updateEntity(currentPhilippineRegion, entityRequest))
-        return philippineRegionRepository.findById(id, pageable).map { philippineRegionMapper.toGetResult(it) }
+        val savedPhilippineRegion = philippineRegionRepository.save(philippineRegionMapper.updateEntity(currentPhilippineRegion, entityRequest))
+        return philippineRegionRepository.findById(savedPhilippineRegion.id, pageable).map { philippineRegionMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<PhilippineRegionDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<PhilippineRegionDTOs.GetResult> {
         val philippineRegion = philippineRegionRepository.findById(id).get()
         philippineRegionRepository.delete(philippineRegion)
         return philippineRegionRepository.findAll(pageable).map { philippineRegionMapper.toGetResult(it) }
     }
-
 }

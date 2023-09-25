@@ -9,13 +9,14 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/ojt-delivery-mode")
+@RequestMapping("/api/ojt-delivery-modes")
 class OJTDeliveryModeController (
-    private val ojtDeliveryModeService: OJTDeliveryModeService
-) : EntityController<OJTDeliveryModeDTOs.GetResult, OJTDeliveryModeDTOs.PostRequest, OJTDeliveryModeDTOs.PutRequest>{
-
+    @Qualifier("OJTDeliveryModeServiceImpl") private val ojtDeliveryModeService: OJTDeliveryModeService
+): EntityController<OJTDeliveryModeDTOs.GetResult, OJTDeliveryModeDTOs.PostRequest, OJTDeliveryModeDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<OJTDeliveryModeDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<OJTDeliveryModeDTOs.GetResult>> {
         return try {
             val ojtDeliveryMode = ojtDeliveryModeService.getEntities(pageable)
             ResponseEntity.ok(ojtDeliveryMode)
@@ -27,7 +28,8 @@ class OJTDeliveryModeController (
     @GetMapping("/{id}")
     override fun getEntityById(
         @PathVariable id: String,
-        pageable: Pageable): ResponseEntity<Page<OJTDeliveryModeDTOs.GetResult>> {
+        pageable: Pageable
+    ): ResponseEntity<Page<OJTDeliveryModeDTOs.GetResult>> {
         return try {
             val ojtDeliveryMode = ojtDeliveryModeService.getEntityById(id, pageable)
             ResponseEntity.ok(ojtDeliveryMode)
@@ -75,9 +77,4 @@ class OJTDeliveryModeController (
             ResponseEntity.notFound().build()
         }
     }
-
-
-
-
-
 }

@@ -13,21 +13,28 @@ import java.util.*
 class ProgramServiceImpl(
     private val programRepository: ProgramRepository,
     private val programMapper: ProgramMapper
-) : ProgramService {
-    override fun getEntities(pageable: Pageable): Page<ProgramDTOs.GetResult> {
+): ProgramService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<ProgramDTOs.GetResult> {
         return programRepository.findAll(pageable).map { programMapper.toGetResult(it) }
-
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<ProgramDTOs.GetResult> {
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<ProgramDTOs.GetResult> {
         val program = programRepository.findById(id, pageable)
         return program.map { programMapper.toGetResult(it) }
     }
 
-    override fun createEntity(entityRequest: ProgramDTOs.PostRequest, pageable: Pageable): Page<ProgramDTOs.GetResult> {
+    override fun createEntity(
+        entityRequest: ProgramDTOs.PostRequest,
+        pageable: Pageable
+    ): Page<ProgramDTOs.GetResult> {
         val programId = UUID.randomUUID().toString()
-        programRepository.save(programMapper.createEntity(programId, entityRequest))
-        return programRepository.findById(programId, pageable).map { programMapper.toGetResult(it) }
+        val savedProgram = programRepository.save(programMapper.createEntity(programId, entityRequest))
+        return programRepository.findById(savedProgram.id, pageable).map { programMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -36,11 +43,14 @@ class ProgramServiceImpl(
         pageable: Pageable
     ): Page<ProgramDTOs.GetResult> {
         val currentProgram = programRepository.findById(id).get()
-        programRepository.save(programMapper.updateEntity(currentProgram, entityRequest))
-        return programRepository.findById(id, pageable).map { programMapper.toGetResult(it) }
+        val savedProgram = programRepository.save(programMapper.updateEntity(currentProgram, entityRequest))
+        return programRepository.findById(savedProgram.id, pageable).map { programMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<ProgramDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<ProgramDTOs.GetResult> {
         val program = programRepository.findById(id).get()
         programRepository.delete(program)
         return programRepository.findAll(pageable).map { programMapper.toGetResult(it) }

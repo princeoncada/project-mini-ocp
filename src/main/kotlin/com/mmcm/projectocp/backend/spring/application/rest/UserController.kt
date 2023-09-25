@@ -7,11 +7,9 @@ import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-// Todo : Implement UserController API With Auths
-
 @RestController
 @RequestMapping("/api/users")
-class UserEntityController(
+class UserController(
     private val userService: UserService
 ): EntityController<UserDTOs.GetResult, UserDTOs.PostRequest, UserDTOs.PutRequest> {
     @GetMapping

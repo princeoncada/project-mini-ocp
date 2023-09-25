@@ -5,14 +5,14 @@ import com.mmcm.projectocp.backend.spring.domain.service.CountryService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/countries")
 class CountryController(
     private val countryService: CountryService
 ): EntityController<CountryDTOs.GetResult, CountryDTOs.PostRequest, CountryDTOs.PutRequest> {
+    @GetMapping
     override fun getEntities(
         pageable: Pageable
     ): ResponseEntity<Page<CountryDTOs.GetResult>> {
@@ -24,7 +24,11 @@ class CountryController(
         }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): ResponseEntity<Page<CountryDTOs.GetResult>> {
+    @GetMapping("/{id}")
+    override fun getEntityById(
+        @PathVariable id: String,
+        pageable: Pageable
+    ): ResponseEntity<Page<CountryDTOs.GetResult>> {
         return try {
             val country = countryService.getEntityById(id, pageable)
             ResponseEntity.ok(country)
@@ -33,8 +37,9 @@ class CountryController(
         }
     }
 
+    @PostMapping
     override fun createEntity(
-        entityRequest: CountryDTOs.PostRequest,
+        @RequestBody entityRequest: CountryDTOs.PostRequest,
         pageable: Pageable
     ): ResponseEntity<Page<CountryDTOs.GetResult>> {
         return try {
@@ -45,9 +50,10 @@ class CountryController(
         }
     }
 
+    @PutMapping("/{id}")
     override fun updateEntityById(
-        id: String,
-        entityRequest: CountryDTOs.PutRequest,
+        @PathVariable id: String,
+        @RequestBody entityRequest: CountryDTOs.PutRequest,
         pageable: Pageable
     ): ResponseEntity<Page<CountryDTOs.GetResult>> {
         return try {
@@ -58,7 +64,11 @@ class CountryController(
         }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): ResponseEntity<Page<CountryDTOs.GetResult>> {
+    @DeleteMapping("/{id}")
+    override fun deleteEntityById(
+        @PathVariable id: String,
+        pageable: Pageable
+    ): ResponseEntity<Page<CountryDTOs.GetResult>> {
         return try {
             val country = countryService.deleteEntityById(id, pageable)
             ResponseEntity.ok(country)

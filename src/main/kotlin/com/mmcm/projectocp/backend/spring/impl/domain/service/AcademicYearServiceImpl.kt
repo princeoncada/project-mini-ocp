@@ -14,13 +14,17 @@ import java.util.*
 class AcademicYearServiceImpl(
     private val academicYearRepository: AcademicYearRepository,
     private val academicYearMapper: AcademicYearMapper
-
-) : AcademicYearService {
-    override fun getEntities(pageable: Pageable): Page<AcademicYearDTOs.GetResult> {
+): AcademicYearService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<AcademicYearDTOs.GetResult> {
         return academicYearRepository.findAll(pageable).map { academicYearMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<AcademicYearDTOs.GetResult> {
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<AcademicYearDTOs.GetResult> {
         val academic = academicYearRepository.findById(id, pageable)
         return academic.map { academicYearMapper.toGetResult(it) }
     }
@@ -30,8 +34,8 @@ class AcademicYearServiceImpl(
         pageable: Pageable
     ): Page<AcademicYearDTOs.GetResult> {
         val academicId = UUID.randomUUID().toString()
-        academicYearRepository.save(academicYearMapper.createEntity(academicId, entityRequest))
-        return academicYearRepository.findById(academicId, pageable).map { academicYearMapper.toGetResult(it) }
+        val savedAcademicYear = academicYearRepository.save(academicYearMapper.createEntity(academicId, entityRequest))
+        return academicYearRepository.findById(savedAcademicYear.id, pageable).map { academicYearMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -39,14 +43,16 @@ class AcademicYearServiceImpl(
         entityRequest: AcademicYearDTOs.PutRequest,
         pageable: Pageable
     ): Page<AcademicYearDTOs.GetResult> {
-        val currentAcademic = academicYearRepository.findById(id).get() ?: throw ChangeSetPersister.NotFoundException()
-        academicYearRepository.save(academicYearMapper.updateEntity(currentAcademic, entityRequest))
-        return academicYearRepository.findById(id, pageable).map { academicYearMapper.toGetResult(it) }
-
+        val currentAcademic = academicYearRepository.findById(id).get()
+        val savedAcademicYear = academicYearRepository.save(academicYearMapper.updateEntity(currentAcademic, entityRequest))
+        return academicYearRepository.findById(savedAcademicYear.id, pageable).map { academicYearMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<AcademicYearDTOs.GetResult> {
-        val academic = academicYearRepository.findById(id).get() ?: throw ChangeSetPersister.NotFoundException()
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<AcademicYearDTOs.GetResult> {
+        val academic = academicYearRepository.findById(id).get()
         academicYearRepository.delete(academic)
         return academicYearRepository.findAll(pageable).map { academicYearMapper.toGetResult(it) }
     }

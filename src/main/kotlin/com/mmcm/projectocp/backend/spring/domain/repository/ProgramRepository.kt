@@ -9,10 +9,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface ProgramRepository : JpaRepository<Program, String> {
-    // You can add custom query methods here if needed
+interface ProgramRepository: JpaRepository<Program, String> {
     fun findById(id: String, pageable: Pageable): Page<Program>
-
-
     fun findByName(name: String?): Optional<Program>
 }

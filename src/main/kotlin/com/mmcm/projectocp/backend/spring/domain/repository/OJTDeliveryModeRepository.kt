@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface OJTDeliveryModeRepository : JpaRepository<OJTDeliveryMode, String> {
-    // You can add custom query methods here if needed
-
+interface OJTDeliveryModeRepository: JpaRepository<OJTDeliveryMode, String> {
     fun findById(id: String, pageable: Pageable): Page<OJTDeliveryMode>
 }

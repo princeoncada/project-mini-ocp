@@ -7,14 +7,19 @@ import java.time.Instant
 
 @Component
 class RoleMapper: EntityMapper<Role, RoleDTOs.GetResult, RoleDTOs.PostRequest, RoleDTOs.PutRequest> {
-    override fun toGetResult(entity: Role): RoleDTOs.GetResult {
+    override fun toGetResult(
+        entity: Role
+    ): RoleDTOs.GetResult {
         return RoleDTOs.GetResult(
             id = entity.id,
             name = entity.name
         )
     }
 
-    override fun createEntity(id: String, entityRequest: RoleDTOs.PostRequest): Role {
+    override fun createEntity(
+        id: String,
+        entityRequest: RoleDTOs.PostRequest
+    ): Role {
         return Role(
             id = id,
             name = entityRequest.name,
@@ -23,7 +28,10 @@ class RoleMapper: EntityMapper<Role, RoleDTOs.GetResult, RoleDTOs.PostRequest, R
         )
     }
 
-    override fun updateEntity(entity: Role, entityRequest: RoleDTOs.PutRequest): Role {
+    override fun updateEntity(
+        entity: Role,
+        entityRequest: RoleDTOs.PutRequest
+    ): Role {
         return Role(
             id = entity.id,
             name = entityRequest.name ?: entity.name,

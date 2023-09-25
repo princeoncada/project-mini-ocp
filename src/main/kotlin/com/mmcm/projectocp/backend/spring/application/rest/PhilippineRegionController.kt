@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/philippine-regions")
 class PhilippineRegionController(
     private val philippineRegionService: PhilippineRegionService
-) : EntityController<PhilippineRegionDTOs.GetResult, PhilippineRegionDTOs.PostRequest, PhilippineRegionDTOs.PutRequest> {
-
+): EntityController<PhilippineRegionDTOs.GetResult, PhilippineRegionDTOs.PostRequest, PhilippineRegionDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<PhilippineRegionDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<PhilippineRegionDTOs.GetResult>> {
         return try {
             val entities = philippineRegionService.getEntities(pageable)
             ResponseEntity.ok(entities)
@@ -24,7 +25,10 @@ class PhilippineRegionController(
     }
 
     @GetMapping("/{id}")
-    override fun getEntityById(id: String, pageable: Pageable): ResponseEntity<Page<PhilippineRegionDTOs.GetResult>> {
+    override fun getEntityById(
+        @PathVariable id: String,
+        pageable: Pageable
+    ): ResponseEntity<Page<PhilippineRegionDTOs.GetResult>> {
         return try {
             val entity = philippineRegionService.getEntityById(id, pageable)
             ResponseEntity.ok(entity)
@@ -72,6 +76,4 @@ class PhilippineRegionController(
             ResponseEntity.badRequest().build()
         }
     }
-
-
 }

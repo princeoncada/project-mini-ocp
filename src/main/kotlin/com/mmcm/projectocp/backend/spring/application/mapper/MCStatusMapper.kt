@@ -6,15 +6,20 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class MCStatusMapper : EntityMapper<MCStatus, MCStatusDTOs.GetResult, MCStatusDTOs.PostRequest, MCStatusDTOs.PutRequest> {
-    override fun toGetResult(entity: MCStatus): MCStatusDTOs.GetResult {
+class MCStatusMapper: EntityMapper<MCStatus, MCStatusDTOs.GetResult, MCStatusDTOs.PostRequest, MCStatusDTOs.PutRequest> {
+    override fun toGetResult(
+        entity: MCStatus
+    ): MCStatusDTOs.GetResult {
         return MCStatusDTOs.GetResult(
             id = entity.id,
             name = entity.name,
         )
     }
 
-    override fun createEntity(id: String, entityRequest: MCStatusDTOs.PostRequest): MCStatus {
+    override fun createEntity(
+        id: String,
+        entityRequest: MCStatusDTOs.PostRequest
+    ): MCStatus {
         return MCStatus(
             id = id,
             name = entityRequest.name,
@@ -23,7 +28,10 @@ class MCStatusMapper : EntityMapper<MCStatus, MCStatusDTOs.GetResult, MCStatusDT
         )
     }
 
-    override fun updateEntity(entity: MCStatus, entityRequest: MCStatusDTOs.PutRequest): MCStatus {
+    override fun updateEntity(
+        entity: MCStatus,
+        entityRequest: MCStatusDTOs.PutRequest
+    ): MCStatus {
         return MCStatus(
             id = entity.id,
             name = entityRequest.name ?: entity.name,

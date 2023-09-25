@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/meeting-types")
 class MeetingTypeController (
     private val meetingTypeService: MeetingTypeService
-) : EntityController<MeetingTypeDTOs.GetResult, MeetingTypeDTOs.PostRequest, MeetingTypeDTOs.PutRequest>{
-
+): EntityController<MeetingTypeDTOs.GetResult, MeetingTypeDTOs.PostRequest, MeetingTypeDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<MeetingTypeDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<MeetingTypeDTOs.GetResult>> {
         return try {
             val meetingType = meetingTypeService.getEntities(pageable)
             ResponseEntity.ok(meetingType)
@@ -26,7 +27,8 @@ class MeetingTypeController (
     @GetMapping("/{id}")
     override fun getEntityById(
         @PathVariable id: String,
-        pageable: Pageable): ResponseEntity<Page<MeetingTypeDTOs.GetResult>> {
+        pageable: Pageable
+    ): ResponseEntity<Page<MeetingTypeDTOs.GetResult>> {
         return try {
             val meetingType = meetingTypeService.getEntityById(id, pageable)
             ResponseEntity.ok(meetingType)
@@ -73,8 +75,4 @@ class MeetingTypeController (
             ResponseEntity.notFound().build()
         }
     }
-
-
-
-
 }

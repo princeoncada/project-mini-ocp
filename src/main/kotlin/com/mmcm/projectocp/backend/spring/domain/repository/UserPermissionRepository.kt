@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 import java.util.Optional
 
 @Repository
-interface UserPermissionRepository : JpaRepository<UserPermission, UserPermissionKey> {
+interface UserPermissionRepository: JpaRepository<UserPermission, UserPermissionKey> {
     override fun findAll(pageable: Pageable): Page<UserPermission>
     fun findById(id: UserPermissionKey, pageable: Pageable): Optional<Page<UserPermission>>
 }

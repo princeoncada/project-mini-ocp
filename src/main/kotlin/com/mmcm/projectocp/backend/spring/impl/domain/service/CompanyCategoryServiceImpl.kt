@@ -13,12 +13,17 @@ import java.util.*
 class CompanyCategoryServiceImpl(
     private val companyCategoryRepository: CompanyCategoryRepository,
     private val companyCategoryMapper: CompanyCategoryMapper
-) : CompanyCategoryService{
-    override fun getEntities(pageable: Pageable): Page<CompanyCategoryDTOs.GetResult> {
+): CompanyCategoryService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<CompanyCategoryDTOs.GetResult> {
         return companyCategoryRepository.findAll(pageable).map { companyCategoryMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<CompanyCategoryDTOs.GetResult> {
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<CompanyCategoryDTOs.GetResult> {
         val companyCategory = companyCategoryRepository.findById(id, pageable)
         return companyCategory.map { companyCategoryMapper.toGetResult(it) }
     }
@@ -38,14 +43,16 @@ class CompanyCategoryServiceImpl(
         pageable: Pageable
     ): Page<CompanyCategoryDTOs.GetResult> {
         val currentCompanyCategory = companyCategoryRepository.findById(id).get()
-        companyCategoryRepository.save(companyCategoryMapper.updateEntity(currentCompanyCategory, entityRequest))
-        return companyCategoryRepository.findById(id, pageable).map { companyCategoryMapper.toGetResult(it) }
+        val savedCompanyCategory = companyCategoryRepository.save(companyCategoryMapper.updateEntity(currentCompanyCategory, entityRequest))
+        return companyCategoryRepository.findById(savedCompanyCategory.id, pageable).map { companyCategoryMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<CompanyCategoryDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<CompanyCategoryDTOs.GetResult> {
         val companyCategory = companyCategoryRepository.findById(id).get()
         companyCategoryRepository.delete(companyCategory)
         return companyCategoryRepository.findAll(pageable).map { companyCategoryMapper.toGetResult(it) }
     }
-
 }

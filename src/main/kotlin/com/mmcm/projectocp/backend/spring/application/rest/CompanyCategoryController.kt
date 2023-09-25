@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/company-categories")
 class CompanyCategoryController(
     private val companyCategoryService: CompanyCategoryService
-) : EntityController<CompanyCategoryDTOs.GetResult, CompanyCategoryDTOs.PostRequest, CompanyCategoryDTOs.PutRequest> {
+): EntityController<CompanyCategoryDTOs.GetResult, CompanyCategoryDTOs.PostRequest, CompanyCategoryDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<CompanyCategoryDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<CompanyCategoryDTOs.GetResult>> {
         return try {
             val companyCategory = companyCategoryService.getEntities(pageable)
             ResponseEntity.ok(companyCategory)

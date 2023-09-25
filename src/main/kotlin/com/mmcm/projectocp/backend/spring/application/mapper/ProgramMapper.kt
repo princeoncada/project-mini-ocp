@@ -10,7 +10,9 @@ import java.time.Instant
 class ProgramMapper (
     private val departmentRepository: DepartmentRepository
 ): EntityMapper<Program, ProgramDTOs.GetResult, ProgramDTOs.PostRequest, ProgramDTOs.PutRequest> {
-    override fun toGetResult(entity: Program): ProgramDTOs.GetResult {
+    override fun toGetResult(
+        entity: Program
+    ): ProgramDTOs.GetResult {
         return ProgramDTOs.GetResult(
             id = entity.id,
             department= entity.department.name,
@@ -19,7 +21,10 @@ class ProgramMapper (
         )
     }
 
-    override fun createEntity(id: String, entityRequest: ProgramDTOs.PostRequest): Program {
+    override fun createEntity(
+        id: String,
+        entityRequest: ProgramDTOs.PostRequest
+    ): Program {
         return Program(
             id = id,
             department = departmentRepository.findByName(entityRequest.department).get(),
@@ -30,10 +35,14 @@ class ProgramMapper (
         )
     }
 
-    override fun updateEntity(entity: Program, entityRequest: ProgramDTOs.PutRequest): Program {
+    override fun updateEntity(
+        entity: Program,
+        entityRequest: ProgramDTOs.PutRequest
+    ): Program {
         return Program(
             id = entity.id,
-            department = departmentRepository.findByName(entityRequest.department ?: entity.department.name).get(),
+            department = departmentRepository.findByName(entityRequest.department
+                ?: entity.department.name).get(),
             name = entityRequest.name ?: entity.name,
             abbr = entityRequest.abbr ?: entity.abbr,
             createdAt = entity.createdAt,

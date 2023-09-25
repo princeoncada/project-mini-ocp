@@ -13,21 +13,28 @@ import java.util.*
 class CountryServiceImpl(
     private val countryRepository: CountryRepository,
     private val countryMapper: CountryMapper
-
-) : CountryService {
-    override fun getEntities(pageable: Pageable): Page<CountryDTOs.GetResult> {
+): CountryService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<CountryDTOs.GetResult> {
         return countryRepository.findAll(pageable).map { countryMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<CountryDTOs.GetResult> {
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<CountryDTOs.GetResult> {
         val country = countryRepository.findById(id, pageable)
         return country.map { countryMapper.toGetResult(it) }
     }
 
-    override fun createEntity(entityRequest: CountryDTOs.PostRequest, pageable: Pageable): Page<CountryDTOs.GetResult> {
+    override fun createEntity(
+        entityRequest: CountryDTOs.PostRequest,
+        pageable: Pageable
+    ): Page<CountryDTOs.GetResult> {
         val countryId = UUID.randomUUID().toString()
-        countryRepository.save(countryMapper.createEntity(countryId, entityRequest))
-        return countryRepository.findById(countryId, pageable).map { countryMapper.toGetResult(it) }
+        val savedCountry = countryRepository.save(countryMapper.createEntity(countryId, entityRequest))
+        return countryRepository.findById(savedCountry.id, pageable).map { countryMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -36,11 +43,14 @@ class CountryServiceImpl(
         pageable: Pageable
     ): Page<CountryDTOs.GetResult> {
         val currentCountry = countryRepository.findById(id).get()
-        countryRepository.save(countryMapper.updateEntity(currentCountry, entityRequest))
-        return countryRepository.findById(id, pageable).map { countryMapper.toGetResult(it) }
+        val savedCountry = countryRepository.save(countryMapper.updateEntity(currentCountry, entityRequest))
+        return countryRepository.findById(savedCountry.id, pageable).map { countryMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<CountryDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<CountryDTOs.GetResult> {
         val country = countryRepository.findById(id).get()
         countryRepository.delete(country)
         return countryRepository.findAll(pageable).map { countryMapper.toGetResult(it) }

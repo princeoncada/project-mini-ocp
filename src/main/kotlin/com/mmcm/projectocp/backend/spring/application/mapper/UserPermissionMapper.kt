@@ -14,7 +14,9 @@ class UserPermissionMapper(
     private val userRepository: UserRepository,
     private val permissionRepository: PermissionRepository
 ) {
-    fun toGetResult(entity: UserPermission): UserPermissionDTOs.GetResult {
+    fun toGetResult(
+        entity: UserPermission
+    ): UserPermissionDTOs.GetResult {
         return UserPermissionDTOs.GetResult(
             userId = entity.id.userId,
             permissionId = entity.id.permissionId,
@@ -23,7 +25,9 @@ class UserPermissionMapper(
         )
     }
 
-    fun createEntity(entityRequest: UserPermissionDTOs.PostRequest): UserPermission {
+    fun createEntity(
+        entityRequest: UserPermissionDTOs.PostRequest
+    ): UserPermission {
         return UserPermission(
             id = UserPermissionKey(
                 userId = userRepository.findByEmail(entityRequest.user).get().id,
@@ -34,11 +38,16 @@ class UserPermissionMapper(
         )
     }
 
-    fun updateEntity(entity: UserPermission, entityRequest: UserPermissionDTOs.PutRequest): UserPermission {
+    fun updateEntity(
+        entity: UserPermission,
+        entityRequest: UserPermissionDTOs.PutRequest
+    ): UserPermission {
         return UserPermission(
             id = UserPermissionKey(
-                userId = userRepository.findByEmail(entityRequest.user).getOrNull()?.id ?: entity.id.userId,
-                permissionId = permissionRepository.findByName(entityRequest.permission).getOrNull()?.id ?: entity.id.permissionId
+                userId = userRepository.findByEmail(entityRequest.user).getOrNull()?.id
+                    ?: entity.id.userId,
+                permissionId = permissionRepository.findByName(entityRequest.permission).getOrNull()?.id
+                    ?: entity.id.permissionId
             ),
             createdAt = entity.createdAt,
             updatedAt = Instant.now()

@@ -9,10 +9,10 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/mc-status")
+@RequestMapping("/api/mc-statuses")
 class MCStatusController(
-    private val mcStatusService: MCStatusService,
-) : EntityController<MCStatusDTOs.GetResult, MCStatusDTOs.PostRequest, MCStatusDTOs.PutRequest> {
+    @Qualifier("MCStatusServiceImpl") private val mcStatusService: MCStatusService,
+): EntityController<MCStatusDTOs.GetResult, MCStatusDTOs.PostRequest, MCStatusDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable

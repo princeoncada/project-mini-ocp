@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface IndustryTypeRepository : JpaRepository<IndustryType, String> {
-    // You can add custom query methods here if needed
+interface IndustryTypeRepository: JpaRepository<IndustryType, String> {
     fun findById(id: String, pageable: Pageable): Page<IndustryType>
-
 }

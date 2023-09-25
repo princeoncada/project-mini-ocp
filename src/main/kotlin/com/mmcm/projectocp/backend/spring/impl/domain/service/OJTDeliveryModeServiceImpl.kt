@@ -13,12 +13,17 @@ import java.util.*
 class OJTDeliveryModeServiceImpl(
     private val ojtDeliveryModeRepository: OJTDeliveryModeRepository,
     private val ojtDeliveryModeMapper: OJTDeliveryModeMapper,
-) : OJTDeliveryModeService {
-    override fun getEntities(pageable: Pageable): Page<OJTDeliveryModeDTOs.GetResult> {
+): OJTDeliveryModeService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<OJTDeliveryModeDTOs.GetResult> {
         return ojtDeliveryModeRepository.findAll(pageable).map { ojtDeliveryModeMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<OJTDeliveryModeDTOs.GetResult> {
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<OJTDeliveryModeDTOs.GetResult> {
         val ojtDeliveryMode = ojtDeliveryModeRepository.findById(id, pageable)
         return ojtDeliveryMode.map { ojtDeliveryModeMapper.toGetResult(it) }
     }
@@ -30,8 +35,6 @@ class OJTDeliveryModeServiceImpl(
         val ojtDeliveryModeId = UUID.randomUUID().toString()
         val savedOJTDeliveryMode = ojtDeliveryModeRepository.save(ojtDeliveryModeMapper.createEntity(ojtDeliveryModeId, entityRequest))
         return ojtDeliveryModeRepository.findById(savedOJTDeliveryMode.id, pageable).map { ojtDeliveryModeMapper.toGetResult(it) }
-
-
     }
 
     override fun updateEntityById(
@@ -40,11 +43,14 @@ class OJTDeliveryModeServiceImpl(
         pageable: Pageable
     ): Page<OJTDeliveryModeDTOs.GetResult> {
         val currentOJTDeliveryMode = ojtDeliveryModeRepository.findById(id).get()
-        ojtDeliveryModeRepository.save(ojtDeliveryModeMapper.updateEntity(currentOJTDeliveryMode, entityRequest))
-        return ojtDeliveryModeRepository.findById(id, pageable).map { ojtDeliveryModeMapper.toGetResult(it) }
+        val savedOJTDeliveryMode = ojtDeliveryModeRepository.save(ojtDeliveryModeMapper.updateEntity(currentOJTDeliveryMode, entityRequest))
+        return ojtDeliveryModeRepository.findById(savedOJTDeliveryMode.id, pageable).map { ojtDeliveryModeMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<OJTDeliveryModeDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<OJTDeliveryModeDTOs.GetResult> {
         val ojtDeliveryMode = ojtDeliveryModeRepository.findById(id).get()
         ojtDeliveryModeRepository.delete(ojtDeliveryMode)
         return ojtDeliveryModeRepository.findAll(pageable).map { ojtDeliveryModeMapper.toGetResult(it) }

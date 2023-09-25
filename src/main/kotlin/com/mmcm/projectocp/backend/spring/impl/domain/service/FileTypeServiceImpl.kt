@@ -13,14 +13,17 @@ import java.util.*
 class FileTypeServiceImpl(
     private val fileTypeRepository: FileTypeRepository,
     private val fileTypeMapper: FileTypeMapper
-
-
-) : FileTypeService {
-    override fun getEntities(pageable: Pageable): Page<FileTypeDTOs.GetResult> {
+): FileTypeService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<FileTypeDTOs.GetResult> {
         return fileTypeRepository.findAll(pageable).map { fileTypeMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<FileTypeDTOs.GetResult> {
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<FileTypeDTOs.GetResult> {
         val fileType = fileTypeRepository.findById(id, pageable)
         return fileType.map { fileTypeMapper.toGetResult(it) }
     }
@@ -30,8 +33,8 @@ class FileTypeServiceImpl(
         pageable: Pageable
     ): Page<FileTypeDTOs.GetResult> {
         val fileTypeId = UUID.randomUUID().toString()
-        fileTypeRepository.save(fileTypeMapper.createEntity(fileTypeId, entityRequest))
-        return fileTypeRepository.findById(fileTypeId, pageable).map { fileTypeMapper.toGetResult(it) }
+        val savedFileType = fileTypeRepository.save(fileTypeMapper.createEntity(fileTypeId, entityRequest))
+        return fileTypeRepository.findById(savedFileType.id, pageable).map { fileTypeMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -40,14 +43,16 @@ class FileTypeServiceImpl(
         pageable: Pageable
     ): Page<FileTypeDTOs.GetResult> {
         val currentFileType = fileTypeRepository.findById(id).get()
-        fileTypeRepository.save(fileTypeMapper.updateEntity(currentFileType, entityRequest))
-        return fileTypeRepository.findById(id, pageable).map { fileTypeMapper.toGetResult(it) }
+        val savedFileType = fileTypeRepository.save(fileTypeMapper.updateEntity(currentFileType, entityRequest))
+        return fileTypeRepository.findById(savedFileType.id, pageable).map { fileTypeMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<FileTypeDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<FileTypeDTOs.GetResult> {
         val fileType = fileTypeRepository.findById(id).get()
         fileTypeRepository.delete(fileType)
         return fileTypeRepository.findAll(pageable).map { fileTypeMapper.toGetResult(it) }
     }
-
 }

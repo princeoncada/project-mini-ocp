@@ -4,7 +4,5 @@ import com.mmcm.projectocp.backend.spring.application.dto.AcademicYearDTOs
 import org.springframework.stereotype.Service
 
 @Service
-interface AcademicYearService : EntityService<AcademicYearDTOs.GetResult,AcademicYearDTOs.PostRequest, AcademicYearDTOs.PutRequest>{
-
-
+interface AcademicYearService: EntityService<AcademicYearDTOs.GetResult,AcademicYearDTOs.PostRequest, AcademicYearDTOs.PutRequest> {
 }

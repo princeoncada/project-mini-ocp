@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/file-types")
 class FileTypeController(
     private val fileTypeService: FileTypeService
-) : EntityController<FileTypeDTOs.GetResult, FileTypeDTOs.PostRequest, FileTypeDTOs.PutRequest>{
-
+): EntityController<FileTypeDTOs.GetResult, FileTypeDTOs.PostRequest, FileTypeDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<FileTypeDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<FileTypeDTOs.GetResult>> {
         return try {
             val department = fileTypeService.getEntities(pageable)
             ResponseEntity.ok(department)
@@ -77,6 +78,4 @@ class FileTypeController(
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         }
     }
-
-
 }

@@ -6,8 +6,10 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class AcademicYearMapper : EntityMapper<AcademicYear, AcademicYearDTOs.GetResult, AcademicYearDTOs.PostRequest, AcademicYearDTOs.PutRequest> {
-    override fun toGetResult(entity: AcademicYear): AcademicYearDTOs.GetResult {
+class AcademicYearMapper: EntityMapper<AcademicYear, AcademicYearDTOs.GetResult, AcademicYearDTOs.PostRequest, AcademicYearDTOs.PutRequest> {
+    override fun toGetResult(
+        entity: AcademicYear
+    ): AcademicYearDTOs.GetResult {
         return AcademicYearDTOs.GetResult(
             id = entity.id,
             yearFrom = entity.yearFrom,
@@ -15,7 +17,10 @@ class AcademicYearMapper : EntityMapper<AcademicYear, AcademicYearDTOs.GetResult
         )
     }
 
-    override fun createEntity(id: String, entityRequest: AcademicYearDTOs.PostRequest): AcademicYear {
+    override fun createEntity(
+        id: String,
+        entityRequest: AcademicYearDTOs.PostRequest
+    ): AcademicYear {
         return AcademicYear(
             id = id,
             yearFrom = entityRequest.yearFrom,
@@ -25,7 +30,10 @@ class AcademicYearMapper : EntityMapper<AcademicYear, AcademicYearDTOs.GetResult
         )
     }
 
-    override fun updateEntity(entity: AcademicYear, entityRequest: AcademicYearDTOs.PutRequest): AcademicYear {
+    override fun updateEntity(
+        entity: AcademicYear,
+        entityRequest: AcademicYearDTOs.PutRequest
+    ): AcademicYear {
         return AcademicYear(
             id = entity.id,
             yearFrom = entityRequest.yearFrom?: entity.yearFrom,

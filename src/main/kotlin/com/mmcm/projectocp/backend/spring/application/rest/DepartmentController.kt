@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/departments")
 class DepartmentController(
     private val departmentService: DepartmentService
-
-) : EntityController<DepartmentDTOs.GetResult, DepartmentDTOs.PostRequest, DepartmentDTOs.PutRequest> {
-
+): EntityController<DepartmentDTOs.GetResult, DepartmentDTOs.PostRequest, DepartmentDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
@@ -80,6 +78,4 @@ class DepartmentController(
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         }
     }
-
-
 }

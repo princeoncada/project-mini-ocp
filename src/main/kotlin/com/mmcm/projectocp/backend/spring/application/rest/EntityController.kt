@@ -6,11 +6,9 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 
 interface EntityController<GetResult, PostResult, PutResult> {
-
     fun getEntities(
         pageable: Pageable
     ): ResponseEntity<Page<GetResult>>
-
 
     fun getEntityById(
         id: String,

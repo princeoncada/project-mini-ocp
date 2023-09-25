@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/academic-years")
 class AcademicYearController(
     private val academicYearService: AcademicYearService
-) : EntityController<AcademicYearDTOs.GetResult, AcademicYearDTOs.PostRequest, AcademicYearDTOs.PutRequest> {
+): EntityController<AcademicYearDTOs.GetResult, AcademicYearDTOs.PostRequest, AcademicYearDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<AcademicYearDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<AcademicYearDTOs.GetResult>> {
         return try {
             val academicYears = academicYearService.getEntities(pageable)
             ResponseEntity.ok(academicYears)

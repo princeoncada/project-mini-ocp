@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/user-roles")
 class UserRoleController(
     private val userRoleService: UserRoleService
-) : EntityController<UserRoleDTOs.GetResult, UserRoleDTOs.PostRequest, UserRoleDTOs.PutRequest> {
+): EntityController<UserRoleDTOs.GetResult, UserRoleDTOs.PostRequest, UserRoleDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
@@ -49,7 +49,6 @@ class UserRoleController(
         }
     }
 
-
     @PutMapping("/{id}")
     override fun updateEntityById(
         @PathVariable id: String,
@@ -75,6 +74,4 @@ class UserRoleController(
             ResponseEntity.notFound().build()
         }
     }
-
-
 }

@@ -77,6 +77,4 @@ class PermissionController(
             ResponseEntity.status(HttpStatus.NOT_FOUND).build()
         }
     }
-
-
 }

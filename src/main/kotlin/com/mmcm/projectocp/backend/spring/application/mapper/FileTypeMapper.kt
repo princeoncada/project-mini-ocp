@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class FileTypeMapper(
-) : EntityMapper<FileType, FileTypeDTOs.GetResult, FileTypeDTOs.PostRequest, FileTypeDTOs.PutRequest> {
-    override fun toGetResult(entity: FileType): FileTypeDTOs.GetResult {
+class FileTypeMapper: EntityMapper<FileType, FileTypeDTOs.GetResult, FileTypeDTOs.PostRequest, FileTypeDTOs.PutRequest> {
+    override fun toGetResult(
+        entity: FileType
+    ): FileTypeDTOs.GetResult {
         return FileTypeDTOs.GetResult(
             id = entity.id,
             name = entity.name,
@@ -17,7 +18,10 @@ class FileTypeMapper(
         )
     }
 
-    override fun createEntity(id: String, entityRequest: FileTypeDTOs.PostRequest): FileType {
+    override fun createEntity(
+        id: String,
+        entityRequest: FileTypeDTOs.PostRequest
+    ): FileType {
         return FileType(
             id = id,
             name = entityRequest.name,
@@ -27,7 +31,10 @@ class FileTypeMapper(
         )
     }
 
-    override fun updateEntity(entity: FileType, entityRequest: FileTypeDTOs.PutRequest): FileType {
+    override fun updateEntity(
+        entity: FileType,
+        entityRequest: FileTypeDTOs.PutRequest
+    ): FileType {
         return FileType(
             id = entity.id,
             name = entityRequest.name ?: entity.name,

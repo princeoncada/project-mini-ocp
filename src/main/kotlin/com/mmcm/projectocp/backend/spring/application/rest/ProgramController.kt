@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/programs")
 class ProgramController(
     private val programService: ProgramService
-) : EntityController<ProgramDTOs.GetResult, ProgramDTOs.PostRequest, ProgramDTOs.PutRequest> {
+): EntityController<ProgramDTOs.GetResult, ProgramDTOs.PostRequest, ProgramDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
@@ -83,5 +83,4 @@ class ProgramController(
             ResponseEntity.notFound().build()
         }
     }
-
 }

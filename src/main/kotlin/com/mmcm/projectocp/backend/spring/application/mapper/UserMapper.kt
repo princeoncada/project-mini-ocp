@@ -9,7 +9,9 @@ import java.time.Instant
 
 @Component
 class UserMapper: EntityMapper<User, UserDTOs.GetResult, UserDTOs.PostRequest, UserDTOs.PutRequest> {
-    override fun toGetResult(entity: User): UserDTOs.GetResult {
+    override fun toGetResult(
+        entity: User
+    ): UserDTOs.GetResult {
         return UserDTOs.GetResult(
             id = entity.id,
             email = entity.email,
@@ -20,7 +22,10 @@ class UserMapper: EntityMapper<User, UserDTOs.GetResult, UserDTOs.PostRequest, U
         )
     }
 
-    override fun createEntity(id: String, entityRequest: UserDTOs.PostRequest): User {
+    override fun createEntity(
+        id: String,
+        entityRequest: UserDTOs.PostRequest
+    ): User {
         return User(
             id = id,
             email = entityRequest.email,
@@ -33,7 +38,10 @@ class UserMapper: EntityMapper<User, UserDTOs.GetResult, UserDTOs.PostRequest, U
         )
     }
 
-    override fun updateEntity(entity: User, entityRequest: UserDTOs.PutRequest): User {
+    override fun updateEntity(
+        entity: User,
+        entityRequest: UserDTOs.PutRequest
+    ): User {
         return User(
             id = entity.id,
             email = entityRequest.email ?: entity.email,

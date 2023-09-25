@@ -7,16 +7,20 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class IndustryTypeMapper(
-) : EntityMapper<IndustryType, IndustryTypeDTOs.GetResult, IndustryTypeDTOs.PostRequest, IndustryTypeDTOs.PutRequest>{
-    override fun toGetResult(entity: IndustryType): IndustryTypeDTOs.GetResult {
+class IndustryTypeMapper: EntityMapper<IndustryType, IndustryTypeDTOs.GetResult, IndustryTypeDTOs.PostRequest, IndustryTypeDTOs.PutRequest>{
+    override fun toGetResult(
+        entity: IndustryType
+    ): IndustryTypeDTOs.GetResult {
         return IndustryTypeDTOs.GetResult(
             id = entity.id,
             type = entity.type
         )
     }
 
-    override fun createEntity(id: String, entityRequest: IndustryTypeDTOs.PostRequest): IndustryType {
+    override fun createEntity(
+        id: String,
+        entityRequest: IndustryTypeDTOs.PostRequest
+    ): IndustryType {
         return IndustryType(
             id = id,
             type = entityRequest.type,
@@ -25,7 +29,10 @@ class IndustryTypeMapper(
         )
     }
 
-    override fun updateEntity(entity: IndustryType, entityRequest: IndustryTypeDTOs.PutRequest): IndustryType {
+    override fun updateEntity(
+        entity: IndustryType,
+        entityRequest: IndustryTypeDTOs.PutRequest
+    ): IndustryType {
         return IndustryType(
             id = entity.id,
             type = entityRequest.type ?: entity.type,

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.time.Instant
 import java.util.UUID
+
 @Service
 class PermissionServiceImpl(
     private val permissionRepository: PermissionRepository,
@@ -23,7 +24,8 @@ class PermissionServiceImpl(
     }
 
     override fun getEntityById(
-        id: String, pageable: Pageable
+        id: String,
+        pageable: Pageable
     ): Page<GetResult> {
         val permission = permissionRepository.findById(id, pageable) ?: throw NotFoundException()
         return permission.map { permissionMapper.toGetResult(it) }
@@ -44,8 +46,8 @@ class PermissionServiceImpl(
         pageable: Pageable
     ): Page<GetResult> {
         val currentPermission = permissionRepository.findById(id).get()
-        permissionRepository.save(permissionMapper.updateEntity(currentPermission, entityRequest))
-        return permissionRepository.findById(id, pageable).map { permissionMapper.toGetResult(it) }
+        val savedPermission = permissionRepository.save(permissionMapper.updateEntity(currentPermission, entityRequest))
+        return permissionRepository.findById(savedPermission.id, pageable).map { permissionMapper.toGetResult(it) }
     }
 
     override fun deleteEntityById(

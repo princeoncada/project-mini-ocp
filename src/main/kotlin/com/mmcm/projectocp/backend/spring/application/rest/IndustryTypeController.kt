@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/industry-types")
 class IndustryTypeController(
     private val industryTypeService: IndustryTypeService
-) : EntityController<IndustryTypeDTOs.GetResult, IndustryTypeDTOs.PostRequest, IndustryTypeDTOs.PutRequest>{
-
+): EntityController<IndustryTypeDTOs.GetResult, IndustryTypeDTOs.PostRequest, IndustryTypeDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<IndustryTypeDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<IndustryTypeDTOs.GetResult>> {
         return try {
             val department = industryTypeService.getEntities(pageable)
             ResponseEntity.ok(department)
@@ -26,7 +27,8 @@ class IndustryTypeController(
     @GetMapping("/{id}")
     override fun getEntityById(
         @PathVariable id: String,
-        pageable: Pageable): ResponseEntity<Page<IndustryTypeDTOs.GetResult>> {
+        pageable: Pageable
+    ): ResponseEntity<Page<IndustryTypeDTOs.GetResult>> {
         return try {
             val department = industryTypeService.getEntityById(id, pageable)
             ResponseEntity.ok(department)
@@ -73,10 +75,4 @@ class IndustryTypeController(
             ResponseEntity.notFound().build()
         }
     }
-
-
-
-
-
-
 }

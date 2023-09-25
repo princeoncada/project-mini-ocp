@@ -6,17 +6,21 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class DepartmentMapper : EntityMapper<Department, DepartmentDTOs.GetResult, DepartmentDTOs.PostRequest, DepartmentDTOs.PutRequest>{
-    override fun toGetResult(entity: Department): DepartmentDTOs.GetResult {
+class DepartmentMapper: EntityMapper<Department, DepartmentDTOs.GetResult, DepartmentDTOs.PostRequest, DepartmentDTOs.PutRequest>{
+    override fun toGetResult(
+        entity: Department
+    ): DepartmentDTOs.GetResult {
         return DepartmentDTOs.GetResult(
             id = entity.id,
             name = entity.name,
             abbr = entity.abbr
-
         )
     }
 
-    override fun createEntity(id: String, entityRequest: DepartmentDTOs.PostRequest): Department {
+    override fun createEntity(
+        id: String,
+        entityRequest: DepartmentDTOs.PostRequest
+    ): Department {
         return Department(
             id = id,
             name = entityRequest.name,
@@ -26,14 +30,16 @@ class DepartmentMapper : EntityMapper<Department, DepartmentDTOs.GetResult, Depa
         )
     }
 
-    override fun updateEntity(entity: Department, entityRequest: DepartmentDTOs.PutRequest): Department {
+    override fun updateEntity(
+        entity: Department,
+        entityRequest: DepartmentDTOs.PutRequest
+    ): Department {
         return Department(
             id = entity.id,
             name = entityRequest.name?: entity.name,
             abbr = entityRequest.abbr?: entity.abbr,
             createdAt = entity.createdAt,
             updatedAt = Instant.now()
-
         )
     }
 }

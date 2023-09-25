@@ -10,16 +10,22 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class MCStatusSericeImpl (
+class MCStatusServiceImpl (
     private val mcStatusRepository: MCStatusRepository,
-    private val mcStatusMapper: MCStatusMapper,
-) : MCStatusService {
-    override fun getEntities(pageable: Pageable): Page<MCStatusDTOs.GetResult> {
+    private val mcStatusMapper: MCStatusMapper
+): MCStatusService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<MCStatusDTOs.GetResult> {
         return mcStatusRepository.findAll(pageable).map { mcStatusMapper.toGetResult(it)}
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<MCStatusDTOs.GetResult> {
-        return mcStatusRepository.findById(id, pageable).map { mcStatusMapper.toGetResult(it) }
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<MCStatusDTOs.GetResult> {
+        val mcStatus = mcStatusRepository.findById(id, pageable)
+        return mcStatus.map { mcStatusMapper.toGetResult(it) }
     }
 
     override fun createEntity(
@@ -37,11 +43,14 @@ class MCStatusSericeImpl (
         pageable: Pageable
     ): Page<MCStatusDTOs.GetResult> {
         val currentMCStatus = mcStatusRepository.findById(id).get()
-        mcStatusRepository.save(mcStatusMapper.updateEntity(currentMCStatus, entityRequest))
-        return mcStatusRepository.findById(id, pageable).map { mcStatusMapper.toGetResult(it) }
+        val savedMCStatus = mcStatusRepository.save(mcStatusMapper.updateEntity(currentMCStatus, entityRequest))
+        return mcStatusRepository.findById(savedMCStatus.id, pageable).map { mcStatusMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<MCStatusDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<MCStatusDTOs.GetResult> {
         val mcStatus = mcStatusRepository.findById(id).get()
         mcStatusRepository.delete(mcStatus)
         return mcStatusRepository.findAll(pageable).map { mcStatusMapper.toGetResult(it) }

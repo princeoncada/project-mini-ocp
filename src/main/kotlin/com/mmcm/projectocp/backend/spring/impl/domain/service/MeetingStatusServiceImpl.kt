@@ -13,13 +13,19 @@ import java.util.*
 class MeetingStatusServiceImpl(
     private val meetingStatusRepository: MeetingStatusRepository,
     private val meetingStatusMapper: MeetingStatusMapper
-) : MeetingStatusService {
-    override fun getEntities(pageable: Pageable): Page<MeetingStatusDTOs.GetResult> {
+): MeetingStatusService {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<MeetingStatusDTOs.GetResult> {
         return meetingStatusRepository.findAll(pageable).map { meetingStatusMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<MeetingStatusDTOs.GetResult> {
-        return meetingStatusRepository.findById(id, pageable).map { meetingStatusMapper.toGetResult(it) }
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<MeetingStatusDTOs.GetResult> {
+        val meetingStatus = meetingStatusRepository.findById(id, pageable)
+        return meetingStatus.map { meetingStatusMapper.toGetResult(it) }
     }
 
     override fun createEntity(
@@ -29,7 +35,6 @@ class MeetingStatusServiceImpl(
         val meetingStatusId = UUID.randomUUID().toString()
         val savedMeetingStatus = meetingStatusRepository.save(meetingStatusMapper.createEntity(meetingStatusId, entityRequest))
         return meetingStatusRepository.findById(savedMeetingStatus.id, pageable).map { meetingStatusMapper.toGetResult(it) }
-
     }
 
     override fun updateEntityById(
@@ -38,15 +43,16 @@ class MeetingStatusServiceImpl(
         pageable: Pageable
     ): Page<MeetingStatusDTOs.GetResult> {
         val currentMeetingStatus = meetingStatusRepository.findById(id).get()
-        meetingStatusRepository.save(meetingStatusMapper.updateEntity(currentMeetingStatus, entityRequest))
-        return meetingStatusRepository.findById(id, pageable).map { meetingStatusMapper.toGetResult(it) }
+        val savedMeetingStatus = meetingStatusRepository.save(meetingStatusMapper.updateEntity(currentMeetingStatus, entityRequest))
+        return meetingStatusRepository.findById(savedMeetingStatus.id, pageable).map { meetingStatusMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<MeetingStatusDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<MeetingStatusDTOs.GetResult> {
         val meetingStatus = meetingStatusRepository.findById(id).get()
         meetingStatusRepository.delete(meetingStatus)
         return meetingStatusRepository.findAll(pageable).map { meetingStatusMapper.toGetResult(it) }
     }
-
-
 }

@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface PartnershipTypeRepository : JpaRepository<PartnershipType, String> {
-    // You can add custom query methods here if needed
+interface PartnershipTypeRepository: JpaRepository<PartnershipType, String> {
     fun findById(id: String, pageable: Pageable): Page<PartnershipType>
 }

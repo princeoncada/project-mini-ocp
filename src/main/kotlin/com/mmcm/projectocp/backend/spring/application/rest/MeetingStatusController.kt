@@ -8,13 +8,14 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/meeting-status")
+@RequestMapping("/api/meeting-statuses")
 class MeetingStatusController(
     private val meetingStatusService: MeetingStatusService
-) : EntityController<MeetingStatusDTOs.GetResult, MeetingStatusDTOs.PostRequest, MeetingStatusDTOs.PutRequest> {
-
+): EntityController<MeetingStatusDTOs.GetResult, MeetingStatusDTOs.PostRequest, MeetingStatusDTOs.PutRequest> {
     @GetMapping
-    override fun getEntities(pageable: Pageable): ResponseEntity<Page<MeetingStatusDTOs.GetResult>> {
+    override fun getEntities(
+        pageable: Pageable
+    ): ResponseEntity<Page<MeetingStatusDTOs.GetResult>> {
         return try {
             val meetingStatus = meetingStatusService.getEntities(pageable)
             ResponseEntity.ok(meetingStatus)
@@ -26,7 +27,8 @@ class MeetingStatusController(
     @GetMapping("/{id}")
     override fun getEntityById(
         @PathVariable id: String,
-        pageable: Pageable): ResponseEntity<Page<MeetingStatusDTOs.GetResult>> {
+        pageable: Pageable
+    ): ResponseEntity<Page<MeetingStatusDTOs.GetResult>> {
         return try {
             val meetingStatus = meetingStatusService.getEntityById(id, pageable)
             ResponseEntity.ok(meetingStatus)
@@ -73,6 +75,4 @@ class MeetingStatusController(
             ResponseEntity.notFound().build()
         }
     }
-
-
 }

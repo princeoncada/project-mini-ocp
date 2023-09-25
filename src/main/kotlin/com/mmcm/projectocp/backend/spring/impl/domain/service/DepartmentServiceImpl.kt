@@ -15,11 +15,16 @@ class DepartmentServiceImpl(
     private val departmentRepository: DepartmentRepository,
     private val departmentMapper: DepartmentMapper
 ): DepartmentService {
-    override fun getEntities(pageable: Pageable): Page<DepartmentDTOs.GetResult> {
+    override fun getEntities(
+        pageable: Pageable
+    ): Page<DepartmentDTOs.GetResult> {
         return departmentRepository.findAll(pageable).map { departmentMapper.toGetResult(it) }
     }
 
-    override fun getEntityById(id: String, pageable: Pageable): Page<DepartmentDTOs.GetResult> {
+    override fun getEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<DepartmentDTOs.GetResult> {
         val department = departmentRepository.findById(id, pageable)
         return department.map { departmentMapper.toGetResult(it) }
     }
@@ -29,8 +34,8 @@ class DepartmentServiceImpl(
         pageable: Pageable
     ): Page<DepartmentDTOs.GetResult> {
         val departmentId = UUID.randomUUID().toString()
-        departmentRepository.save(departmentMapper.createEntity(departmentId, entityRequest))
-        return departmentRepository.findById(departmentId, pageable).map { departmentMapper.toGetResult(it) }
+        val savedDepartment = departmentRepository.save(departmentMapper.createEntity(departmentId, entityRequest))
+        return departmentRepository.findById(savedDepartment.id, pageable).map { departmentMapper.toGetResult(it) }
     }
 
     override fun updateEntityById(
@@ -39,15 +44,16 @@ class DepartmentServiceImpl(
         pageable: Pageable
     ): Page<DepartmentDTOs.GetResult> {
         val currentDepartment = departmentRepository.findById(id).get()
-        departmentRepository.save(departmentMapper.updateEntity(currentDepartment, entityRequest))
-        return departmentRepository.findById(id, pageable).map { departmentMapper.toGetResult(it) }
-
+        val savedDepartment = departmentRepository.save(departmentMapper.updateEntity(currentDepartment, entityRequest))
+        return departmentRepository.findById(savedDepartment.id, pageable).map { departmentMapper.toGetResult(it) }
     }
 
-    override fun deleteEntityById(id: String, pageable: Pageable): Page<DepartmentDTOs.GetResult> {
+    override fun deleteEntityById(
+        id: String,
+        pageable: Pageable
+    ): Page<DepartmentDTOs.GetResult> {
         val department = departmentRepository.findById(id).get()
         departmentRepository.delete(department)
         return departmentRepository.findAll(pageable).map { departmentMapper.toGetResult(it) }
-
     }
 }

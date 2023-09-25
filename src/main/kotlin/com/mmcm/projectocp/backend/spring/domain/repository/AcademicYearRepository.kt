@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface AcademicYearRepository : JpaRepository<AcademicYear, String> {
-    // You can add custom query methods here if needed
+interface AcademicYearRepository: JpaRepository<AcademicYear, String> {
     fun findById(id: String, pageable: Pageable): Page<AcademicYear>
-
-
 }

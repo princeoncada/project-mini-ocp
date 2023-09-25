@@ -6,8 +6,10 @@ import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class PhilippineRegionMapper : EntityMapper<PhilippineRegion ,PhilippineRegionDTOs.GetResult, PhilippineRegionDTOs.PostRequest, PhilippineRegionDTOs.PutRequest>{
-    override fun toGetResult(entity: PhilippineRegion): PhilippineRegionDTOs.GetResult {
+class PhilippineRegionMapper: EntityMapper<PhilippineRegion ,PhilippineRegionDTOs.GetResult, PhilippineRegionDTOs.PostRequest, PhilippineRegionDTOs.PutRequest>{
+    override fun toGetResult(
+        entity: PhilippineRegion
+    ): PhilippineRegionDTOs.GetResult {
         return PhilippineRegionDTOs.GetResult(
             id = entity.id,
             regionCode = entity.regionCode,
@@ -15,7 +17,10 @@ class PhilippineRegionMapper : EntityMapper<PhilippineRegion ,PhilippineRegionDT
         )
     }
 
-    override fun createEntity(id: String, entityRequest: PhilippineRegionDTOs.PostRequest): PhilippineRegion {
+    override fun createEntity(
+        id: String,
+        entityRequest: PhilippineRegionDTOs.PostRequest
+    ): PhilippineRegion {
         return PhilippineRegion(
             id = id,
             regionCode = entityRequest.regionCode,
