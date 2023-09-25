@@ -12,7 +12,7 @@ class CustomUserDetailsServiceImpl(
     private val userRoleRepository: UserRoleRepository
 ): UserDetailsService {
 
-    override fun loadUserByUsername(email: String): UserDetails {
+    override fun loadUserByUsername(email: String): UserPrincipal {
         val user = userRepository.findByEmail(email).get()
         val userRole = userRoleRepository.findByUserId(user.id)
         return UserPrincipal(userRole)
