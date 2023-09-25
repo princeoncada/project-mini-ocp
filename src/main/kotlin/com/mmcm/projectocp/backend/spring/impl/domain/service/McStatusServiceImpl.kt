@@ -3,17 +3,17 @@ package com.mmcm.projectocp.backend.spring.impl.domain.service
 import com.mmcm.projectocp.backend.spring.application.dto.MCStatusDTOs
 import com.mmcm.projectocp.backend.spring.application.mapper.MCStatusMapper
 import com.mmcm.projectocp.backend.spring.domain.repository.MCStatusRepository
-import com.mmcm.projectocp.backend.spring.domain.service.MCStatusService
+import com.mmcm.projectocp.backend.spring.domain.service.McStatusService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class MCStatusServiceImpl (
+class McStatusServiceImpl (
     private val mcStatusRepository: MCStatusRepository,
     private val mcStatusMapper: MCStatusMapper
-): MCStatusService {
+): McStatusService {
     override fun getEntities(
         pageable: Pageable
     ): Page<MCStatusDTOs.GetResult> {

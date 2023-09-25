@@ -1,8 +1,7 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
 import com.mmcm.projectocp.backend.spring.application.dto.MCStatusDTOs
-import com.mmcm.projectocp.backend.spring.domain.service.MCStatusService
-import org.springframework.beans.factory.annotation.Qualifier
+import com.mmcm.projectocp.backend.spring.domain.service.McStatusService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/mc-statuses")
-class MCStatusController(
-    @Qualifier("MCStatusServiceImpl") private val mcStatusService: MCStatusService,
+class McStatusController(
+    private val mcStatusService: McStatusService,
 ): EntityController<MCStatusDTOs.GetResult, MCStatusDTOs.PostRequest, MCStatusDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(

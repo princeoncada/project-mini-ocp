@@ -1,8 +1,7 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
 import com.mmcm.projectocp.backend.spring.application.dto.OJTDeliveryModeDTOs
-import com.mmcm.projectocp.backend.spring.domain.service.OJTDeliveryModeService
-import org.springframework.beans.factory.annotation.Qualifier
+import com.mmcm.projectocp.backend.spring.domain.service.OjtDeliveryModeService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/ojt-delivery-modes")
-class OJTDeliveryModeController (
-    @Qualifier("OJTDeliveryModeServiceImpl") private val ojtDeliveryModeService: OJTDeliveryModeService
+class OjtDeliveryModeController (
+    private val ojtDeliveryModeService: OjtDeliveryModeService
 ): EntityController<OJTDeliveryModeDTOs.GetResult, OJTDeliveryModeDTOs.PostRequest, OJTDeliveryModeDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(

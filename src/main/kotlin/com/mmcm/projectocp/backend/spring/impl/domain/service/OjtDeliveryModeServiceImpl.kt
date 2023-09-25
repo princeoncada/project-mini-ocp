@@ -3,17 +3,17 @@ package com.mmcm.projectocp.backend.spring.impl.domain.service
 import com.mmcm.projectocp.backend.spring.application.dto.OJTDeliveryModeDTOs
 import com.mmcm.projectocp.backend.spring.application.mapper.OJTDeliveryModeMapper
 import com.mmcm.projectocp.backend.spring.domain.repository.OJTDeliveryModeRepository
-import com.mmcm.projectocp.backend.spring.domain.service.OJTDeliveryModeService
+import com.mmcm.projectocp.backend.spring.domain.service.OjtDeliveryModeService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class OJTDeliveryModeServiceImpl(
+class OjtDeliveryModeServiceImpl(
     private val ojtDeliveryModeRepository: OJTDeliveryModeRepository,
     private val ojtDeliveryModeMapper: OJTDeliveryModeMapper,
-): OJTDeliveryModeService {
+): OjtDeliveryModeService {
     override fun getEntities(
         pageable: Pageable
     ): Page<OJTDeliveryModeDTOs.GetResult> {
