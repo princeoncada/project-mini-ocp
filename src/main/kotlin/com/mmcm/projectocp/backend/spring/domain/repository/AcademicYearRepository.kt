@@ -10,4 +10,5 @@ import java.util.*
 @Repository
 interface AcademicYearRepository: JpaRepository<AcademicYear, String> {
     fun findById(id: String, pageable: Pageable): Page<AcademicYear>
+    fun findByYearFrom(yearFrom: Int): AcademicYear
 }
