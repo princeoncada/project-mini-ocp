@@ -1,6 +1,7 @@
 package com.mmcm.projectocp.backend.spring.config
 
 import com.mmcm.projectocp.backend.spring.config.service.CustomOidcUserService
+import com.mmcm.projectocp.backend.spring.config.service.CustomUserDetailsServiceImpl
 import com.mmcm.projectocp.backend.spring.config.service.JwtAuthenticationFilter
 import com.mmcm.projectocp.backend.spring.config.service.JwtService
 import org.springframework.context.annotation.Bean
@@ -15,7 +16,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val jwtService: JwtService
+    private val jwtService: JwtService,
+    private val userPrincipalService: CustomUserDetailsServiceImpl
 ) {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -31,7 +33,7 @@ class SecurityConfig(
                 }
                 defaultSuccessUrl("/authenticate", true)
             }
-            addFilterBefore<UsernamePasswordAuthenticationFilter>(JwtAuthenticationFilter(jwtService))
+            addFilterBefore<UsernamePasswordAuthenticationFilter>(JwtAuthenticationFilter(jwtService, userPrincipalService))
         }
         return http.build()
     }
