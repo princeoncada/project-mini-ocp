@@ -11,13 +11,17 @@ import javax.crypto.SecretKey
 class JwtService(
     private val secretKey: SecretKey
 ){
-    fun generateToken(email: String, authorities: MutableCollection<out GrantedAuthority>): String {
+    fun generateToken(principal: UserPrincipal, authorities: MutableCollection<out GrantedAuthority>): String {
         val now = Date()
         val validity = Date(now.time + TOKEN_VALIDITY)
         return Jwts.builder()
-            .setSubject(email)
+            .setIssuer("https://localhost:8080/authenticate")
+            .setSubject(principal.username)
+            .setAudience("authenticate-api")
+            .setId(principal.getUserId())
+//            .setExpiration(validity)
+            .setExpiration(Date(now.time + TOKEN_EXPIRY_TEST))
             .setIssuedAt(now)
-            .setExpiration(validity)
             .claim("authorities", authorities.map { it.authority })
             .signWith(secretKey)
             .compact()
@@ -31,24 +35,16 @@ class JwtService(
             .body
     }
 
-    fun getUsername(token: String): String {
-        return getClaims(token).subject
-    }
-
-    fun getExpirationDate(token: String): Date {
-        return getClaims(token).expiration
-    }
-
-    private fun isTokenExpired(token: String): Boolean {
-        return getExpirationDate(token).before(Date())
+    fun isTokenExpired(token: String): Boolean {
+        return getClaims(token).expiration.before(Date())
     }
 
     fun validateToken(token: String, userDetails: UserPrincipal): Boolean {
-        val username = getUsername(token)
-        return username == userDetails.username && !isTokenExpired(token)
+        return getClaims(token).subject == userDetails.username && !isTokenExpired(token)
     }
 
     companion object {
+        private const val TOKEN_EXPIRY_TEST = 90000L // Token expiry test: 1.5 minutes
         private const val TOKEN_VALIDITY = 3600000L // Token validity: 1 hour
     }
 }
