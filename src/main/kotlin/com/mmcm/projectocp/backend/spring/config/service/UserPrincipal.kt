@@ -37,5 +37,7 @@ class UserPrincipal(
         return true
     }
 
-
+    fun getUserId(): String {
+        return userRole.user.id
+    }
 }
