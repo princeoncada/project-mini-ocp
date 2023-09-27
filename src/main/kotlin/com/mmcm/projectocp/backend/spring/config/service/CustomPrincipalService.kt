@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
 
 @Service
-class CustomUserDetailsServiceImpl(
+class CustomPrincipalService(
     private val userRepository: UserRepository,
     private val userRoleRepository: UserRoleRepository
 ): UserDetailsService {
