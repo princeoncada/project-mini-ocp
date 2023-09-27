@@ -1,14 +1,18 @@
 package com.mmcm.projectocp.backend.spring.config.service
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.mmcm.projectocp.backend.spring.domain.repository.RefreshTokenRepository
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
-import io.jsonwebtoken.Header
 import jakarta.servlet.FilterChain
+import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.oauth2.jwt.JwtValidationException
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
@@ -16,43 +20,88 @@ import org.springframework.web.filter.OncePerRequestFilter
 @Component
 class JwtAuthenticationFilter(
     private val jwtService: JwtService,
-    private val userPrincipalService: CustomUserDetailsServiceImpl
+    private val userPrincipalService: CustomPrincipalService,
+    private val refreshTokenRepository: RefreshTokenRepository
 ): OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        val header: String? = request.getHeader("Authorization")
-        if (header == null || !header.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response)
-            return
-        }
-
         try {
-            val token: String = header.substring(7)
-            val payload: Claims = jwtService.getClaims(token)
-            val userPrincipal: UserPrincipal = userPrincipalService.loadUserByUsername(payload.subject)
-
-            if (jwtService.validateToken(token, userPrincipal)) {
-                val roles = payload["authorities"] as List<*>
-                val authorities = roles.map { SimpleGrantedAuthority(it as String) }
-                val authenticationToken = UsernamePasswordAuthenticationToken(
-                    userPrincipal.username,
-                    null,
-                    authorities
-                )
-                authenticationToken.details = WebAuthenticationDetailsSource().buildDetails(request)
-                SecurityContextHolder.getContext().authentication = authenticationToken
+            var jwtToken: String? = null
+            val cookies: Array<Cookie>? = request.cookies
+            if (cookies != null) {
+                for (cookie in cookies) {
+                    if (cookie.name == "jwtToken") {
+                        jwtToken = cookie.value
+                    }
+                }
             }
 
-            if (jwtService.isTokenExpired(token)) throw ExpiredJwtException(null, payload, "Token expired")
+            if (jwtToken == null) {
+                val authorizationHeader: String? = request.getHeader("Authorization")
+                if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                    jwtToken = authorizationHeader.substring(7)
+                } else {
+                    filterChain.doFilter(request, response)
+                    return
+                }
+            }
+
+            val payload: Claims = jwtService.getClaims(jwtToken)
+            val userPrincipal: UserPrincipal = userPrincipalService.loadUserByUsername(payload.subject)
+
+            if (!jwtService.validateToken(jwtToken, userPrincipal)) throw JwtValidationException("Invalid token", null)
+            if (jwtService.isTokenExpired(jwtToken)) throw ExpiredJwtException(null, payload, "Token expired")
+
+            val roles = payload["authorities"] as List<*>
+            val authorities = roles.map { SimpleGrantedAuthority(it as String) }
+            val authenticationToken = UsernamePasswordAuthenticationToken(
+                userPrincipal.username,
+                null,
+                authorities
+            )
+            authenticationToken.details = WebAuthenticationDetailsSource().buildDetails(request)
+            SecurityContextHolder.getContext().authentication = authenticationToken
+            filterChain.doFilter(request, response)
+
         } catch (e: ExpiredJwtException) {
-            println("Token expired!!")
+            val user = userPrincipalService.loadUserByUsername(e.claims.subject)
+            val refreshToken = refreshTokenRepository.findByUserId(e.claims.id)
+            val authorities = SecurityContextHolder.getContext().authentication.authorities
+
+            if (jwtService.validateToken(refreshToken.refreshToken, user)) {
+                println("Refresh token is valid: ${refreshToken.refreshToken}")
+
+                val newAccessToken = jwtService.generateToken(user, authorities)
+                println("New access token: $newAccessToken")
+
+                val cookie = jwtService.createCookie(newAccessToken, 3600)
+                response.addCookie(cookie)
+                response.status = HttpServletResponse.SC_OK
+                response.contentType = "application/json"
+
+                val responseBody = mapOf(
+                    "token" to newAccessToken
+                )
+
+                response.writer.write(ObjectMapper().writeValueAsString(responseBody))
+            } else {
+
+                response.status = HttpServletResponse.SC_UNAUTHORIZED
+                response.contentType = "application/json"
+                val responseBody = mapOf(
+                    "error" to "Unauthorized",
+                    "message" to "Token expired for user ${e.claims.subject}"
+                )
+                response.writer.write(ObjectMapper().writeValueAsString(responseBody))
+                jwtService.clearAccessTokenCookie(response)
+            }
+
         } catch (e: Exception) {
             println("Error: ${e.message}")
+            jwtService.clearAccessTokenCookie(response)
         }
-
-        filterChain.doFilter(request, response)
     }
 }
