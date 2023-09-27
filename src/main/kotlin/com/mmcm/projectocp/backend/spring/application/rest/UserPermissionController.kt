@@ -38,14 +38,13 @@ class UserPermissionController(
         }
     }
 
-    @DeleteMapping("/{user}/{permission}")
-    fun deleteEntityByKey(
-        @PathVariable user: String,
-        @PathVariable permission: String,
+    @PostMapping
+    fun createEntity(
+        @RequestBody entityRequest: UserPermissionDTOs.PostRequest,
         pageable: Pageable
     ): ResponseEntity<Page<UserPermissionDTOs.GetResult>> {
         return try {
-            val userPermission = userPermissionService.deleteEntityByKey(user, permission, pageable)
+            val userPermission = userPermissionService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(userPermission)
         } catch (e: Exception) {
             ResponseEntity.notFound().build()
@@ -67,13 +66,14 @@ class UserPermissionController(
         }
     }
 
-    @PostMapping
-    fun createEntity(
-        @RequestBody entityRequest: UserPermissionDTOs.PostRequest,
+    @DeleteMapping("/{user}/{permission}")
+    fun deleteEntityByKey(
+        @PathVariable user: String,
+        @PathVariable permission: String,
         pageable: Pageable
     ): ResponseEntity<Page<UserPermissionDTOs.GetResult>> {
         return try {
-            val userPermission = userPermissionService.createEntity(entityRequest, pageable)
+            val userPermission = userPermissionService.deleteEntityByKey(user, permission, pageable)
             ResponseEntity.ok(userPermission)
         } catch (e: Exception) {
             ResponseEntity.notFound().build()

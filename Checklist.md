@@ -114,10 +114,10 @@
 - [x]  Meeting Type: `MeetingTypeService`
 - [x]  MC Status: `MCStatusService`
 - [x]  Phil Region: `PhilippineRegionService`
-- [ ]  Phil Province: `PhilippineProvinceService`
-- [ ]  Phil Municipality: `PhilippineMunicipalityService`
-- [ ]  Phil Barangay: `PhilippineBarangayService`
-- [ ]  Company: `CompanyService`
+- [x]  Phil Province: `PhilippineProvinceService`
+- [x]  Phil City Municipality: `PhilippineCityMunicipalityService`
+- [x]  Phil Barangay: `PhilippineBarangayService`
+- [x]  Company: `CompanyService`
 - [ ]  Company Contact Person: `CompanyContactPersonService`
 - [x]  Country: `CountryService`
 - [ ]  Company Branch: `CompanyBranchService`

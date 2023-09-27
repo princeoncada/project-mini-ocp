@@ -1,24 +1,24 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-import com.mmcm.projectocp.backend.spring.application.dto.SessionDTOs
-import com.mmcm.projectocp.backend.spring.domain.service.SessionService
+import com.mmcm.projectocp.backend.spring.application.dto.CompanyDTOs
+import com.mmcm.projectocp.backend.spring.domain.service.CompanyService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/sessions")
-class SessionController(
-    private val sessionService: SessionService
-): EntityController<SessionDTOs.GetResult, SessionDTOs.PostRequest, SessionDTOs.PutRequest> {
+@RequestMapping("/api/companies")
+class CompanyController(
+    private val companyService: CompanyService
+): EntityController<CompanyDTOs.GetResult, CompanyDTOs.PostRequest, CompanyDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
-    ): ResponseEntity<Page<SessionDTOs.GetResult>> {
+    ): ResponseEntity<Page<CompanyDTOs.GetResult>> {
         return try {
-            val session = sessionService.getEntities(pageable)
-            ResponseEntity.ok(session)
+            val entities = companyService.getEntities(pageable)
+            ResponseEntity.ok(entities)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }
@@ -28,10 +28,10 @@ class SessionController(
     override fun getEntityById(
         @PathVariable id: String,
         pageable: Pageable
-    ): ResponseEntity<Page<SessionDTOs.GetResult>> {
+    ): ResponseEntity<Page<CompanyDTOs.GetResult>> {
         return try {
-            val session = sessionService.getEntityById(id, pageable)
-            ResponseEntity.ok(session)
+            val entity = companyService.getEntityById(id, pageable)
+            ResponseEntity.ok(entity)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }
@@ -39,12 +39,12 @@ class SessionController(
 
     @PostMapping
     override fun createEntity(
-        @RequestBody entityRequest: SessionDTOs.PostRequest,
+        @RequestBody entityRequest: CompanyDTOs.PostRequest,
         pageable: Pageable
-    ): ResponseEntity<Page<SessionDTOs.GetResult>> {
+    ): ResponseEntity<Page<CompanyDTOs.GetResult>> {
         return try {
-            val session = sessionService.createEntity(entityRequest, pageable)
-            ResponseEntity.ok(session)
+            val entity = companyService.createEntity(entityRequest, pageable)
+            ResponseEntity.ok(entity)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }
@@ -53,12 +53,12 @@ class SessionController(
     @PutMapping("/{id}")
     override fun updateEntityById(
         @PathVariable id: String,
-        @RequestBody entityRequest: SessionDTOs.PutRequest,
+        @RequestBody entityRequest: CompanyDTOs.PutRequest,
         pageable: Pageable
-    ): ResponseEntity<Page<SessionDTOs.GetResult>> {
+    ): ResponseEntity<Page<CompanyDTOs.GetResult>> {
         return try {
-            val session = sessionService.updateEntityById(id, entityRequest, pageable)
-            ResponseEntity.ok(session)
+            val entity = companyService.updateEntityById(id, entityRequest, pageable)
+            ResponseEntity.ok(entity)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }
@@ -68,10 +68,10 @@ class SessionController(
     override fun deleteEntityById(
         @PathVariable id: String,
         pageable: Pageable
-    ): ResponseEntity<Page<SessionDTOs.GetResult>> {
+    ): ResponseEntity<Page<CompanyDTOs.GetResult>> {
         return try {
-            val session = sessionService.deleteEntityById(id, pageable)
-            ResponseEntity.ok(session)
+            val entity = companyService.deleteEntityById(id, pageable)
+            ResponseEntity.ok(entity)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
         }

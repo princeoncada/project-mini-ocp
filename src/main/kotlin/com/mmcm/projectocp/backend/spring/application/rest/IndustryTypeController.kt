@@ -46,7 +46,7 @@ class IndustryTypeController(
             val department = industryTypeService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(department)
         } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ResponseEntity.badRequest().build()
         }
     }
 
@@ -60,14 +60,15 @@ class IndustryTypeController(
             val department = industryTypeService.updateEntityById(id, entityRequest, pageable)
             ResponseEntity.ok(department)
         } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ResponseEntity.badRequest().build()
         }
     }
 
     @DeleteMapping("/{id}")
     override fun deleteEntityById(
         @PathVariable id: String,
-        pageable: Pageable): ResponseEntity<Page<IndustryTypeDTOs.GetResult>> {
+        pageable: Pageable
+    ): ResponseEntity<Page<IndustryTypeDTOs.GetResult>> {
         return try {
             val department = industryTypeService.deleteEntityById(id, pageable)
             ResponseEntity.ok(department)

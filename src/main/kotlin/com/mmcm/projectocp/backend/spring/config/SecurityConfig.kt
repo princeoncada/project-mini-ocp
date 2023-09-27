@@ -19,11 +19,13 @@ class SecurityConfig(
 ) {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-        http.invoke {
+        http {
             csrf { disable() }
-            authorizeRequests {
+
+            authorizeHttpRequests {
 //                authorize("/api/users/**", hasRole("admin"))
-                authorize(anyRequest, authenticated)
+                authorize(anyRequest, permitAll)
+
             }
             oauth2Login {
                 userInfoEndpoint {

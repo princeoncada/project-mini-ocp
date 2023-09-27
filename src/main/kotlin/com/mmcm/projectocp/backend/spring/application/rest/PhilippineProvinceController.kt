@@ -1,26 +1,26 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-import com.mmcm.projectocp.backend.spring.application.dto.MCStatusDTOs
-import com.mmcm.projectocp.backend.spring.domain.service.McStatusService
+import com.mmcm.projectocp.backend.spring.application.dto.PhilippineProvinceDTOs
+import com.mmcm.projectocp.backend.spring.domain.service.PhilippineProvinceService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/mc-statuses")
-class McStatusController(
-    private val mcStatusService: McStatusService,
-): EntityController<MCStatusDTOs.GetResult, MCStatusDTOs.PostRequest, MCStatusDTOs.PutRequest> {
+@RequestMapping("/api/philippine-provinces")
+class PhilippineProvinceController(
+    private val philippineProvinceService: PhilippineProvinceService
+): EntityController<PhilippineProvinceDTOs.GetResult, PhilippineProvinceDTOs.PostRequest, PhilippineProvinceDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<PhilippineProvinceDTOs.GetResult>> {
         return try {
-            val entities = mcStatusService.getEntities(pageable)
+            val entities = philippineProvinceService.getEntities(pageable)
             ResponseEntity.ok(entities)
         } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ResponseEntity.badRequest().build()
         }
     }
 
@@ -28,22 +28,22 @@ class McStatusController(
     override fun getEntityById(
         @PathVariable id: String,
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<PhilippineProvinceDTOs.GetResult>> {
         return try {
-            val entity = mcStatusService.getEntityById(id, pageable)
+            val entity = philippineProvinceService.getEntityById(id, pageable)
             ResponseEntity.ok(entity)
         } catch (e: Exception) {
-            ResponseEntity.notFound().build()
+            ResponseEntity.badRequest().build()
         }
     }
 
     @PostMapping
     override fun createEntity(
-        @RequestBody entityRequest: MCStatusDTOs.PostRequest,
+        @RequestBody entityRequest: PhilippineProvinceDTOs.PostRequest,
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<PhilippineProvinceDTOs.GetResult>> {
         return try {
-            val entity = mcStatusService.createEntity(entityRequest, pageable)
+            val entity = philippineProvinceService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(entity)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
@@ -53,11 +53,11 @@ class McStatusController(
     @PutMapping("/{id}")
     override fun updateEntityById(
         @PathVariable id: String,
-        @RequestBody entityRequest: MCStatusDTOs.PutRequest,
+        @RequestBody entityRequest: PhilippineProvinceDTOs.PutRequest,
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<PhilippineProvinceDTOs.GetResult>> {
         return try {
-            val entity = mcStatusService.updateEntityById(id, entityRequest, pageable)
+            val entity = philippineProvinceService.updateEntityById(id, entityRequest, pageable)
             ResponseEntity.ok(entity)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
@@ -68,9 +68,9 @@ class McStatusController(
     override fun deleteEntityById(
         @PathVariable id: String,
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<PhilippineProvinceDTOs.GetResult>> {
         return try {
-            val entity = mcStatusService.deleteEntityById(id, pageable)
+            val entity = philippineProvinceService.deleteEntityById(id, pageable)
             ResponseEntity.ok(entity)
         } catch (e: Exception) {
             ResponseEntity.badRequest().build()
