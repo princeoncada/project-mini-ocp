@@ -12,9 +12,4 @@ class JwtConfiguration {
         val keyGenerator: KeyGenerator = KeyGenerator.getInstance("HmacSHA256")
         return keyGenerator.generateKey()
     }
-
-    @Bean
-    fun jwtTokenProvider(secretKey: SecretKey): JwtService {
-        return JwtService(secretKey)
-    }
 }
