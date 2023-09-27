@@ -11,5 +11,4 @@ import java.util.*
 interface IndustryTypeRepository: JpaRepository<IndustryType, String> {
     fun findById(id: String, pageable: Pageable): Page<IndustryType>
     fun findByType(type: String?): Optional<IndustryType>
-
 }
