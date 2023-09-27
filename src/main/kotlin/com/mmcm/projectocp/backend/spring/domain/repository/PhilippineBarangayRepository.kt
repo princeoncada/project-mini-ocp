@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository
 @Repository
 interface PhilippineBarangayRepository: JpaRepository<PhilippineBarangay, String> {
     fun findById(id: String, pageable: Pageable): Page<PhilippineBarangay>
-
 }
