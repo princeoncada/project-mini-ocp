@@ -1,4 +1,4 @@
-package com.mmcm.projectocp.backend.spring.config.service
+package com.mmcm.projectocp.backend.spring.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -6,7 +6,7 @@ import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
 
 @Configuration
-class JwtConfiguration {
+class JwtConfig {
     @Bean
     fun secretKey(): SecretKey {
         val keyGenerator: KeyGenerator = KeyGenerator.getInstance("HmacSHA256")

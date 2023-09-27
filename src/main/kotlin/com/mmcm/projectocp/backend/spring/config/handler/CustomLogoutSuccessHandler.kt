@@ -1,5 +1,6 @@
-package com.mmcm.projectocp.backend.spring.config.service
+package com.mmcm.projectocp.backend.spring.config.handler
 
+import com.mmcm.projectocp.backend.spring.config.service.JwtService
 import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

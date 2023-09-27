@@ -1,6 +1,9 @@
-package com.mmcm.projectocp.backend.spring.config.service
+package com.mmcm.projectocp.backend.spring.config.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.mmcm.projectocp.backend.spring.config.service.CustomPrincipalService
+import com.mmcm.projectocp.backend.spring.config.service.JwtService
+import com.mmcm.projectocp.backend.spring.config.service.UserPrincipal
 import com.mmcm.projectocp.backend.spring.domain.repository.RefreshTokenRepository
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
@@ -9,7 +12,6 @@ import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.oauth2.jwt.JwtValidationException
