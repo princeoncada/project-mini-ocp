@@ -26,6 +26,3 @@ class UserDTOs{
         val designation: String?
     )
 }
-
-
-

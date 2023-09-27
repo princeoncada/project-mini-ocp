@@ -15,7 +15,7 @@ class ProgramMapper (
     ): ProgramDTOs.GetResult {
         return ProgramDTOs.GetResult(
             id = entity.id,
-            department= entity.department.name,
+            department = entity.department.name,
             name = entity.name,
             abbr = entity.abbr
         )

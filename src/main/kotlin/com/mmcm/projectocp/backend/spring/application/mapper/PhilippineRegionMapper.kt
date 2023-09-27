@@ -12,7 +12,7 @@ class PhilippineRegionMapper: EntityMapper<PhilippineRegion ,PhilippineRegionDTO
     ): PhilippineRegionDTOs.GetResult {
         return PhilippineRegionDTOs.GetResult(
             id = entity.id,
-            regionCode = entity.regionCode,
+            regCode = entity.regionCode,
             name = entity.name,
         )
     }
@@ -23,10 +23,10 @@ class PhilippineRegionMapper: EntityMapper<PhilippineRegion ,PhilippineRegionDTO
     ): PhilippineRegion {
         return PhilippineRegion(
             id = id,
-            regionCode = entityRequest.regionCode,
+            regionCode = entityRequest.regCode,
             name = entityRequest.name,
             createdAt = Instant.now(),
-            updatedAt = Instant.now(),
+            updatedAt = Instant.now()
         )
     }
 
@@ -36,10 +36,10 @@ class PhilippineRegionMapper: EntityMapper<PhilippineRegion ,PhilippineRegionDTO
     ): PhilippineRegion {
         return PhilippineRegion(
             id = entity.id,
-            regionCode = entityRequest.regionCode ?: entity.regionCode,
+            regionCode = entityRequest.regCode ?: entity.regionCode,
             name = entityRequest.name ?: entity.name,
             createdAt = entity.createdAt,
-            updatedAt = Instant.now(),
+            updatedAt = Instant.now()
         )
     }
 }

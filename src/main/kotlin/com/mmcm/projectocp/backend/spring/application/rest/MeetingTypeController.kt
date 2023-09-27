@@ -67,7 +67,8 @@ class MeetingTypeController (
     @DeleteMapping("/{id}")
     override fun deleteEntityById(
         @PathVariable id: String,
-        pageable: Pageable): ResponseEntity<Page<MeetingTypeDTOs.GetResult>> {
+        pageable: Pageable
+    ): ResponseEntity<Page<MeetingTypeDTOs.GetResult>> {
         return try {
             val meetingType = meetingTypeService.deleteEntityById(id, pageable)
             ResponseEntity.ok(meetingType)

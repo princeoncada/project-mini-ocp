@@ -4,7 +4,6 @@ import com.mmcm.projectocp.backend.spring.application.dto.FileTypeDTOs
 import com.mmcm.projectocp.backend.spring.domain.service.FileTypeService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -21,7 +20,7 @@ class FileTypeController(
             val department = fileTypeService.getEntities(pageable)
             ResponseEntity.ok(department)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -34,7 +33,7 @@ class FileTypeController(
             val department = fileTypeService.getEntityById(id, pageable)
             ResponseEntity.ok(department)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -47,10 +46,9 @@ class FileTypeController(
             val department = fileTypeService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(department)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.badRequest().build()
         }
     }
-
 
     @PutMapping("/{id}")
     override fun updateEntityById(
@@ -62,7 +60,7 @@ class FileTypeController(
             val department = fileTypeService.updateEntityById(id, entityRequest, pageable)
             ResponseEntity.ok(department)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.badRequest().build()
         }
     }
 
@@ -75,7 +73,7 @@ class FileTypeController(
             val department = fileTypeService.deleteEntityById(id, pageable)
             ResponseEntity.ok(department)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.badRequest().build()
         }
     }
 }

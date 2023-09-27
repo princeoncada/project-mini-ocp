@@ -20,7 +20,7 @@ class McStatusController(
             val entities = mcStatusService.getEntities(pageable)
             ResponseEntity.ok(entities)
         } catch (e: Exception) {
-            ResponseEntity.badRequest().build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -33,7 +33,7 @@ class McStatusController(
             val entity = mcStatusService.getEntityById(id, pageable)
             ResponseEntity.ok(entity)
         } catch (e: Exception) {
-            ResponseEntity.badRequest().build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -77,4 +77,3 @@ class McStatusController(
         }
     }
 }
-

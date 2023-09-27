@@ -50,7 +50,6 @@ class SessionController(
         }
     }
 
-
     @PutMapping("/{id}")
     override fun updateEntityById(
         @PathVariable id: String,
