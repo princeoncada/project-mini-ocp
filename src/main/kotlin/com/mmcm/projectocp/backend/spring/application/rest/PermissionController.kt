@@ -4,7 +4,6 @@ import com.mmcm.projectocp.backend.spring.application.dto.PermissionDTOs
 import com.mmcm.projectocp.backend.spring.domain.service.PermissionService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -21,7 +20,7 @@ class PermissionController(
             val permissions = permissionService.getEntities(pageable)
             ResponseEntity.ok(permissions)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -34,7 +33,7 @@ class PermissionController(
             val permission = permissionService.getEntityById(id, pageable)
             ResponseEntity.ok(permission)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 
@@ -47,7 +46,7 @@ class PermissionController(
             val permission = permissionService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(permission)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.badRequest().build()
         }
     }
 
@@ -61,7 +60,7 @@ class PermissionController(
             val permission = permissionService.updateEntityById(id, entityRequest, pageable)
             ResponseEntity.ok(permission)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.badRequest().build()
         }
     }
 
@@ -74,7 +73,7 @@ class PermissionController(
             val permission = permissionService.deleteEntityById(id, pageable)
             ResponseEntity.ok(permission)
         } catch (e: Exception) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build()
+            ResponseEntity.notFound().build()
         }
     }
 }
