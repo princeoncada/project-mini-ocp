@@ -19,7 +19,7 @@ data class StudentCompanyAttendance(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "moa_id", referencedColumnName = "id", nullable = false)
-    val moa: MOA,
+    val moa: Moa,
 
     @Column(name = "designation", length = 255, nullable = false)
     val designation: String,

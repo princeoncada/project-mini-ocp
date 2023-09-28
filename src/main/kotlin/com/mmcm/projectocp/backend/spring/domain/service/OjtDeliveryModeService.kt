@@ -1,8 +1,8 @@
 package com.mmcm.projectocp.backend.spring.domain.service
 
-import com.mmcm.projectocp.backend.spring.application.dto.OJTDeliveryModeDTOs
+import com.mmcm.projectocp.backend.spring.application.dto.OjtDeliveryModeDTOs
 import org.springframework.stereotype.Service
 
 @Service
-interface OjtDeliveryModeService: EntityService<OJTDeliveryModeDTOs.GetResult, OJTDeliveryModeDTOs.PostRequest, OJTDeliveryModeDTOs.PutRequest> {
+interface OjtDeliveryModeService: EntityService<OjtDeliveryModeDTOs.GetResult, OjtDeliveryModeDTOs.PostRequest, OjtDeliveryModeDTOs.PutRequest> {
 }

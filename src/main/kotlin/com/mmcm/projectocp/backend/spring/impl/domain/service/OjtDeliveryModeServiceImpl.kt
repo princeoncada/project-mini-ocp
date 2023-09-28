@@ -1,8 +1,8 @@
 package com.mmcm.projectocp.backend.spring.impl.domain.service
 
-import com.mmcm.projectocp.backend.spring.application.dto.OJTDeliveryModeDTOs
-import com.mmcm.projectocp.backend.spring.application.mapper.OJTDeliveryModeMapper
-import com.mmcm.projectocp.backend.spring.domain.repository.OJTDeliveryModeRepository
+import com.mmcm.projectocp.backend.spring.application.dto.OjtDeliveryModeDTOs
+import com.mmcm.projectocp.backend.spring.application.mapper.OjtDeliveryModeMapper
+import com.mmcm.projectocp.backend.spring.domain.repository.OjtDeliveryModeRepository
 import com.mmcm.projectocp.backend.spring.domain.service.OjtDeliveryModeService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -11,27 +11,27 @@ import java.util.*
 
 @Service
 class OjtDeliveryModeServiceImpl(
-    private val ojtDeliveryModeRepository: OJTDeliveryModeRepository,
-    private val ojtDeliveryModeMapper: OJTDeliveryModeMapper,
+    private val ojtDeliveryModeRepository: OjtDeliveryModeRepository,
+    private val ojtDeliveryModeMapper: OjtDeliveryModeMapper,
 ): OjtDeliveryModeService {
     override fun getEntities(
         pageable: Pageable
-    ): Page<OJTDeliveryModeDTOs.GetResult> {
+    ): Page<OjtDeliveryModeDTOs.GetResult> {
         return ojtDeliveryModeRepository.findAll(pageable).map { ojtDeliveryModeMapper.toGetResult(it) }
     }
 
     override fun getEntityById(
         id: String,
         pageable: Pageable
-    ): Page<OJTDeliveryModeDTOs.GetResult> {
+    ): Page<OjtDeliveryModeDTOs.GetResult> {
         val ojtDeliveryMode = ojtDeliveryModeRepository.findById(id, pageable)
         return ojtDeliveryMode.map { ojtDeliveryModeMapper.toGetResult(it) }
     }
 
     override fun createEntity(
-        entityRequest: OJTDeliveryModeDTOs.PostRequest,
+        entityRequest: OjtDeliveryModeDTOs.PostRequest,
         pageable: Pageable
-    ): Page<OJTDeliveryModeDTOs.GetResult> {
+    ): Page<OjtDeliveryModeDTOs.GetResult> {
         val ojtDeliveryModeId = UUID.randomUUID().toString()
         val savedOJTDeliveryMode = ojtDeliveryModeRepository.save(ojtDeliveryModeMapper.createEntity(ojtDeliveryModeId, entityRequest))
         return ojtDeliveryModeRepository.findById(savedOJTDeliveryMode.id, pageable).map { ojtDeliveryModeMapper.toGetResult(it) }
@@ -39,9 +39,9 @@ class OjtDeliveryModeServiceImpl(
 
     override fun updateEntityById(
         id: String,
-        entityRequest: OJTDeliveryModeDTOs.PutRequest,
+        entityRequest: OjtDeliveryModeDTOs.PutRequest,
         pageable: Pageable
-    ): Page<OJTDeliveryModeDTOs.GetResult> {
+    ): Page<OjtDeliveryModeDTOs.GetResult> {
         val currentOJTDeliveryMode = ojtDeliveryModeRepository.findById(id).get()
         val savedOJTDeliveryMode = ojtDeliveryModeRepository.save(ojtDeliveryModeMapper.updateEntity(currentOJTDeliveryMode, entityRequest))
         return ojtDeliveryModeRepository.findById(savedOJTDeliveryMode.id, pageable).map { ojtDeliveryModeMapper.toGetResult(it) }
@@ -50,7 +50,7 @@ class OjtDeliveryModeServiceImpl(
     override fun deleteEntityById(
         id: String,
         pageable: Pageable
-    ): Page<OJTDeliveryModeDTOs.GetResult> {
+    ): Page<OjtDeliveryModeDTOs.GetResult> {
         val ojtDeliveryMode = ojtDeliveryModeRepository.findById(id).get()
         ojtDeliveryModeRepository.delete(ojtDeliveryMode)
         return ojtDeliveryModeRepository.findAll(pageable).map { ojtDeliveryModeMapper.toGetResult(it) }
