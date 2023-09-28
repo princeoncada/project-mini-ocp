@@ -1,13 +1,16 @@
 package com.mmcm.projectocp.backend.spring.config
 
-import com.mmcm.projectocp.backend.spring.config.service.CustomOidcUserService
-import com.mmcm.projectocp.backend.spring.config.service.JwtAuthenticationFilter
-import com.mmcm.projectocp.backend.spring.config.service.JwtService
+import com.mmcm.projectocp.backend.spring.config.filter.JwtAuthenticationFilter
+import com.mmcm.projectocp.backend.spring.config.handler.CustomLogoutSuccessHandler
+import com.mmcm.projectocp.backend.spring.config.service.*
+import com.mmcm.projectocp.backend.spring.domain.repository.RefreshTokenRepository
+import com.mmcm.projectocp.backend.spring.domain.repository.UserRepository
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
@@ -15,7 +18,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val jwtService: JwtService
+    private val jwtService: JwtService,
+    private val userPrincipalService: CustomPrincipalService,
+    private val refreshTokenRepository: RefreshTokenRepository,
+    private val userRepository: UserRepository
 ) {
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -27,13 +33,27 @@ class SecurityConfig(
                 authorize(anyRequest, permitAll)
 
             }
+            sessionManagement {
+                SessionCreationPolicy.STATELESS
+            }
             oauth2Login {
                 userInfoEndpoint {
                     oidcUserService = oidcUserService()
                 }
-                defaultSuccessUrl("/authenticate", true)
+                defaultSuccessUrl("/oauth2/callback", true)
             }
-            addFilterBefore<UsernamePasswordAuthenticationFilter>(JwtAuthenticationFilter(jwtService))
+            addFilterBefore<UsernamePasswordAuthenticationFilter>(
+                JwtAuthenticationFilter(
+                    jwtService,
+                    userPrincipalService,
+                    refreshTokenRepository
+                )
+            )
+            logout {
+                logoutUrl = "/logout"
+                logoutSuccessHandler = CustomLogoutSuccessHandler(userRepository, jwtService)
+                permitAll()
+            }
         }
         return http.build()
     }
