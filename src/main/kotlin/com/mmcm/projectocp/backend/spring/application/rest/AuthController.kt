@@ -51,6 +51,11 @@ class AuthController (
 
         println("Initial token: $accessToken")
 
+        val refreshTokenEntity = refreshTokenRepository.findByUserId(userPrincipal.getUserId())
+        if(refreshTokenEntity.isPresent) {
+            refreshTokenRepository.delete(refreshTokenEntity.get())
+        }
+
         refreshTokenRepository.save(
             RefreshToken(
                 id = UUID.randomUUID().toString(),
