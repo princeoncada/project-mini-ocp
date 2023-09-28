@@ -1,6 +1,6 @@
 package com.mmcm.projectocp.backend.spring.application.rest
 
-import com.mmcm.projectocp.backend.spring.application.dto.MCStatusDTOs
+import com.mmcm.projectocp.backend.spring.application.dto.McStatusDTOs
 import com.mmcm.projectocp.backend.spring.domain.service.McStatusService
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/mc-statuses")
 class McStatusController(
     private val mcStatusService: McStatusService,
-): EntityController<MCStatusDTOs.GetResult, MCStatusDTOs.PostRequest, MCStatusDTOs.PutRequest> {
+): EntityController<McStatusDTOs.GetResult, McStatusDTOs.PostRequest, McStatusDTOs.PutRequest> {
     @GetMapping
     override fun getEntities(
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<McStatusDTOs.GetResult>> {
         return try {
             val entities = mcStatusService.getEntities(pageable)
             ResponseEntity.ok(entities)
@@ -28,7 +28,7 @@ class McStatusController(
     override fun getEntityById(
         @PathVariable id: String,
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<McStatusDTOs.GetResult>> {
         return try {
             val entity = mcStatusService.getEntityById(id, pageable)
             ResponseEntity.ok(entity)
@@ -39,9 +39,9 @@ class McStatusController(
 
     @PostMapping
     override fun createEntity(
-        @RequestBody entityRequest: MCStatusDTOs.PostRequest,
+        @RequestBody entityRequest: McStatusDTOs.PostRequest,
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<McStatusDTOs.GetResult>> {
         return try {
             val entity = mcStatusService.createEntity(entityRequest, pageable)
             ResponseEntity.ok(entity)
@@ -53,9 +53,9 @@ class McStatusController(
     @PutMapping("/{id}")
     override fun updateEntityById(
         @PathVariable id: String,
-        @RequestBody entityRequest: MCStatusDTOs.PutRequest,
+        @RequestBody entityRequest: McStatusDTOs.PutRequest,
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<McStatusDTOs.GetResult>> {
         return try {
             val entity = mcStatusService.updateEntityById(id, entityRequest, pageable)
             ResponseEntity.ok(entity)
@@ -68,7 +68,7 @@ class McStatusController(
     override fun deleteEntityById(
         @PathVariable id: String,
         pageable: Pageable
-    ): ResponseEntity<Page<MCStatusDTOs.GetResult>> {
+    ): ResponseEntity<Page<McStatusDTOs.GetResult>> {
         return try {
             val entity = mcStatusService.deleteEntityById(id, pageable)
             ResponseEntity.ok(entity)

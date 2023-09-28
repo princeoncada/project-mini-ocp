@@ -1,16 +1,16 @@
 package com.mmcm.projectocp.backend.spring.application.mapper
 
-import com.mmcm.projectocp.backend.spring.application.dto.MCStatusDTOs
-import com.mmcm.projectocp.backend.spring.domain.model.MCStatus
+import com.mmcm.projectocp.backend.spring.application.dto.McStatusDTOs
+import com.mmcm.projectocp.backend.spring.domain.model.McStatus
 import org.springframework.stereotype.Component
 import java.time.Instant
 
 @Component
-class MCStatusMapper: EntityMapper<MCStatus, MCStatusDTOs.GetResult, MCStatusDTOs.PostRequest, MCStatusDTOs.PutRequest> {
+class McStatusMapper: EntityMapper<McStatus, McStatusDTOs.GetResult, McStatusDTOs.PostRequest, McStatusDTOs.PutRequest> {
     override fun toGetResult(
-        entity: MCStatus
-    ): MCStatusDTOs.GetResult {
-        return MCStatusDTOs.GetResult(
+        entity: McStatus
+    ): McStatusDTOs.GetResult {
+        return McStatusDTOs.GetResult(
             id = entity.id,
             name = entity.name,
         )
@@ -18,9 +18,9 @@ class MCStatusMapper: EntityMapper<MCStatus, MCStatusDTOs.GetResult, MCStatusDTO
 
     override fun createEntity(
         id: String,
-        entityRequest: MCStatusDTOs.PostRequest
-    ): MCStatus {
-        return MCStatus(
+        entityRequest: McStatusDTOs.PostRequest
+    ): McStatus {
+        return McStatus(
             id = id,
             name = entityRequest.name,
             createdAt = Instant.now(),
@@ -29,10 +29,10 @@ class MCStatusMapper: EntityMapper<MCStatus, MCStatusDTOs.GetResult, MCStatusDTO
     }
 
     override fun updateEntity(
-        entity: MCStatus,
-        entityRequest: MCStatusDTOs.PutRequest
-    ): MCStatus {
-        return MCStatus(
+        entity: McStatus,
+        entityRequest: McStatusDTOs.PutRequest
+    ): McStatus {
+        return McStatus(
             id = entity.id,
             name = entityRequest.name ?: entity.name,
             createdAt = entity.createdAt,
