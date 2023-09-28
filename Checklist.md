@@ -97,49 +97,49 @@
 
 # Service Checklist
 
-- [x]  Role: `RoleService`
-- [x]  Permission: `PermissionService`
-- [x]  User: `UserService`
-- [x]  User Role: `UserRoleService`
-- [x]  Session: `SessionService`
-- [x]  User Permission: `UserPermissionService`
-- [x]  Department: `DepartmentService`
-- [x]  Program: `ProgramService`
-- [x]  File Type: `FileTypeService`
-- [x]  Industry Type: `IndustryTypeService`
-- [x]  Partnership Type: `PartnershipTypeService`
-- [x]  Company Category: `CompanyCategoryService`
-- [x]  OJT Delivery Mode: `OJTDeliveryModeService`
-- [x]  Meeting Status: `MeetingStatusService`
-- [x]  Meeting Type: `MeetingTypeService`
-- [x]  MC Status: `MCStatusService`
-- [x]  Phil Region: `PhilippineRegionService`
-- [x]  Phil Province: `PhilippineProvinceService`
-- [x]  Phil City Municipality: `PhilippineCityMunicipalityService`
-- [x]  Phil Barangay: `PhilippineBarangayService`
-- [x]  Company: `CompanyService`
-- [ ]  Company Contact Person: `CompanyContactPersonService`
-- [x]  Country: `CountryService`
-- [ ]  Company Branch: `CompanyBranchService`
-- [ ]  Link Type: `LinkTypeService`
-- [ ]  Links: `LinksService`
-- [ ]  MOA: `MOAService`
-- [ ]  MC Status Update: `MCStatusUpdateService`
-- [ ]  MOA OJT Delivery Mode: `MOAOJTDeliveryModeService`
-- [ ]  MOA Position: `MOAPositionService`
-- [ ]  Meeting: `MeetingService`
-- [ ]  File: `FileService`
-- [x]  Academic Year: `AcademicYearService`
-- [ ]  Term: `TermService`
-- [ ]  Course: `CourseService`
-- [ ]  Requirement: `RequirementService`
-- [ ]  Student Course: `StudentCourseService`
-- [ ]  Requirement Submission: `RequirementSubmissionService`
-- [ ]  Content Type: `ContentTypeService`
-- [ ]  Content: `ContentService`
-- [ ]  MOA Partnership Type: `MOAPartnershipTypeService`
-- [ ]  Student Company Attended: `StudentCompanyAttendedService`
-- [ ]  Student Testimony: `StudentTestimonyService`
-- [ ]  MOA Position Program: `MOAPositionProgramService`
-- [ ]  User Email: `UserEmailService`
+- [x] Role: `RoleService`
+- [x] Permission: `PermissionService`
+- [x] User: `UserService`
+- [x] User Role: `UserRoleService`
+- [x] Session: `SessionService`
+- [x] User Permission: `UserPermissionService`
+- [x] Department: `DepartmentService`
+- [x] Program: `ProgramService`
+- [x] File Type: `FileTypeService`
+- [x] Industry Type: `IndustryTypeService`
+- [x] Partnership Type: `PartnershipTypeService`
+- [x] Company Category: `CompanyCategoryService`
+- [x] OJT Delivery Mode: `OJTDeliveryModeService`
+- [x] Meeting Status: `MeetingStatusService`
+- [x] Meeting Type: `MeetingTypeService`
+- [x] MC Status: `MCStatusService`
+- [x] Phil Region: `PhilRegionService`
+- [x] Phil Province: `PhilProvinceService`
+- [x] Phil Municipality: `PhilMunicipalityService`
+- [x] Phil Barangay: `PhilBarangayService`
+- [x] Company: `CompanyService`
+- [x] Company Contact Person: `CompanyContactPersonService` 9/28/2023
+- [x] Country: `CountryService`
+- [x] Company Branch: `CompanyBranchService` 9/28/2023
+- [x] Link Type: `LinkTypeService` 9/28/2023
+- [x] Link: `LinkService` 9/28/2023
+- [x] MOA: `MOAService` 9/28/2023
+- [x] MC Status Update: `MCStatusUpdateService` 9/28/2023
+- [x] MOA OJT Delivery Mode: `MOAOJTDeliveryModeService` 9/28/2023
+- [x] MOA Position: `MOAPositionService` 9/28/2023
+- [x] Meeting: `MeetingService` 9/28/2023
+- [x] File: `FileService` 9/28/2023
+- [x] Academic Year: `AcademicYearService`
+- [ ] Term: `TermService`
+- [ ] Course: `CourseService`
+- [ ] Requirement: `RequirementService`
+- [ ] Student Course: `StudentCourseService`
+- [ ] Requirement Submission: `RequirementSubmissionService`
+- [ ] Content Type: `ContentTypeService`
+- [ ] Content: `ContentService`
+- [ ] MOA Partnership Type: `MOAPartnershipTypeService`
+- [ ] Student Company Attended: `StudentCompanyAttendedService`
+- [ ] Student Testimony: `StudentTestimonyService`
+- [ ] MOA Position Program: `MOAPositionProgramService`
+- [ ] User Email: `UserEmailService`
 
