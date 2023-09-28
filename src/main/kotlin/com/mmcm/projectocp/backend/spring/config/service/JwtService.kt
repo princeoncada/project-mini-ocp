@@ -6,7 +6,6 @@ import io.jsonwebtoken.Jwts
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.oauth2.jwt.JwtValidationException
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.crypto.SecretKey
