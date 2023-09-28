@@ -5,8 +5,8 @@ import java.time.Instant
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "tbl_moa_positions")
-data class MOAPosition(
+@Table(name = "tbl_moa_ojt_delivery_modes")
+data class MoaOjtDeliveryMode(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
@@ -14,20 +14,11 @@ data class MOAPosition(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "moa_id", referencedColumnName = "id", nullable = false)
-    val moa: MOA,
+    val moa: Moa,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "academic_year_id", referencedColumnName = "id")
-    val academicYear: AcademicYear?,
-
-    @Column(name = "name", length = 255, nullable = false)
-    val name: String,
-
-    @Column(name = "requirements", columnDefinition = "TEXT")
-    val requirements: String?,
-
-    @Column(name = "students_accommodated")
-    val studentsAccommodated: Int?,
+    @JoinColumn(name = "ojt_delivery_mode_id", referencedColumnName = "id", nullable = false)
+    val ojtDeliveryMode: OjtDeliveryMode,
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

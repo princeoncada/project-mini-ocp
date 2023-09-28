@@ -5,15 +5,15 @@ import java.time.Instant
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "tbl_mc_statuses")
-data class MCStatus(
+@Table(name = "tbl_ojt_delivery_modes")
+data class OjtDeliveryMode(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
-    @Column(name = "name", length = 255, nullable = false, unique = true)
-    val name: String,
+    @Column(name = "mode", length = 255, nullable = false, unique = true)
+    val mode: String,
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

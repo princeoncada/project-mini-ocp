@@ -6,7 +6,7 @@ import java.time.Instant
 
 @Entity
 @Table(name = "tbl_moa_partnership_types")
-data class MOAPartnershipType(
+data class MoaPartnershipType(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
@@ -14,7 +14,7 @@ data class MOAPartnershipType(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "moa_id", referencedColumnName = "id", nullable = false)
-    val moa: MOA,
+    val moa: Moa,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partnership_type_id", referencedColumnName = "id", nullable = false)

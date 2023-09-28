@@ -1,24 +1,30 @@
 package com.mmcm.projectocp.backend.spring.domain.model
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
-import jakarta.persistence.*
 import java.time.Instant
+import jakarta.persistence.*
 
 @Entity
-@Table(name = "tbl_moa_position_programs")
-data class MOAPositionProgram(
+@Table(name = "tbl_moa_positions")
+data class MoaPosition(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "program_id", referencedColumnName = "id", nullable = false)
-    val program: Program,
+    @JoinColumn(name = "moa_id", referencedColumnName = "id", nullable = false)
+    val moa: Moa,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "moa_position_id", referencedColumnName = "id", nullable = false)
-    val moaPosition: MOAPosition,
+    @JoinColumn(name = "academic_year_id", referencedColumnName = "id")
+    val academicYear: AcademicYear?,
+
+    @Column(name = "name", length = 255, nullable = false)
+    val name: String,
+
+    @Column(name = "requirements", columnDefinition = "TEXT")
+    val requirements: String?,
 
     @Column(name = "students_accommodated")
     val studentsAccommodated: Int?,

@@ -1,31 +1,27 @@
 package com.mmcm.projectocp.backend.spring.domain.model
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
-import java.time.Instant
-import java.time.LocalDate
 import jakarta.persistence.*
+import java.time.Instant
 
 @Entity
-@Table(name = "tbl_mc_status_updates")
-data class MCStatusUpdate(
+@Table(name = "tbl_moa_position_programs")
+data class MoaPositionProgram(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
     val id: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mc_status_id", referencedColumnName = "id", nullable = false)
-    val mcStatus: MCStatus,
+    @JoinColumn(name = "program_id", referencedColumnName = "id", nullable = false)
+    val program: Program,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "moa_id", referencedColumnName = "id", nullable = false)
-    val moa: MOA,
+    @JoinColumn(name = "moa_position_id", referencedColumnName = "id", nullable = false)
+    val moaPosition: MoaPosition,
 
-    @Column(name = "notes", columnDefinition = "TEXT")
-    val notes: String?,
-
-    @Column(name = "mc_approved_date")
-    val mcApprovedDate: LocalDate?,
+    @Column(name = "students_accommodated")
+    val studentsAccommodated: Int?,
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)

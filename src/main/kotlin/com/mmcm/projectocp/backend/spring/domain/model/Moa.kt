@@ -7,7 +7,7 @@ import jakarta.persistence.*
 
 @Entity
 @Table(name = "tbl_moas")
-data class MOA(
+data class Moa(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", length = 36, nullable = false)
