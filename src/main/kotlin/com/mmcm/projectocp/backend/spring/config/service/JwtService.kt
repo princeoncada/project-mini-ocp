@@ -6,7 +6,7 @@ import io.jsonwebtoken.Jwts
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.oauth2.jwt.JwtValidationException
 import org.springframework.stereotype.Service
 import java.util.*
 import javax.crypto.SecretKey
@@ -74,12 +74,14 @@ class JwtService(
     fun clearAccessTokenCookie(response: HttpServletResponse) {
         val cookie = createCookie(age = 0)
         response.addCookie(cookie)
-        SecurityContextHolder.clearContext()
     }
 
     fun revokeRefreshToken(userId: String) {
         val refreshToken = refreshTokenRepository.findByUserId(userId)
-        refreshTokenRepository.delete(refreshToken)
+        if(refreshToken.isPresent) {
+            refreshTokenRepository.delete(refreshToken.get())
+        }
+
     }
 
     companion object {
