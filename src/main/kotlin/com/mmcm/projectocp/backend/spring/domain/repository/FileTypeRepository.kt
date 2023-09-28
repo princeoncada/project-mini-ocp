@@ -10,4 +10,5 @@ import java.util.*
 @Repository
 interface FileTypeRepository: JpaRepository<FileType, String> {
     fun findById(id: String, pageable: Pageable): Page<FileType>
+    fun findByName(name: String?): Optional<FileType>
 }

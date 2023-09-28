@@ -10,4 +10,5 @@ import java.util.*
 @Repository
 interface CompanyRepository: JpaRepository<Company, String> {
     fun findById(id: String, pageable: Pageable): Page<Company>
+    fun findByName(name: String): Optional<Company>
 }

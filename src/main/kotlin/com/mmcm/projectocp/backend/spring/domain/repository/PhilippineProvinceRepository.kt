@@ -10,4 +10,5 @@ import java.util.*
 @Repository
 interface PhilippineProvinceRepository: JpaRepository<PhilippineProvince, String> {
     fun findById(id: String, pageable: Pageable): Page<PhilippineProvince>
+    fun findByName(name: String?): Optional<PhilippineProvince>
 }
