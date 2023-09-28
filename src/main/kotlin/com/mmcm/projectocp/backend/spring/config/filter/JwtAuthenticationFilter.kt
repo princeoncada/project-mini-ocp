@@ -70,7 +70,7 @@ class JwtAuthenticationFilter(
 
         } catch (e: ExpiredJwtException) {
             val user = userPrincipalService.loadUserByUsername(e.claims.subject)
-            val refreshToken = refreshTokenRepository.findByUserId(e.claims.id)
+            val refreshToken = refreshTokenRepository.findByUserId(e.claims.id).get()
             val authorities = SecurityContextHolder.getContext().authentication.authorities
 
             if (jwtService.validateToken(refreshToken.refreshToken, user)) {
@@ -90,7 +90,6 @@ class JwtAuthenticationFilter(
 
                 response.writer.write(ObjectMapper().writeValueAsString(responseBody))
             } else {
-
                 response.status = HttpServletResponse.SC_UNAUTHORIZED
                 response.contentType = "application/json"
                 val responseBody = mapOf(
@@ -98,12 +97,20 @@ class JwtAuthenticationFilter(
                     "message" to "Token expired for user ${e.claims.subject}"
                 )
                 response.writer.write(ObjectMapper().writeValueAsString(responseBody))
+                val authentication = SecurityContextHolder.getContext().authentication
                 jwtService.clearAccessTokenCookie(response)
+                jwtService.revokeRefreshToken(authentication.name)
+                SecurityContextHolder.getContext().authentication = null
+                response.sendRedirect("/login")
             }
 
         } catch (e: Exception) {
             println("Error: ${e.message}")
+            val authentication = SecurityContextHolder.getContext().authentication
             jwtService.clearAccessTokenCookie(response)
+            jwtService.revokeRefreshToken(authentication.name)
+            SecurityContextHolder.getContext().authentication = null
+            response.sendRedirect("/login")
         }
     }
 }
