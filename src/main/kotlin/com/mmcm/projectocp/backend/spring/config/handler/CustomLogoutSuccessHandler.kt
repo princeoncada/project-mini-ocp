@@ -21,7 +21,7 @@ class CustomLogoutSuccessHandler(
             jwtService.revokeRefreshToken(user.id)
         }
         jwtService.clearAccessTokenCookie(response!!)
-        SecurityContextHolder.clearContext()
-        response.sendRedirect("/login?logout")
+        SecurityContextHolder.getContext().authentication = null
+        response.sendRedirect("/login")
     }
 }
