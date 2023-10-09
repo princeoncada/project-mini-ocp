@@ -1,6 +1,5 @@
 package com.mmcm.projectocp.backend.spring.domain.repository
 
-import com.mmcm.projectocp.backend.spring.domain.model.Course
 import com.mmcm.projectocp.backend.spring.domain.model.StudentCourse
 import com.mmcm.projectocp.backend.spring.domain.model.User
 import org.springframework.data.domain.Page
