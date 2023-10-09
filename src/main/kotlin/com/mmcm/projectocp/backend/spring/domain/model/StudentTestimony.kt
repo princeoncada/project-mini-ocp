@@ -17,13 +17,13 @@ data class StudentTestimony(
     val studentCompaniesAttendedId: String,
 
     @Column(name = "review", columnDefinition = "TEXT")
-    val review: String? = null,
+    val review: String?,
 
     @Column(name = "rating", nullable = false)
     val rating: Int,
 
     @Column(name = "date_approved")
-    val dateApproved: LocalDate? = null,
+    val dateApproved: LocalDate?,
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
